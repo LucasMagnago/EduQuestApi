@@ -18,7 +18,13 @@ namespace EduQuest.Domain.Entities
         public Conquista? Conquista { get; set; }
         public bool Ativo { get; set; }
 
-        public ICollection<Escola>? Escolas { get; set; }
-        public ICollection<Turma>? Turmas { get; set; }
+        // 1. Turma ---> DesafioCondicao <--- Escola
+        public virtual ICollection<DesafioCondicao> DesafioCondicoes { get; set; } = new HashSet<DesafioCondicao>();
+
+        // 2. Turma ---> DesafioEscola <--- Escola
+        public virtual ICollection<DesafioEscola> DesafioEscolas { get; set; } = new HashSet<DesafioEscola>();
+
+        // 3. Turma ---> DesafioTurma <--- Desafio
+        public virtual ICollection<DesafioTurma> DesafioTurmas { get; set; } = new HashSet<DesafioTurma>();
     }
 }

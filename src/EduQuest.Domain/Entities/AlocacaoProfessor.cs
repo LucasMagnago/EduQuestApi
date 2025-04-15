@@ -2,8 +2,6 @@
 {
     public class AlocacaoProfessor
     {
-        public int Id { get; set; }
-
         public int ProfessorId { get; set; }
         public Usuario Professor { get; set; } = default!;
 

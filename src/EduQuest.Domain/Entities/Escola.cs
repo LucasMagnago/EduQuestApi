@@ -11,7 +11,18 @@ namespace EduQuest.Domain.Entities
         public string Inep { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
         public bool ativo { get; set; }
+
+        // 1. Escola ---> TipoUnidade
+        public int TipoUnidadeId { get; set; }
         public TipoUnidade TipoUnidade { get; set; } = default!;
-        public ICollection<UsuarioPerfilEscola> UsuarioEscolaPerfis { get; set; } = new List<UsuarioPerfilEscola>();
+
+        // 2. Escola ---> DesafioEscola <--- Desafio
+        public virtual ICollection<DesafioEscola> DesafiosEscolas { get; set; } = new HashSet<DesafioEscola>();
+
+        // 2. Usuario ---> UsuarioPerfilEscola <--- Escola
+        //                        ^
+        //                        |
+        //                      Perfil
+        public ICollection<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; } = new List<UsuarioEscolaPerfil>();
     }
 }

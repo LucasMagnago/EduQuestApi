@@ -9,6 +9,10 @@ namespace EduQuest.Domain.Entities
         public string Nome { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
 
-        public ICollection<UsuarioPerfilEscola> UsuarioEscolaPerfis { get; set; } = new List<UsuarioPerfilEscola>();
+        // 1. Usuario ---> UsuarioPerfilEscola <--- Escola
+        //                        ^
+        //                        |
+        //                      Perfil
+        public ICollection<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; } = new List<UsuarioEscolaPerfil>();
     }
 }

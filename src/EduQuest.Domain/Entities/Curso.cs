@@ -8,6 +8,6 @@ namespace EduQuest.Domain.Entities
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
-        public Curso? proximoCurso { get; set; }
+        public Curso? ProximoCurso { get; set; }
     }
 }

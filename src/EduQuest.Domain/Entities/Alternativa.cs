@@ -8,6 +8,9 @@ namespace EduQuest.Domain.Entities
         public int Id { get; set; }
         public string Descricao { get; set; } = string.Empty;
         public int Ordem { get; set; }
+
+        // Altenativa ---> Questao
+        public int QuestaoId { get; set; }
         public Questao Questao { get; set; } = default!;
     }
 }

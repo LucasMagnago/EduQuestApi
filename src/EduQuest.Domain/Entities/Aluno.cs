@@ -10,13 +10,19 @@
         public int StreakDiasConsecutivos { get; set; }
         public DateTime DataUltimoAcessoStreak { get; set; }
 
-        // Apenas a navegação para as Matrículas (que contêm o payload)
+        // 1. Aluno ---> Matricula <--- Turma
         public virtual ICollection<Matricula> Matriculas { get; set; } = new HashSet<Matricula>();
 
-        // Apenas a navegação para AlunoRealizaAtividade (que contêm o payload)
+        // 2. Aluno ---> AlunoRealizaAtividade <--- Atividade
         public virtual ICollection<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; } = new HashSet<AlunoRealizaAtividade>();
 
-        // Navegação para as participações do aluno em batalhas
-        public virtual ICollection<BatalhaParticipante> ParticipacoesEmBatalhas { get; set; } = new HashSet<BatalhaParticipante>();
+        // 3. Aluno ---> BatalhaParticipante <--- Batalha
+        public virtual ICollection<BatalhaParticipante> BatalhaParticipantes { get; set; } = new HashSet<BatalhaParticipante>();
+
+        // 4. Aluno ---> AlunoPossuiItem <--- Item
+        public virtual ICollection<AlunoPossuiItem> AlunoPossuiItens { get; set; } = new HashSet<AlunoPossuiItem>();
+
+        // 5. Aluno ---> AlunoConquista <--- Conquista
+        public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
     }
 }

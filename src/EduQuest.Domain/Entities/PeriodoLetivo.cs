@@ -10,6 +10,9 @@ namespace EduQuest.Domain.Entities
         public DateOnly DataInicio { get; set; }
         public DateOnly DataFim { get; set; }
         public bool Ativo { get; set; }
+
+        // 1. PeriodoLetivo ---> Escola
+        public int EscolaId { get; set; }
         public Escola Escola { get; set; } = default!;
     }
 }

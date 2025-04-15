@@ -10,5 +10,8 @@ namespace EduQuest.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
         public int XpRecompensa { get; set; }
         public int moedasRecompensa { get; set; }
+
+        // 1. TipoAtividade -> Atividade
+        public ICollection<Atividade> Atividades { get; } = new HashSet<Atividade>();
     }
 }

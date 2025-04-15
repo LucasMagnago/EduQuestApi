@@ -1,9 +1,12 @@
 ﻿using EduQuest.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduQuest.Domain.Entities
 {
     public class BatalhaParticipante
     {
+        [Key]
         public int Id { get; set; }
         public int Pontuacao { get; set; }
         public int TempoTotalSegundos { get; set; }
@@ -13,10 +16,18 @@ namespace EduQuest.Domain.Entities
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
 
-        public int batalhaId { get; set; }
-        public Batalha Batalha { get; set; } = default!;
+        // 1. Aluno -> BatalhaParticipante <-Batalha
+        public int BatalhaId { get; set; }
+        [ForeignKey("BatalhaId")]
+        public virtual Batalha Batalha { get; set; } = null!;
 
         public int AlunoId { get; set; }
-        public Aluno Aluno { get; set; } = default!;
+        [ForeignKey("AlunoId")]
+        public virtual Aluno Aluno { get; set; } = null!;
+
+        // 2. BatalhaParticipante -> BatalhaRespostaParticipante <- Questao
+        public virtual ICollection<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; } = new HashSet<BatalhaRespostaParticipante>();
+
+
     }
 }

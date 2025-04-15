@@ -11,5 +11,8 @@ namespace EduQuest.Domain.Entities
         public string IconeUrl { get; set; } = string.Empty;
         public string CriterioTipo { get; set; } = string.Empty;
         public string CriterioValor { get; set; } = string.Empty;
+
+        // 1. Aluno ---> AlunoConquista <--- Conquista
+        public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
     }
 }

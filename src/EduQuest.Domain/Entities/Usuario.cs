@@ -14,13 +14,25 @@ namespace EduQuest.Domain.Entities
         public DateTime DataCadastro { get; set; }
         public bool Ativo { get; set; }
 
-        // Matrículas que este usuário criou
+        // 1. Usuario (Criação) ---> Matricula
         public virtual ICollection<Matricula> MatriculasCriadas { get; set; } = new HashSet<Matricula>();
 
-        // Matrículas cuja situação foi alterada por último por este usuário
+        // 2. Usuario (Situação) ---> Matricula
         public virtual ICollection<Matricula> MatriculasComSituacaoAlterada { get; set; } = new HashSet<Matricula>();
 
-        // Matrículas que este usuário excluiu (logicamente)
+        // 3. Usuario (Alteração) ---> Matricula
         public virtual ICollection<Matricula> MatriculasExcluidas { get; set; } = new HashSet<Matricula>();
+
+        // 4. Usuario ---> UsuarioPerfilEscola <--- Escola
+        //                        ^
+        //                        |
+        //                      Perfil
+        public virtual ICollection<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; } = new HashSet<UsuarioEscolaPerfil>();
+
+        // 5. Usuario ---> AlocacaoProfessor <--- Turma
+        //                        ^
+        //                        |
+        //                    Disciplina
+        public virtual ICollection<AlocacaoProfessor> AlocacaoProfessores { get; set; } = new HashSet<AlocacaoProfessor>();
     }
 }

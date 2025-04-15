@@ -11,6 +11,7 @@ namespace EduQuest.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
         public TipoItem Tipo { get; set; }
 
-        public List<Aluno> Alunos { get; } = [];
+        // 1. Aluno ---> AlunoPossuiItem <--- Item
+        public virtual ICollection<AlunoPossuiItem> AlunoPossuiItens { get; set; } = new HashSet<AlunoPossuiItem>();
     }
 }
