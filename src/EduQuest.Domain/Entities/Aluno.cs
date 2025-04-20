@@ -24,5 +24,11 @@
 
         // 5. Aluno ---> AlunoConquista <--- Conquista
         public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
+
+        // 6. Aluno ---> AlunoProgressoDesafio <--- Desafio
+        public virtual ICollection<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; } = new HashSet<AlunoProgressoDesafio>();
+
+        // 7. Aluno ---> AlunoProgressoCondicao <--- Condicao
+        public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
     }
 }

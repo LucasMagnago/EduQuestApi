@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduQuest.Domain.Entities
 {
@@ -34,5 +35,13 @@ namespace EduQuest.Domain.Entities
         //                        |
         //                    Disciplina
         public virtual ICollection<AlocacaoProfessor> AlocacaoProfessores { get; set; } = new HashSet<AlocacaoProfessor>();
+
+        // 6. Remetente ---> Mensagem
+        [InverseProperty("Remetente")]
+        public virtual ICollection<Mensagem> MensagensEnviadas { get; set; } = new List<Mensagem>();
+
+        // 7. Remetente ---> Mensagem
+        [InverseProperty("Destinatario")]
+        public virtual ICollection<Mensagem> MensagensRecebidas { get; set; } = new List<Mensagem>();
     }
 }

@@ -10,8 +10,17 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<AlocacaoProfessor> AlocacaoProfessores { get; set; }
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
+        public DbSet<AlunoConquista> AlunoConquistas { get; set; }
+        public DbSet<AlunoPossuiItem> AlunoPossuiItens { get; set; }
+        public DbSet<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; }
+        public DbSet<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; }
+        public DbSet<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; }
         public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<AtividadeQuestao> AtividadeQuestoes { get; set; }
+        public DbSet<AtividadeTurma> AtivideTurmas { get; set; }
         public DbSet<Batalha> Batalhas { get; set; }
+        public DbSet<BatalhaParticipante> BatalhaParticipantes { get; set; }
+        public DbSet<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; }
         public DbSet<Conquista> Conquistas { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Desafio> Desafios { get; set; }
@@ -21,11 +30,13 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Escola> Escolas { get; set; }
         public DbSet<Item> Itens { get; set; }
+        public DbSet<Matricula> Matriculas { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
         public DbSet<Perfil> Perfis { get; set; }
         public DbSet<PeriodoLetivo> PeriodosLetivos { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<TipoAtividade> TiposAtividade { get; set; }
+        public DbSet<TipoCondicao> TiposCondicoes { get; set; }
         public DbSet<TipoUnidade> TiposUnidade { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -79,15 +90,15 @@ namespace EduQuest.Infrastructure.DataAccess
                 entity.HasOne(m => m.UsuarioSituacao)
                     .WithMany(u => u.MatriculasComSituacaoAlterada)
                     .HasForeignKey(m => m.UsuarioSituacaoId)
-                    .IsRequired(false)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 // Usuario (Excluiu) ---> Matricula
                 entity.HasOne(m => m.UsuarioExclusao)
                     .WithMany(u => u.MatriculasExcluidas)
                     .HasForeignKey(m => m.UsuarioExclusaoId)
                     .IsRequired(false)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.Property(m => m.Situacao)
                 .HasConversion<string>()
@@ -107,9 +118,11 @@ namespace EduQuest.Infrastructure.DataAccess
                 entity.HasOne(bp => bp.Batalha)
                 .WithMany(b => b.BatalhaParticipantes)
                 .HasForeignKey(bp => bp.BatalhaId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(bp => bp.Status).HasConversion<string>().HasMaxLength(20);
+                entity.Property(bp => bp.Status)
+                .HasConversion<string>()
+                .HasMaxLength(20);
             });
 
             // 4. BatalhaRespostaParticipante
@@ -307,6 +320,64 @@ namespace EduQuest.Infrastructure.DataAccess
                 entity.HasOne(ac => ac.Conquista)
                 .WithMany(i => i.AlunoConquistas)
                 .HasForeignKey(ac => ac.ConquistaId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 14. AlunoProgressoDesafio
+            modelBuilder.Entity<AlunoProgressoDesafio>(entity =>
+            {
+                // Aluno ---> AlunoProgressoDesafio
+                entity.HasOne(ap => ap.Aluno)
+                .WithMany(a => a.AlunoProgressoDesafios)
+                .HasForeignKey(ap => ap.AlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                // Desafio ---> AlunoProgressoDesafio
+                entity.HasOne(ap => ap.Desafio)
+                .WithMany(d => d.AlunoProgressoDesafios)
+                .HasForeignKey(ap => ap.DesafioId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 15. AlunoProgressoCondicao
+            modelBuilder.Entity<AlunoProgressoCondicao>(entity =>
+            {
+                // Aluno ---> AlunoProgressoCondicao
+                entity.HasOne(ap => ap.Aluno)
+                .WithMany(a => a.AlunoProgressoCondicoes)
+                .HasForeignKey(ap => ap.AlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                // Desafio ---> AlunoProgressoCondicao
+                entity.HasOne(ap => ap.DesafioCondicao)
+                .WithMany(d => d.AlunoProgressoCondicoes)
+                .HasForeignKey(ap => ap.DesafioConficaoId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 16. Mensagem ---> Usuario
+            modelBuilder.Entity<Mensagem>(entity =>
+            {
+                entity.HasOne(m => m.Remetente)
+                .WithMany(r => r.MensagensEnviadas)
+                .HasForeignKey(m => m.RemetenteId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            modelBuilder.Entity<Mensagem>(entity =>
+            {
+                entity.HasOne(m => m.Destinatario)
+                .WithMany(r => r.MensagensRecebidas)
+                .HasForeignKey(m => m.DestinatarioId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 17. Turma ---> PeriodoLetivo
+            modelBuilder.Entity<Turma>(entity =>
+            {
+                entity.HasOne(t => t.PeriodoLetivo)
+                .WithMany(p => p.Turmas)
+                .HasForeignKey(t => t.PeriodoLetivoId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
         }

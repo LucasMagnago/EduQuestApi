@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -104,6 +105,19 @@ namespace EduQuest.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TiposAtividade", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TiposCondicoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TiposCondicoes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,26 +239,20 @@ namespace EduQuest.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UsuarioCriacaoId = table.Column<int>(type: "int", nullable: false),
                     dataInicioVigencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     dataFimVigencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Escopo = table.Column<int>(type: "int", nullable: false),
                     XpRecompensa = table.Column<int>(type: "int", nullable: false),
                     MoedasRecompensa = table.Column<int>(type: "int", nullable: false),
-                    ConquistaId = table.Column<int>(type: "int", nullable: true),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Desafios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Desafios_Conquistas_ConquistaId",
-                        column: x => x.ConquistaId,
-                        principalTable: "Conquistas",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Desafios_Usuarios_UsuarioCriacaoId",
-                        column: x => x.UsuarioCriacaoId,
+                        name: "FK_Desafios_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -256,11 +264,11 @@ namespace EduQuest.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RemetenteId = table.Column<int>(type: "int", nullable: false),
-                    DestinatarioId = table.Column<int>(type: "int", nullable: false),
                     Conteudo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataEnvio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Lida = table.Column<bool>(type: "bit", nullable: false)
+                    Lida = table.Column<bool>(type: "bit", nullable: false),
+                    RemetenteId = table.Column<int>(type: "int", nullable: false),
+                    DestinatarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,13 +278,13 @@ namespace EduQuest.Infrastructure.Migrations
                         column: x => x.DestinatarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Mensagens_Usuarios_RemetenteId",
                         column: x => x.RemetenteId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -334,7 +342,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlunoConquista",
+                name: "AlunoConquistas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -345,15 +353,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunoConquista", x => x.Id);
+                    table.PrimaryKey("PK_AlunoConquistas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AlunoConquista_Alunos_AlunoId",
+                        name: "FK_AlunoConquistas_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AlunoConquista_Conquistas_ConquistaId",
+                        name: "FK_AlunoConquistas_Conquistas_ConquistaId",
                         column: x => x.ConquistaId,
                         principalTable: "Conquistas",
                         principalColumn: "Id",
@@ -361,7 +369,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlunoPossuiItem",
+                name: "AlunoPossuiItens",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -372,15 +380,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunoPossuiItem", x => x.Id);
+                    table.PrimaryKey("PK_AlunoPossuiItens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AlunoPossuiItem_Alunos_AlunoId",
+                        name: "FK_AlunoPossuiItens_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AlunoPossuiItem_Itens_ItemId",
+                        name: "FK_AlunoPossuiItens_Itens_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Itens",
                         principalColumn: "Id",
@@ -388,7 +396,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlunoRealizaAtividade",
+                name: "AlunoRealizaAtividades",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -404,15 +412,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunoRealizaAtividade", x => x.Id);
+                    table.PrimaryKey("PK_AlunoRealizaAtividades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AlunoRealizaAtividade_Alunos_AlunoId",
+                        name: "FK_AlunoRealizaAtividades_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AlunoRealizaAtividade_Atividades_AtividadeId",
+                        name: "FK_AlunoRealizaAtividades_Atividades_AtividadeId",
                         column: x => x.AtividadeId,
                         principalTable: "Atividades",
                         principalColumn: "Id",
@@ -443,17 +451,45 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AlunoProgressoDesafios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataConclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AlunoId = table.Column<int>(type: "int", nullable: false),
+                    DesafioId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlunoProgressoDesafios", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AlunoProgressoDesafios_Alunos_AlunoId",
+                        column: x => x.AlunoId,
+                        principalTable: "Alunos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AlunoProgressoDesafios_Desafios_DesafioId",
+                        column: x => x.DesafioId,
+                        principalTable: "Desafios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DesafioCondicoes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DesafioId = table.Column<int>(type: "int", nullable: false),
                     TipoCondicao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescricaoCondicao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ValorObjetivo = table.Column<int>(type: "int", nullable: false),
                     DataInicioContagem = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataFimContagem = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataFimContagem = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DesafioId = table.Column<int>(type: "int", nullable: false),
+                    TipoCondicaoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -462,6 +498,12 @@ namespace EduQuest.Infrastructure.Migrations
                         name: "FK_DesafioCondicoes_Desafios_DesafioId",
                         column: x => x.DesafioId,
                         principalTable: "Desafios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DesafioCondicoes_TiposCondicoes_TipoCondicaoId",
+                        column: x => x.TipoCondicaoId,
+                        principalTable: "TiposCondicoes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -513,13 +555,13 @@ namespace EduQuest.Infrastructure.Migrations
                         column: x => x.CursoId,
                         principalTable: "Cursos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Turmas_Escolas_EscolaId",
                         column: x => x.EscolaId,
                         principalTable: "Escolas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Turmas_PeriodosLetivos_PeriodoLetivoId",
                         column: x => x.PeriodoLetivoId,
@@ -529,7 +571,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BatalhaParticipante",
+                name: "BatalhaParticipantes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -546,19 +588,47 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BatalhaParticipante", x => x.Id);
+                    table.PrimaryKey("PK_BatalhaParticipantes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BatalhaParticipante_Alunos_AlunoId",
+                        name: "FK_BatalhaParticipantes_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BatalhaParticipante_Batalhas_BatalhaId",
+                        name: "FK_BatalhaParticipantes_Batalhas_BatalhaId",
                         column: x => x.BatalhaId,
                         principalTable: "Batalhas",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AlunoProgressoCondicoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ValorAtual = table.Column<int>(type: "int", nullable: false),
+                    DataUltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AlunoId = table.Column<int>(type: "int", nullable: false),
+                    DesafioConficaoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AlunoProgressoCondicoes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AlunoProgressoCondicoes_Alunos_AlunoId",
+                        column: x => x.AlunoId,
+                        principalTable: "Alunos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AlunoProgressoCondicoes_DesafioCondicoes_DesafioConficaoId",
+                        column: x => x.DesafioConficaoId,
+                        principalTable: "DesafioCondicoes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -593,7 +663,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AtividadeTurma",
+                name: "AtivideTurmas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -603,15 +673,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AtividadeTurma", x => x.Id);
+                    table.PrimaryKey("PK_AtivideTurmas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AtividadeTurma_Atividades_AtividadeId",
+                        name: "FK_AtivideTurmas_Atividades_AtividadeId",
                         column: x => x.AtividadeId,
                         principalTable: "Atividades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AtividadeTurma_Turmas_TurmaId",
+                        name: "FK_AtivideTurmas_Turmas_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
@@ -643,7 +713,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Matricula",
+                name: "Matriculas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -656,41 +726,41 @@ namespace EduQuest.Infrastructure.Migrations
                     TurmaId = table.Column<int>(type: "int", nullable: false),
                     UsuarioCriacaoId = table.Column<int>(type: "int", nullable: false),
                     UsuarioSituacaoId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioExclusaoId = table.Column<int>(type: "int", nullable: false)
+                    UsuarioExclusaoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Matricula", x => x.Id);
+                    table.PrimaryKey("PK_Matriculas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Matricula_Alunos_AlunoId",
+                        name: "FK_Matriculas_Alunos_AlunoId",
                         column: x => x.AlunoId,
                         principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Matricula_Turmas_TurmaId",
+                        name: "FK_Matriculas_Turmas_TurmaId",
                         column: x => x.TurmaId,
                         principalTable: "Turmas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Matricula_Usuarios_UsuarioCriacaoId",
+                        name: "FK_Matriculas_Usuarios_UsuarioCriacaoId",
                         column: x => x.UsuarioCriacaoId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Matricula_Usuarios_UsuarioExclusaoId",
+                        name: "FK_Matriculas_Usuarios_UsuarioExclusaoId",
                         column: x => x.UsuarioExclusaoId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Matricula_Usuarios_UsuarioSituacaoId",
+                        name: "FK_Matriculas_Usuarios_UsuarioSituacaoId",
                         column: x => x.UsuarioSituacaoId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -751,7 +821,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AtividadeQuestao",
+                name: "AtividadeQuestoes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -762,15 +832,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AtividadeQuestao", x => x.Id);
+                    table.PrimaryKey("PK_AtividadeQuestoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AtividadeQuestao_Atividades_AtividadeId",
+                        name: "FK_AtividadeQuestoes_Atividades_AtividadeId",
                         column: x => x.AtividadeId,
                         principalTable: "Atividades",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AtividadeQuestao_Questoes_QuestaoId",
+                        name: "FK_AtividadeQuestoes_Questoes_QuestaoId",
                         column: x => x.QuestaoId,
                         principalTable: "Questoes",
                         principalColumn: "Id",
@@ -778,7 +848,7 @@ namespace EduQuest.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BatalhaRespostaParticipante",
+                name: "BatalhaRespostaParticipantes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -791,15 +861,15 @@ namespace EduQuest.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BatalhaRespostaParticipante", x => x.Id);
+                    table.PrimaryKey("PK_BatalhaRespostaParticipantes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BatalhaRespostaParticipante_BatalhaParticipante_BatalhaParticipanteId",
+                        name: "FK_BatalhaRespostaParticipantes_BatalhaParticipantes_BatalhaParticipanteId",
                         column: x => x.BatalhaParticipanteId,
-                        principalTable: "BatalhaParticipante",
+                        principalTable: "BatalhaParticipantes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BatalhaRespostaParticipante_Questoes_QuestaoId",
+                        name: "FK_BatalhaRespostaParticipantes_Questoes_QuestaoId",
                         column: x => x.QuestaoId,
                         principalTable: "Questoes",
                         principalColumn: "Id",
@@ -822,43 +892,63 @@ namespace EduQuest.Infrastructure.Migrations
                 column: "QuestaoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoConquista_AlunoId",
-                table: "AlunoConquista",
+                name: "IX_AlunoConquistas_AlunoId",
+                table: "AlunoConquistas",
                 column: "AlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoConquista_ConquistaId",
-                table: "AlunoConquista",
+                name: "IX_AlunoConquistas_ConquistaId",
+                table: "AlunoConquistas",
                 column: "ConquistaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoPossuiItem_AlunoId",
-                table: "AlunoPossuiItem",
+                name: "IX_AlunoPossuiItens_AlunoId",
+                table: "AlunoPossuiItens",
                 column: "AlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoPossuiItem_ItemId",
-                table: "AlunoPossuiItem",
+                name: "IX_AlunoPossuiItens_ItemId",
+                table: "AlunoPossuiItens",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoRealizaAtividade_AlunoId",
-                table: "AlunoRealizaAtividade",
+                name: "IX_AlunoProgressoCondicoes_AlunoId",
+                table: "AlunoProgressoCondicoes",
                 column: "AlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoRealizaAtividade_AtividadeId",
-                table: "AlunoRealizaAtividade",
+                name: "IX_AlunoProgressoCondicoes_DesafioConficaoId",
+                table: "AlunoProgressoCondicoes",
+                column: "DesafioConficaoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlunoProgressoDesafios_AlunoId",
+                table: "AlunoProgressoDesafios",
+                column: "AlunoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlunoProgressoDesafios_DesafioId",
+                table: "AlunoProgressoDesafios",
+                column: "DesafioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlunoRealizaAtividades_AlunoId",
+                table: "AlunoRealizaAtividades",
+                column: "AlunoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AlunoRealizaAtividades_AtividadeId",
+                table: "AlunoRealizaAtividades",
                 column: "AtividadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AtividadeQuestao_AtividadeId",
-                table: "AtividadeQuestao",
+                name: "IX_AtividadeQuestoes_AtividadeId",
+                table: "AtividadeQuestoes",
                 column: "AtividadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AtividadeQuestao_QuestaoId",
-                table: "AtividadeQuestao",
+                name: "IX_AtividadeQuestoes_QuestaoId",
+                table: "AtividadeQuestoes",
                 column: "QuestaoId");
 
             migrationBuilder.CreateIndex(
@@ -872,33 +962,33 @@ namespace EduQuest.Infrastructure.Migrations
                 column: "TipoAtividadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AtividadeTurma_AtividadeId",
-                table: "AtividadeTurma",
+                name: "IX_AtivideTurmas_AtividadeId",
+                table: "AtivideTurmas",
                 column: "AtividadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AtividadeTurma_TurmaId",
-                table: "AtividadeTurma",
+                name: "IX_AtivideTurmas_TurmaId",
+                table: "AtivideTurmas",
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BatalhaParticipante_AlunoId",
-                table: "BatalhaParticipante",
+                name: "IX_BatalhaParticipantes_AlunoId",
+                table: "BatalhaParticipantes",
                 column: "AlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BatalhaParticipante_BatalhaId",
-                table: "BatalhaParticipante",
+                name: "IX_BatalhaParticipantes_BatalhaId",
+                table: "BatalhaParticipantes",
                 column: "BatalhaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BatalhaRespostaParticipante_BatalhaParticipanteId",
-                table: "BatalhaRespostaParticipante",
+                name: "IX_BatalhaRespostaParticipantes_BatalhaParticipanteId",
+                table: "BatalhaRespostaParticipantes",
                 column: "BatalhaParticipanteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BatalhaRespostaParticipante_QuestaoId",
-                table: "BatalhaRespostaParticipante",
+                name: "IX_BatalhaRespostaParticipantes_QuestaoId",
+                table: "BatalhaRespostaParticipantes",
                 column: "QuestaoId");
 
             migrationBuilder.CreateIndex(
@@ -917,19 +1007,19 @@ namespace EduQuest.Infrastructure.Migrations
                 column: "DesafioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DesafioCondicoes_TipoCondicaoId",
+                table: "DesafioCondicoes",
+                column: "TipoCondicaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DesafioEscolas_EscolaId",
                 table: "DesafioEscolas",
                 column: "EscolaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Desafios_ConquistaId",
+                name: "IX_Desafios_UsuarioId",
                 table: "Desafios",
-                column: "ConquistaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Desafios_UsuarioCriacaoId",
-                table: "Desafios",
-                column: "UsuarioCriacaoId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DesafioTurmas_TurmaId",
@@ -942,28 +1032,28 @@ namespace EduQuest.Infrastructure.Migrations
                 column: "TipoUnidadeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_AlunoId",
-                table: "Matricula",
+                name: "IX_Matriculas_AlunoId",
+                table: "Matriculas",
                 column: "AlunoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_TurmaId",
-                table: "Matricula",
+                name: "IX_Matriculas_TurmaId",
+                table: "Matriculas",
                 column: "TurmaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_UsuarioCriacaoId",
-                table: "Matricula",
+                name: "IX_Matriculas_UsuarioCriacaoId",
+                table: "Matriculas",
                 column: "UsuarioCriacaoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_UsuarioExclusaoId",
-                table: "Matricula",
+                name: "IX_Matriculas_UsuarioExclusaoId",
+                table: "Matriculas",
                 column: "UsuarioExclusaoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Matricula_UsuarioSituacaoId",
-                table: "Matricula",
+                name: "IX_Matriculas_UsuarioSituacaoId",
+                table: "Matriculas",
                 column: "UsuarioSituacaoId");
 
             migrationBuilder.CreateIndex(
@@ -1060,25 +1150,28 @@ namespace EduQuest.Infrastructure.Migrations
                 name: "AlocacaoProfessores");
 
             migrationBuilder.DropTable(
-                name: "AlunoConquista");
+                name: "AlunoConquistas");
 
             migrationBuilder.DropTable(
-                name: "AlunoPossuiItem");
+                name: "AlunoPossuiItens");
 
             migrationBuilder.DropTable(
-                name: "AlunoRealizaAtividade");
+                name: "AlunoProgressoCondicoes");
 
             migrationBuilder.DropTable(
-                name: "AtividadeQuestao");
+                name: "AlunoProgressoDesafios");
 
             migrationBuilder.DropTable(
-                name: "AtividadeTurma");
+                name: "AlunoRealizaAtividades");
 
             migrationBuilder.DropTable(
-                name: "BatalhaRespostaParticipante");
+                name: "AtividadeQuestoes");
 
             migrationBuilder.DropTable(
-                name: "DesafioCondicoes");
+                name: "AtivideTurmas");
+
+            migrationBuilder.DropTable(
+                name: "BatalhaRespostaParticipantes");
 
             migrationBuilder.DropTable(
                 name: "DesafioEscolas");
@@ -1087,7 +1180,7 @@ namespace EduQuest.Infrastructure.Migrations
                 name: "DesafioTurmas");
 
             migrationBuilder.DropTable(
-                name: "Matricula");
+                name: "Matriculas");
 
             migrationBuilder.DropTable(
                 name: "Mensagens");
@@ -1096,13 +1189,16 @@ namespace EduQuest.Infrastructure.Migrations
                 name: "UsuarioEscolaPerfis");
 
             migrationBuilder.DropTable(
+                name: "Conquistas");
+
+            migrationBuilder.DropTable(
                 name: "Itens");
 
             migrationBuilder.DropTable(
-                name: "BatalhaParticipante");
+                name: "DesafioCondicoes");
 
             migrationBuilder.DropTable(
-                name: "Desafios");
+                name: "BatalhaParticipantes");
 
             migrationBuilder.DropTable(
                 name: "Turmas");
@@ -1111,13 +1207,16 @@ namespace EduQuest.Infrastructure.Migrations
                 name: "Perfis");
 
             migrationBuilder.DropTable(
+                name: "Desafios");
+
+            migrationBuilder.DropTable(
+                name: "TiposCondicoes");
+
+            migrationBuilder.DropTable(
                 name: "Alunos");
 
             migrationBuilder.DropTable(
                 name: "Batalhas");
-
-            migrationBuilder.DropTable(
-                name: "Conquistas");
 
             migrationBuilder.DropTable(
                 name: "PeriodosLetivos");

@@ -6,10 +6,14 @@ namespace EduQuest.Domain.Entities
     {
         [Key]
         public int Id { get; set; }
-        public Usuario Remetente { get; set; } = default!;
-        public Usuario Destinatario { get; set; } = default!;
         public string Conteudo { get; set; } = string.Empty;
         public DateTime DataEnvio { get; set; }
         public bool Lida { get; set; }
+
+        // Usuario ---> Mensagem
+        public int RemetenteId { get; set; }
+        public Usuario Remetente { get; set; } = default!;
+        public int DestinatarioId { get; set; }
+        public Usuario Destinatario { get; set; } = default!;
     }
 }

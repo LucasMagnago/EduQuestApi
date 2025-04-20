@@ -21,16 +21,14 @@ namespace EduQuest.Domain.Entities
 
         // 2. Matricula ---> Usuário (Criação)
         public int UsuarioCriacaoId { get; set; }
-        public Usuario UsuarioCriacao { get; set; } = default!;
+        public Usuario UsuarioCriacao { get; set; } = null!;
 
         // 3. Matricula ---> Usuário (Situação)
         public int UsuarioSituacaoId { get; set; }
-        public Usuario UsuarioSituacao { get; set; } = default!;
+        public Usuario UsuarioSituacao { get; set; } = null!;
 
         // 4. Matricula ---> Usuário (Alteração)
-        public int UsuarioExclusaoId { get; set; }
+        public int? UsuarioExclusaoId { get; set; }
         public Usuario? UsuarioExclusao { get; set; }
-
-
     }
 }
