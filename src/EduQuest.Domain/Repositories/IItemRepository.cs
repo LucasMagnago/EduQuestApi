@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IItemRepository
+    public interface IItemRepository : IGenericRepository<Item>
     {
-        Task Add(Item item);
-        Task Delete(Item item);
-        void Update(Item item);
-        Task<Item> GetById(long id);
+
     }
 }

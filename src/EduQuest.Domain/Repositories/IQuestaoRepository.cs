@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IQuestaoRepository
+    public interface IQuestaoRepository : IGenericRepository<Questao>
     {
-        Task Add(Questao questao);
-        Task Delete(Questao questao);
-        void Update(Questao questao);
-        Task<Questao> GetById(long id);
+
     }
 }

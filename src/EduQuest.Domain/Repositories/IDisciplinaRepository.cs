@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IDisciplinaRepository
+    public interface IDisciplinaRepository : IGenericRepository<Disciplina>
     {
-        Task Add(Disciplina disciplina);
-        Task Delete(Disciplina disciplina);
-        void Update(Disciplina disciplina);
-        Task<Disciplina> GetById(long id);
+
     }
 }

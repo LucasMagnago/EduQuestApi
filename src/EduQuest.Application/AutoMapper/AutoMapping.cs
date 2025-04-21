@@ -16,7 +16,7 @@ namespace EduQuest.Application.AutoMapper
         private void RequestToEntity()
         {
             CreateMap<RequestRegisterUsuarioJson, Usuario>()
-                .ForMember(entityUsuario => entityUsuario.Senha, config => config.Ignore());
+                .ForMember(entityUsuario => entityUsuario.SenhaHash, config => config.Ignore());
         }
 
         private void EntityToResponse()

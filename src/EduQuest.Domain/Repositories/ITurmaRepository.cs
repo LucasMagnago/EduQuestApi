@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface ITurmaRepository
+    public interface ITurmaRepository : IGenericRepository<Turma>
     {
-        Task Add(Turma turma);
-        Task Delete(Turma turma);
-        void Update(Turma turma);
-        Task<Turma> GetById(long id);
+
     }
 }

@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IConquistaRepository
+    public interface IConquistaRepository : IGenericRepository<Conquista>
     {
-        Task Add(Conquista conquista);
-        Task Delete(Conquista conquista);
-        void Update(Conquista conquista);
-        Task<Conquista> GetById(long id);
+
     }
 }

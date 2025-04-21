@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IEscolaRepository
+    public interface IEscolaRepository : IGenericRepository<Escola>
     {
-        Task Add(Escola escola);
-        Task Delete(Escola escola);
-        void Update(Escola escola);
-        Task<Escola> GetById(long id);
+
     }
 }

@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IAtividadeRepository
+    public interface IAtividadeRepository : IGenericRepository<Atividade>
     {
-        Task Add(Usuario usuario);
-        Task Delete(Usuario usuario);
-        void Update(Usuario usuario);
-        Task<Usuario> GetById(long id);
+
     }
 }

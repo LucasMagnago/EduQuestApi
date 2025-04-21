@@ -18,13 +18,26 @@ namespace EduQuest.Infrastructure.Security.Tokens
             _signingKey = signingKey;
         }
 
-        public string Generate(Usuario usuario)
+        public string Generate(Usuario usuario,
+            Matricula matricula,
+            List<UsuarioEscolaPerfil> perfis
+            )
         {
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim(ClaimTypes.Sid, usuario.UsuarioIdentifier.ToString()),
             };
+
+            if (matricula != null)
+            {
+                claims.Add(new Claim("matricula", matricula.Id.ToString()));
+            }
+
+            foreach (var perfil in perfis)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, $"{perfil.EscolaId}:{perfil.PerfilId}"));
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

@@ -1,9 +1,11 @@
+using EduQuest.Api.Authorization;
 using EduQuest.Api.Filters;
 using EduQuest.Api.Token;
 using EduQuest.Application;
 using EduQuest.Domain.Security.Tokens;
 using EduQuest.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using System.Text;
@@ -12,38 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-
-//builder.Services.AddSwaggerGen(config =>
-//{
-//    config.AddSecurityDefinition("Bearer Token", new OpenApiSecurityScheme
-//    {
-//        Name = "Authorization",
-//        Description = @"JWT Authorization header using the Bearer scheme.
-//                      Enter 'Bearer' [space] and then your token in the text input below.
-//                      Example: 'Bearar 123456abcdef'",
-//        In = ParameterLocation.Header,
-//        Scheme = "Bearer",
-//        Type = SecuritySchemeType.ApiKey
-//    });
-
-//    config.AddSecurityRequirement(new OpenApiSecurityRequirement
-//    {
-//        {
-//           new OpenApiSecurityScheme
-//           {
-//               Reference = new OpenApiReference
-//                {
-//                    Type = ReferenceType.SecurityScheme,
-//                    Id = "Bearer"
-//                },
-//               Scheme = "oauth2",
-//               Name = "Bearer",
-//               In = ParameterLocation.Header
-//           },
-//           new List<string>()
-//        }
-//    });
-//});
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
@@ -69,6 +39,35 @@ builder.Services.AddAuthentication(config =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey!))
     };
 });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("OnlyAdmin", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin" })));
+
+    options.AddPolicy("OnlyAluno", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Aluno" })));
+
+    options.AddPolicy("OnlyProfessor", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor" })));
+
+    options.AddPolicy("OnlyGestor", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Gestor" })));
+
+    options.AddPolicy("AdminOrGestor", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Gestor" })));
+
+    options.AddPolicy("ProfessorOrGestor", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor", "Gestor" })));
+
+    options.AddPolicy("AdminOrProfessorOrGestor", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Professor", "Gestor" })));
+
+    options.AddPolicy("All", policy =>
+        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Aluno", "Professor", "Gestor" })));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, PerfilHandler>();
 
 var app = builder.Build();
 

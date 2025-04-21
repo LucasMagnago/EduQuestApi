@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IMensagemRepository
+    public interface IMensagemRepository : IGenericRepository<Mensagem>
     {
-        Task Add(Mensagem mensagem);
-        Task Delete(Mensagem mensagem);
-        void Update(Mensagem mensagem);
-        Task<Mensagem> GetById(long id);
+
     }
 }

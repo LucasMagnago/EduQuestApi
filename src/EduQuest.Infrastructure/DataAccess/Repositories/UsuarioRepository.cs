@@ -4,44 +4,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EduQuest.Infrastructure.DataAccess.Repositories
 {
-    internal class UsuarioRepository : IUsuarioRepository
+    internal class UsuarioRepository : GenericRepository<Usuario>, IUsuarioRepository
     {
-        private readonly EduQuestDbContext _context;
-
-        public UsuarioRepository(EduQuestDbContext context)
+        public UsuarioRepository(EduQuestDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task Add(Usuario usuario)
+        public async Task<Usuario?> GetByGuid(Guid guid)
         {
-            await _context.Usuarios.AddAsync(usuario);
+            return await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.UsuarioIdentifier.Equals(guid));
         }
 
-        public async Task Delete(Usuario usuario)
+        public async Task<Usuario?> GetByEmail(string email)
         {
-            var usuarioToRemove = await _context.Usuarios.FindAsync(usuario.Id);
-            _context.Usuarios.Remove(usuarioToRemove!);
+            return await _context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(user => user.Email.Equals(email));
         }
 
-        public async Task<bool> ExistActiveUserWithEmail(string email)
+        public async Task<bool> ExistActiveUsuarioWithEmail(string email)
         {
-            return await _context.Usuarios.AnyAsync(u => u.Email.Equals(email));
-        }
-
-        public async Task<Usuario> GetById(long id)
-        {
-            return await _context.Usuarios.FirstAsync(user => user.Id == id);
-        }
-
-        public async Task<Usuario?> GetUserByEmail(string email)
-        {
-            return await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(user => user.Email.Equals(email));
-        }
-
-        public void Update(Usuario user)
-        {
-            _context.Usuarios.Update(user);
+            return await _context.Usuarios
+                .AnyAsync(u => u.Email.Equals(email));
         }
     }
 }

@@ -4,6 +4,6 @@ namespace EduQuest.Domain.Security.Tokens
 {
     public interface IAccessTokenGenerator
     {
-        string Generate(Usuario usuario);
+        public string Generate(Usuario usuario, Matricula? matricula, List<UsuarioEscolaPerfil>? perfis);
     }
 }

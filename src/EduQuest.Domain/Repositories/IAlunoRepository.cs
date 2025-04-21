@@ -2,13 +2,9 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IAlunoRepository
+    public interface IAlunoRepository : IGenericRepository<Aluno>
     {
-        Task Add(Aluno aluno);
-        Task Delete(Aluno aluno);
-        void Update(Aluno aluno);
-        Task<Aluno> GetById(int id);
-        Task<bool> Matricular(int turmaId);
-        Task<bool> Remanejar(int turmaDestinoId);
+        Task<Aluno?> GetByUsuarioGuid(Guid usuarioGuid);
+        Task<bool> ExistAlunoWithUsuarioGuid(Guid usuarioGuid);
     }
 }

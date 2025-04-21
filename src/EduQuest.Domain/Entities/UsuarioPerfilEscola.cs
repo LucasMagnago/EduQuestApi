@@ -16,6 +16,6 @@
         public int EscolaId { get; set; }
         public virtual Escola Escola { get; set; } = null!;
 
-
+        public bool Ativo { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using EduQuest.Application.AutoMapper;
+using EduQuest.Application.UseCases.Auth.Register;
 using EduQuest.Application.UseCases.Usuarios.Profile;
-using EduQuest.Application.UseCases.Usuarios.Register;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EduQuest.Application

@@ -3,33 +3,11 @@ using EduQuest.Domain.Repositories;
 
 namespace EduQuest.Infrastructure.DataAccess.Repositories
 {
-    internal class EscolaRepository : IEscolaRepository
+    internal class EscolaRepository : GenericRepository<Escola>, IEscolaRepository
     {
-        private readonly EduQuestDbContext _context;
-
-        public EscolaRepository(EduQuestDbContext context)
+        public EscolaRepository(EduQuestDbContext context) : base(context)
         {
-            _context = context;
-        }
 
-        Task IEscolaRepository.Add(Escola escola)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IEscolaRepository.Delete(Escola escola)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Escola> IEscolaRepository.GetById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IEscolaRepository.Update(Escola escola)
-        {
-            throw new NotImplementedException();
         }
     }
 }

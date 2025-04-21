@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IDesafioRepository
+    public interface IDesafioRepository : IGenericRepository<Desafio>
     {
-        Task Add(Desafio desafio);
-        Task Delete(Desafio desafio);
-        void Update(Desafio desafio);
-        Task<Desafio> GetById(long id);
+
     }
 }

@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IPeriodoLetivoRepository
+    public interface IPeriodoLetivoRepository : IGenericRepository<PeriodoLetivo>
     {
-        Task Add(PeriodoLetivo periodoLetivo);
-        Task Delete(PeriodoLetivo periodoLetivo);
-        void Update(PeriodoLetivo periodoLetivo);
-        Task<PeriodoLetivo> GetById(long id);
+
     }
 }

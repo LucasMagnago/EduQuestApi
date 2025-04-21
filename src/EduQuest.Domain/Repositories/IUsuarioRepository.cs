@@ -2,13 +2,11 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IGenericRepository<Usuario>
     {
-        Task Add(Usuario usuario);
-        Task Delete(Usuario usuario);
-        void Update(Usuario usuario);
-        Task<Usuario> GetById(long id);
-        Task<bool> ExistActiveUserWithEmail(string email);
-        Task<Usuario?> GetUserByEmail(string email);
+        Task<Usuario?> GetByGuid(Guid guid);
+        Task<Usuario?> GetByEmail(string email);
+        Task<bool> ExistActiveUsuarioWithEmail(string email);
+
     }
 }

@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface ITipoUnidadeRepository
+    public interface ITipoUnidadeRepository : IGenericRepository<TipoUnidade>
     {
-        Task Add(TipoUnidade tipoUnidade);
-        Task Delete(TipoUnidade tipoUnidade);
-        void Update(TipoUnidade tipoUnidade);
-        Task<TipoUnidade> GetById(long id);
+
     }
 }

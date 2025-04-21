@@ -7,7 +7,7 @@ using EduQuest.Domain.Security.Tokens;
 using EduQuest.Exception.ExceptionsBase;
 using FluentValidation.Results;
 
-namespace EduQuest.Application.UseCases.Usuarios.Register
+namespace EduQuest.Application.UseCases.Auth.Register
 {
     internal class RegisterUsuarioUseCase : IRegisterUsuarioUseCase
     {
@@ -34,19 +34,20 @@ namespace EduQuest.Application.UseCases.Usuarios.Register
         {
             await Validate(request);
 
-            var user = _mapper.Map<Domain.Entities.Usuario>(request);
-            user.Senha = _passwordEncripter.Encrypt(request.Senha);
-            user.UsuarioIdentifier = Guid.NewGuid();
-            user.Ativo = true;
-            user.DataCadastro = DateTime.Now;
+            var usuario = _mapper.Map<Domain.Entities.Usuario>(request);
+            usuario.SenhaHash = _passwordEncripter.Encrypt(request.Senha);
+            usuario.UsuarioIdentifier = Guid.NewGuid();
+            usuario.Ativo = true;
+            usuario.DataCadastro = DateTime.Now;
+            usuario.DataUltimoLogin = DateTime.Now;
 
-            await _usuarioRepository.Add(user);
+            await _usuarioRepository.SaveAsync(usuario);
             await _unitOfWork.Commit();
 
             return new ResponseRegisteredUsuarioJson
             {
-                Nome = user.Nome,
-                Token = _tokenGenerator.Generate(user)
+                Nome = usuario.Nome,
+                Token = _tokenGenerator.Generate(usuario, null, null)
             };
         }
 
@@ -54,10 +55,11 @@ namespace EduQuest.Application.UseCases.Usuarios.Register
         {
             var result = new RegisterUsuarioValidator().Validate(request);
 
-            var emailExist = await _usuarioRepository.ExistActiveUserWithEmail(request.Email);
+            var emailExist = await _usuarioRepository.ExistActiveUsuarioWithEmail(request.Email);
+
             if (emailExist)
             {
-                result.Errors.Add(new ValidationFailure(string.Empty, "Email already exists"));
+                result.Errors.Add(new ValidationFailure(string.Empty, "E-mail já cadastrado"));
             }
 
             if (result.IsValid == false)

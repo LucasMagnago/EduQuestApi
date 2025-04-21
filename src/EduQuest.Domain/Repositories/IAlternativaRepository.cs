@@ -2,11 +2,8 @@
 
 namespace EduQuest.Domain.Repositories
 {
-    public interface IAlternativaRepository
+    public interface IAlternativaRepository : IGenericRepository<Alternativa>
     {
-        Task Add(Alternativa alternativa);
-        Task Delete(Alternativa alternativa);
-        void Update(Alternativa alternativa);
-        Task<Alternativa> GetById(long id);
+
     }
 }
