@@ -24,7 +24,7 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                 .FirstOrDefaultAsync(user => user.Email.Equals(email));
         }
 
-        public async Task<bool> ExistActiveUsuarioWithEmail(string email)
+        public async Task<bool> ExistsActiveUsuarioWithEmail(string email)
         {
             return await _context.Usuarios
                 .AnyAsync(u => u.Email.Equals(email));

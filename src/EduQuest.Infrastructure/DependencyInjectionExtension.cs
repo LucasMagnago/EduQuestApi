@@ -36,27 +36,26 @@ namespace EduQuest.Infrastructure
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAlternativaRepository, AlternativaRepository>();
+            services.AddScoped<IAlocacaoProfessorRepository, AlocacaoProfessorRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
             services.AddScoped<IBatalhaRepository, BatalhaRepository>();
             services.AddScoped<IConquistaRepository, ConquistaRepository>();
-            services.AddScoped<ICursoRepository, CursoRepository>();
+            //services.AddScoped<ICursoRepository, CursoRepository>();
             services.AddScoped<IDesafioRepository, DesafioRepository>();
             services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
             services.AddScoped<IEscolaRepository, EscolaRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
+            //services.AddScoped<IMatriculaRepository, MatriculaRepository>();
             services.AddScoped<IMensagemRepository, MensagemRepository>();
-            services.AddScoped<IPeriodoLetivoRepository, PeriodoLetivoRepository>();
+            services.AddScoped<IPerfilRepository, PerfilRepository>();
+            //services.AddScoped<IPeriodoLetivoRepository, PeriodoLetivoRepository>();
             services.AddScoped<IQuestaoRepository, QuestaoRepository>();
             services.AddScoped<ITipoAtividadeRepository, TipoAtividadeRepository>();
             services.AddScoped<ITipoUnidadeRepository, TipoUnidadeRepository>();
             services.AddScoped<ITurmaRepository, TurmaRepository>();
+            services.AddScoped<IUsuarioEscolaPerfilRepository, UsuarioEscolaPerfilRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-            //services.AddScoped<IExpensesWriteOnlyRepository, ExpensesRepository>();
-            //services.AddScoped<IExpensesUpdateOnlyRepository, ExpensesRepository>();
-            //services.AddScoped<IUserReadOnlyRepository, UserRepository>();
-            //services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

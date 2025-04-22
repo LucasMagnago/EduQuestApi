@@ -1,5 +1,6 @@
 ﻿using EduQuest.Domain.Entities;
 using EduQuest.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduQuest.Infrastructure.DataAccess.Repositories
 {
@@ -8,6 +9,18 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         public EscolaRepository(EduQuestDbContext context) : base(context)
         {
 
+        }
+
+        public async Task<bool> ExistsWithNomeAsync(string nome)
+        {
+            return await _context.Escolas
+                .AnyAsync(e => e.Nome.Equals(nome));
+        }
+
+        public async Task<bool> ExistsWithSiglaAsync(string sigla)
+        {
+            return await _context.Escolas
+                .AnyAsync(e => e.Sigla.Equals(sigla));
         }
     }
 }

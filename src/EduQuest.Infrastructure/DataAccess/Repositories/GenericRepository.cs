@@ -39,6 +39,11 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         }
 
         // GET
+        public async Task<bool> ExistsWithIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id) != null;
+        }
+
         public T? GetById(int id)
         {
             return _context.Set<T>().Find(id);

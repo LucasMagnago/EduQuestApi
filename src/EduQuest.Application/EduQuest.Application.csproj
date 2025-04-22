@@ -18,4 +18,8 @@
     <ProjectReference Include="..\EduQuest.Exception\EduQuest.Exception.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Matriculas\Remanejar\" />
+  </ItemGroup>
+
 </Project>

@@ -22,5 +22,13 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         {
             return await _context.Alunos.AnyAsync(a => a.UsuarioIdentifier == usuarioGuid);
         }
+
+        public async Task<Turma?> GetTurmaByAlunoId(int alunoId)
+        {
+            return await _context.Alunos
+                .Where(a => a.Id == alunoId)
+                .Select(a => a.Turma)
+                .FirstOrDefaultAsync();
+        }
     }
 }

@@ -19,24 +19,34 @@ namespace EduQuest.Infrastructure.Security.Tokens
         }
 
         public string Generate(Usuario usuario,
-            Matricula matricula,
-            List<UsuarioEscolaPerfil> perfis
+            Turma? turma = null,
+            List<UsuarioEscolaPerfil>? perfis = null
             )
         {
+            if (usuario is null)
+                throw new ArgumentNullException(nameof(usuario), "Erro ao gerar token");
+
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim(ClaimTypes.Sid, usuario.UsuarioIdentifier.ToString()),
             };
 
-            if (matricula != null)
+            // Verifica se é aluno ou servidor e adiciona a claim 'tipo'
+            if (usuario is Aluno)
             {
-                claims.Add(new Claim("matricula", matricula.Id.ToString()));
-            }
+                claims.Add(new Claim("tipoUsuario", "aluno"));
 
-            foreach (var perfil in perfis)
+                if (turma is not null)
+                    claims.Add(new Claim("turma", turma.Id.ToString()));
+            }
+            else
             {
-                claims.Add(new Claim(ClaimTypes.Role, $"{perfil.EscolaId}:{perfil.PerfilId}"));
+                claims.Add(new Claim("tipoUsuario", "servidor"));
+
+                var perfisValidos = perfis?.Where(p => p is not null) ?? Enumerable.Empty<UsuarioEscolaPerfil>();
+                claims.AddRange(perfisValidos.Select(p =>
+                    new Claim(ClaimTypes.Role, $"{p.EscolaId}:{p.PerfilId}")));
             }
 
             var tokenDescriptor = new SecurityTokenDescriptor

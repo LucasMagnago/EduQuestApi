@@ -25,10 +25,10 @@ namespace EduQuest.Api.Filters
 
         private void HandleProjectException(ExceptionContext context)
         {
-            var cashFlowException = (EduQuestException)context.Exception;
-            var errorResponse = new ResponseErrorJson(cashFlowException.GetErrors());
+            var eduQuestException = (EduQuestException)context.Exception;
+            var errorResponse = new ResponseErrorJson(eduQuestException.GetErrors());
 
-            context.HttpContext.Response.StatusCode = cashFlowException.StatusCode;
+            context.HttpContext.Response.StatusCode = eduQuestException.StatusCode;
             context.Result = new ObjectResult(errorResponse);
         }
 

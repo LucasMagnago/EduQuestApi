@@ -9,14 +9,15 @@ namespace EduQuest.Domain.Entities
         public int Id { get; set; }
         public string Enunciado { get; set; } = string.Empty;
         public string Resposta { get; set; } = string.Empty;
+        public int NivelEscola { get; set; }
 
         // 1. Questao ---> Disciplina
         public int DisciplinaId { get; set; }
         public Disciplina Disciplina { get; set; } = null!;
 
-        // 2. Questao ---> Curso
-        public int CursoId { get; set; }
-        public Curso Curso { get; set; } = null!;
+        //// 2. Questao ---> Curso
+        //public int CursoId { get; set; }
+        //public Curso Curso { get; set; } = null!;
 
         // 3. Questao ---> Alternativa
         public int AlternativaCorretaId { get; set; }

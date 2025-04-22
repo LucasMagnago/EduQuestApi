@@ -447,32 +447,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("Conquistas");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.Curso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProximoCursoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProximoCursoId");
-
-                    b.ToTable("Cursos");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Desafio", b =>
                 {
                     b.Property<int>("Id")
@@ -669,58 +643,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("Itens");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.Matricula", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataExclusao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataMatricula")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataSituacao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Situacao")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("TurmaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioCriacaoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UsuarioExclusaoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuarioSituacaoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.HasIndex("TurmaId");
-
-                    b.HasIndex("UsuarioCriacaoId");
-
-                    b.HasIndex("UsuarioExclusaoId");
-
-                    b.HasIndex("UsuarioSituacaoId");
-
-                    b.ToTable("Matriculas");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Mensagem", b =>
                 {
                     b.Property<int>("Id")
@@ -775,36 +697,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("Perfis");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.PeriodoLetivo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<short>("Ano")
-                        .HasColumnType("smallint");
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
-                    b.Property<DateOnly>("DataFim")
-                        .HasColumnType("date");
-
-                    b.Property<DateOnly>("DataInicio")
-                        .HasColumnType("date");
-
-                    b.Property<int>("EscolaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EscolaId");
-
-                    b.ToTable("PeriodosLetivos");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Questao", b =>
                 {
                     b.Property<int>("Id")
@@ -816,15 +708,15 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("AlternativaCorretaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("DisciplinaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Enunciado")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NivelEscola")
+                        .HasColumnType("int");
 
                     b.Property<string>("Resposta")
                         .IsRequired()
@@ -836,8 +728,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AlternativaCorretaId");
-
-                    b.HasIndex("CursoId");
 
                     b.HasIndex("DisciplinaId");
 
@@ -923,11 +813,11 @@ namespace EduQuest.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -936,26 +826,15 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("EscolaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Inep")
+                    b.Property<int>("NivelEscolar")
                         .HasColumnType("int");
-
-                    b.Property<int>("PeriodoLetivoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Turno")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
-
                     b.HasIndex("EscolaId");
-
-                    b.HasIndex("PeriodoLetivoId");
 
                     b.ToTable("Turmas");
                 });
@@ -974,6 +853,9 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateOnly>("DataNascimento")
+                        .HasColumnType("date");
+
                     b.Property<DateTime>("DataUltimoLogin")
                         .HasColumnType("datetime2");
 
@@ -985,7 +867,7 @@ namespace EduQuest.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("SenhaHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1013,6 +895,9 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("PerfilId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
                     b.HasKey("UsuarioId", "EscolaId", "PerfilId");
 
                     b.HasIndex("EscolaId");
@@ -1038,8 +923,13 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("StreakDiasConsecutivos")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TurmaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("XpAtual")
                         .HasColumnType("int");
+
+                    b.HasIndex("TurmaId");
 
                     b.ToTable("Alunos", (string)null);
                 });
@@ -1283,15 +1173,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("Questao");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.Curso", b =>
-                {
-                    b.HasOne("EduQuest.Domain.Entities.Curso", "ProximoCurso")
-                        .WithMany()
-                        .HasForeignKey("ProximoCursoId");
-
-                    b.Navigation("ProximoCurso");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Desafio", b =>
                 {
                     b.HasOne("EduQuest.Domain.Entities.Usuario", "UsuarioCriacao")
@@ -1371,48 +1252,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("TipoUnidade");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.Matricula", b =>
-                {
-                    b.HasOne("EduQuest.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("Matriculas")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Turma", "Turma")
-                        .WithMany("Matriculas")
-                        .HasForeignKey("TurmaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Usuario", "UsuarioCriacao")
-                        .WithMany("MatriculasCriadas")
-                        .HasForeignKey("UsuarioCriacaoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Usuario", "UsuarioExclusao")
-                        .WithMany("MatriculasExcluidas")
-                        .HasForeignKey("UsuarioExclusaoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("EduQuest.Domain.Entities.Usuario", "UsuarioSituacao")
-                        .WithMany("MatriculasComSituacaoAlterada")
-                        .HasForeignKey("UsuarioSituacaoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Turma");
-
-                    b.Navigation("UsuarioCriacao");
-
-                    b.Navigation("UsuarioExclusao");
-
-                    b.Navigation("UsuarioSituacao");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Mensagem", b =>
                 {
                     b.HasOne("EduQuest.Domain.Entities.Usuario", "Destinatario")
@@ -1432,29 +1271,12 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("Remetente");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.PeriodoLetivo", b =>
-                {
-                    b.HasOne("EduQuest.Domain.Entities.Escola", "Escola")
-                        .WithMany()
-                        .HasForeignKey("EscolaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Escola");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Questao", b =>
                 {
                     b.HasOne("EduQuest.Domain.Entities.Alternativa", "AlternativaCorreta")
                         .WithMany()
                         .HasForeignKey("AlternativaCorretaId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EduQuest.Domain.Entities.Disciplina", "Disciplina")
@@ -1471,8 +1293,6 @@ namespace EduQuest.Infrastructure.Migrations
 
                     b.Navigation("AlternativaCorreta");
 
-                    b.Navigation("Curso");
-
                     b.Navigation("Disciplina");
 
                     b.Navigation("UsuarioCriacao");
@@ -1480,29 +1300,13 @@ namespace EduQuest.Infrastructure.Migrations
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Turma", b =>
                 {
-                    b.HasOne("EduQuest.Domain.Entities.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EduQuest.Domain.Entities.Escola", "Escola")
                         .WithMany()
                         .HasForeignKey("EscolaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EduQuest.Domain.Entities.PeriodoLetivo", "PeriodoLetivo")
-                        .WithMany("Turmas")
-                        .HasForeignKey("PeriodoLetivoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
-
                     b.Navigation("Escola");
-
-                    b.Navigation("PeriodoLetivo");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.UsuarioEscolaPerfil", b =>
@@ -1539,6 +1343,12 @@ namespace EduQuest.Infrastructure.Migrations
                         .HasForeignKey("EduQuest.Domain.Entities.Aluno", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.Turma", "Turma")
+                        .WithMany("Alunos")
+                        .HasForeignKey("TurmaId");
+
+                    b.Navigation("Turma");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Atividade", b =>
@@ -1603,11 +1413,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("UsuarioEscolaPerfis");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.PeriodoLetivo", b =>
-                {
-                    b.Navigation("Turmas");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Questao", b =>
                 {
                     b.Navigation("Alternativas");
@@ -1626,22 +1431,16 @@ namespace EduQuest.Infrastructure.Migrations
                 {
                     b.Navigation("AlocacaoProfessores");
 
+                    b.Navigation("Alunos");
+
                     b.Navigation("AtividadeTurmas");
 
                     b.Navigation("DesafioTurmas");
-
-                    b.Navigation("Matriculas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Usuario", b =>
                 {
                     b.Navigation("AlocacaoProfessores");
-
-                    b.Navigation("MatriculasComSituacaoAlterada");
-
-                    b.Navigation("MatriculasCriadas");
-
-                    b.Navigation("MatriculasExcluidas");
 
                     b.Navigation("MensagensEnviadas");
 
@@ -1663,8 +1462,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("AlunoRealizaAtividades");
 
                     b.Navigation("BatalhaParticipantes");
-
-                    b.Navigation("Matriculas");
                 });
 #pragma warning restore 612, 618
         }

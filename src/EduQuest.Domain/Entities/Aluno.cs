@@ -11,7 +11,12 @@
         public DateTime DataUltimoAcessoStreak { get; set; }
 
         // 1. Aluno ---> Matricula <--- Turma
-        public virtual ICollection<Matricula> Matriculas { get; set; } = new HashSet<Matricula>();
+        //public virtual ICollection<Matricula> Matriculas { get; set; } = new HashSet<Matricula>();
+
+        // 1. Aluno ---> Turma
+        public virtual int? TurmaId { get; set; }
+        public virtual Turma? Turma { get; set; } = null!;
+
 
         // 2. Aluno ---> AlunoRealizaAtividade <--- Atividade
         public virtual ICollection<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; } = new HashSet<AlunoRealizaAtividade>();

@@ -8,6 +8,7 @@ namespace EduQuest.Domain.Entities
         [Key]
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
+        public DateOnly DataNascimento { get; set; }
         public string Email { get; set; } = string.Empty;
         public string SenhaHash { get; set; } = string.Empty;
         public Guid UsuarioIdentifier { get; set; }
@@ -15,14 +16,14 @@ namespace EduQuest.Domain.Entities
         public DateTime DataCadastro { get; set; }
         public bool Ativo { get; set; }
 
-        // 1. Usuario (Criação) ---> Matricula
-        public virtual ICollection<Matricula> MatriculasCriadas { get; set; } = new HashSet<Matricula>();
+        //// 1. Usuario (Criação) ---> Matricula
+        //public virtual ICollection<Matricula> MatriculasCriadas { get; set; } = new HashSet<Matricula>();
 
-        // 2. Usuario (Situação) ---> Matricula
-        public virtual ICollection<Matricula> MatriculasComSituacaoAlterada { get; set; } = new HashSet<Matricula>();
+        //// 2. Usuario (Situação) ---> Matricula
+        //public virtual ICollection<Matricula> MatriculasComSituacaoAlterada { get; set; } = new HashSet<Matricula>();
 
-        // 3. Usuario (Alteração) ---> Matricula
-        public virtual ICollection<Matricula> MatriculasExcluidas { get; set; } = new HashSet<Matricula>();
+        //// 3. Usuario (Alteração) ---> Matricula
+        //public virtual ICollection<Matricula> MatriculasExcluidas { get; set; } = new HashSet<Matricula>();
 
         // 4. Usuario ---> UsuarioPerfilEscola <--- Escola
         //                        ^

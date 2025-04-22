@@ -2,7 +2,7 @@
 
 namespace EduQuest.Exception.ExceptionsBase
 {
-    internal class NotFoundException : EduQuestException
+    public class NotFoundException : EduQuestException
     {
         public override int StatusCode => (int)HttpStatusCode.NotFound;
 

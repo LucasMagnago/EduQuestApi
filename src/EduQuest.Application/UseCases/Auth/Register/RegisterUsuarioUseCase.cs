@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
+using EduQuest.Domain.Entities;
 using EduQuest.Domain.Repositories;
 using EduQuest.Domain.Security.Cryptography;
 using EduQuest.Domain.Security.Tokens;
@@ -34,7 +35,9 @@ namespace EduQuest.Application.UseCases.Auth.Register
         {
             await Validate(request);
 
-            var usuario = _mapper.Map<Domain.Entities.Usuario>(request);
+            var usuario = request.IsAluno ? new Aluno() { StreakDiasConsecutivos = 1, DataUltimoAcessoStreak = DateTime.Now } : new Usuario();
+
+            usuario = _mapper.Map(request, usuario);
             usuario.SenhaHash = _passwordEncripter.Encrypt(request.Senha);
             usuario.UsuarioIdentifier = Guid.NewGuid();
             usuario.Ativo = true;
@@ -55,7 +58,7 @@ namespace EduQuest.Application.UseCases.Auth.Register
         {
             var result = new RegisterUsuarioValidator().Validate(request);
 
-            var emailExist = await _usuarioRepository.ExistActiveUsuarioWithEmail(request.Email);
+            var emailExist = await _usuarioRepository.ExistsActiveUsuarioWithEmail(request.Email);
 
             if (emailExist)
             {

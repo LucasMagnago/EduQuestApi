@@ -8,6 +8,8 @@ namespace EduQuest.Domain.Repositories
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
 
+        Task<bool> ExistsWithIdAsync(int id);
+
         T? GetById(int id);
         Task<T?> GetByIdAsync(int id);
         Task<T?> FindAsync(Expression<Func<T, bool>> entity);

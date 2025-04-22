@@ -6,7 +6,7 @@ namespace EduQuest.Domain.Repositories
     {
         Task<Usuario?> GetByGuid(Guid guid);
         Task<Usuario?> GetByEmail(string email);
-        Task<bool> ExistActiveUsuarioWithEmail(string email);
+        Task<bool> ExistsActiveUsuarioWithEmail(string email);
 
     }
 }

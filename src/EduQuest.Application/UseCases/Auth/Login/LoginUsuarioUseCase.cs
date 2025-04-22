@@ -1,6 +1,6 @@
-﻿using AutoMapper;
-using EduQuest.Communication.Requests;
+﻿using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
+using EduQuest.Domain.Entities;
 using EduQuest.Domain.Repositories;
 using EduQuest.Domain.Security.Cryptography;
 using EduQuest.Domain.Security.Tokens;
@@ -8,28 +8,28 @@ using EduQuest.Exception.ExceptionsBase;
 
 namespace EduQuest.Application.UseCases.Auth.Login
 {
-    internal class LoginUsuarioUseCase
+    internal class LoginUsuarioUseCase : ILoginUsuarioUseCase
     {
-        private readonly IMapper _mapper;
         private readonly IPasswordEncripter _passwordEncripter;
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IMatriculaRepository _matriculaRepository;
+        private readonly IAlunoRepository _alunoRepository;
         private readonly IUsuarioEscolaPerfilRepository _usuarioEscolaPerfilRepository;
         private readonly IAccessTokenGenerator _tokenGenerator;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public LoginUsuarioUseCase(IMapper mapper,
-            IPasswordEncripter passwordEncripter,
+        public LoginUsuarioUseCase(IPasswordEncripter passwordEncripter,
             IUsuarioRepository usuarioRepository,
-            //IMatriculaRepository matriculaRepository,
-            //IUsuarioEscolaPerfilRepository usuarioEscolaPerfilRepository,
-            IAccessTokenGenerator tokenGenerator)
+            IAlunoRepository alunoRepository,
+            IUsuarioEscolaPerfilRepository usuarioEscolaPerfilRepository,
+            IAccessTokenGenerator tokenGenerator,
+            IUnitOfWork unitOfWork)
         {
-            _mapper = mapper;
             _passwordEncripter = passwordEncripter;
             _usuarioRepository = usuarioRepository;
-            //_matriculaRepository = matriculaRepository;
-            //_usuarioEscolaPerfilRepository = usuarioEscolaPerfilRepository;
+            _alunoRepository = alunoRepository;
+            _usuarioEscolaPerfilRepository = usuarioEscolaPerfilRepository;
             _tokenGenerator = tokenGenerator;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ResponseLoggedUsuarioJson> Execute(RequestLoginUsuarioJson request)
@@ -52,14 +52,35 @@ namespace EduQuest.Application.UseCases.Auth.Login
                 Token = string.Empty
             };
 
-            var matricula = await _matriculaRepository.GetMatriculaAtivaByUsuarioId(usuario.Id);
+            var turma = await _alunoRepository.GetTurmaByAlunoId(usuario.Id);
             var perfis = await _usuarioEscolaPerfilRepository.GetAllByUsuarioIdAsync(usuario.Id);
+
+            usuario.DataUltimoLogin = DateTime.Now;
+
+            UpdateStreakIfAluno(usuario);
 
             return new ResponseLoggedUsuarioJson
             {
                 Nome = usuario.Nome,
-                Token = _tokenGenerator.Generate(usuario, matricula, perfis)
+                Token = _tokenGenerator.Generate(usuario, turma, perfis)
             };
+        }
+
+        private void UpdateStreakIfAluno(Usuario usuario)
+        {
+            if (usuario is not Aluno aluno)
+                return;
+
+            if (aluno.DataUltimoAcessoStreak.Date.AddDays(1) == DateTime.Now.Date)
+            {
+                aluno.StreakDiasConsecutivos += 1;
+                aluno.DataUltimoAcessoStreak = DateTime.Now;
+            }
+            else if (aluno.DataUltimoAcessoStreak.Date.AddDays(1) < DateTime.Now.Date)
+            {
+                aluno.StreakDiasConsecutivos = 0;
+                aluno.DataUltimoAcessoStreak = DateTime.Now;
+            }
         }
     }
 }

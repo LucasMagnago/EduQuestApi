@@ -44,5 +44,15 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                 .Where(u => u.UsuarioId == usuarioId)
                 .ToListAsync();
         }
+
+        public async Task<bool> DoesUsuarioHavePerfilInEscolaAsync(Guid usuarioGuid, int escolaId, int perfilId)
+        {
+            return await _context.UsuarioEscolaPerfis.AnyAsync(u => u.Usuario.UsuarioIdentifier == usuarioGuid && u.EscolaId == escolaId && u.PerfilId == perfilId);
+        }
+
+        public async Task<bool> DoesUsuarioHavePerfilInEscolaAsync(int usuarioId, int escolaId, int perfilId)
+        {
+            return await _context.UsuarioEscolaPerfis.AnyAsync(u => u.UsuarioId == usuarioId && u.EscolaId == escolaId && u.PerfilId == perfilId);
+        }
     }
 }

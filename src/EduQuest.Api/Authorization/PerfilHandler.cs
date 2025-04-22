@@ -25,7 +25,7 @@ public class PerfilHandler : AuthorizationHandler<PerfilRequirement>
         if (usuarioIdClaim == null)
             return;
 
-        var userId = Guid.Parse(usuarioIdClaim.Value);
+        var userGuid = Guid.Parse(usuarioIdClaim.Value);
 
         var routeData = _httpContextAccessor.HttpContext?.GetRouteData();
 
@@ -38,13 +38,13 @@ public class PerfilHandler : AuthorizationHandler<PerfilRequirement>
         List<string> perfis = new List<string>();
 
         // 2. Busca os perfis do usuário
-        var usuarioEscolaPerfis = await _usuarioEscolaPerfilRepository.GetAllByUsuarioGuidAsync(userId);
+        var usuarioEscolaPerfis = await _usuarioEscolaPerfilRepository.GetAllByUsuarioGuidAsync(userGuid);
 
         foreach (var usuarioEscolaPerfil in usuarioEscolaPerfis)
             perfis.Add(usuarioEscolaPerfil.Perfil.Nome.ToLower());
 
         // 3. Verifica se é aluno
-        bool isAluno = await _alunoRepository.ExistAlunoWithUsuarioGuid(userId);
+        bool isAluno = await _alunoRepository.ExistAlunoWithUsuarioGuid(userGuid);
         if (isAluno)
         {
             perfis.Add("aluno");

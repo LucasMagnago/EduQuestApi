@@ -1,9 +1,7 @@
-﻿using EduQuest.Domain.Entities;
-
-namespace EduQuest.Domain.Repositories
+﻿namespace EduQuest.Domain.Repositories
 {
-    public interface IPeriodoLetivoRepository : IGenericRepository<PeriodoLetivo>
-    {
-
-    }
+    //public interface IPeriodoLetivoRepository : IGenericRepository<PeriodoLetivo>
+    //{
+    //    Task<PeriodoLetivo> GetByTurmaId(int turmaId);
+    //}
 }

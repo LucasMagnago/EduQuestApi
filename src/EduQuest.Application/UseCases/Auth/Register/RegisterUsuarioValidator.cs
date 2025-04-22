@@ -27,7 +27,7 @@ namespace EduQuest.Application.UseCases.Auth.Register
                 .SetValidator(new PasswordValidator<RequestRegisterUsuarioJson>());
 
             RuleFor(usuario => usuario.IsAluno)
-                .NotEmpty()
+                .NotNull()
                 .WithMessage("Deve ser informado se a conta é para aluno ou servidor");
         }
     }

@@ -12,7 +12,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    opts.JsonSerializerOptions.MaxDepth = 64;
+});
+
 builder.Services.AddOpenApi();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
@@ -67,7 +71,7 @@ builder.Services.AddAuthorization(options =>
         policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Aluno", "Professor", "Gestor" })));
 });
 
-builder.Services.AddSingleton<IAuthorizationHandler, PerfilHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, PerfilHandler>();
 
 var app = builder.Build();
 

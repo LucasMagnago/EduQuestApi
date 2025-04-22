@@ -22,7 +22,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<BatalhaParticipante> BatalhaParticipantes { get; set; }
         public DbSet<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; }
         public DbSet<Conquista> Conquistas { get; set; }
-        public DbSet<Curso> Cursos { get; set; }
+        //public DbSet<Curso> Cursos { get; set; }
         public DbSet<Desafio> Desafios { get; set; }
         public DbSet<DesafioCondicao> DesafioCondicoes { get; set; }
         public DbSet<DesafioEscola> DesafioEscolas { get; set; }
@@ -30,10 +30,10 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Escola> Escolas { get; set; }
         public DbSet<Item> Itens { get; set; }
-        public DbSet<Matricula> Matriculas { get; set; }
+        //public DbSet<Matricula> Matriculas { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
         public DbSet<Perfil> Perfis { get; set; }
-        public DbSet<PeriodoLetivo> PeriodosLetivos { get; set; }
+        //public DbSet<PeriodoLetivo> PeriodosLetivos { get; set; }
         public DbSet<Questao> Questoes { get; set; }
         public DbSet<TipoAtividade> TiposAtividade { get; set; }
         public DbSet<TipoCondicao> TiposCondicoes { get; set; }
@@ -61,49 +61,49 @@ namespace EduQuest.Infrastructure.DataAccess
             modelBuilder.Entity<Aluno>().ToTable("Alunos");
 
             // 3. Aluno ---> Matricula <--- Turma
-            modelBuilder.Entity<Matricula>(entity =>
-            {
-                // Configurar PK
-                //entity
-                //.HasKey(m => new { m.AlunoId, m.TurmaId });
+            //modelBuilder.Entity<Matricula>(entity =>
+            //{
+            //    // Configurar PK
+            //    //entity
+            //    //.HasKey(m => new { m.AlunoId, m.TurmaId });
 
-                // Aluno ---> Matricula
-                entity.HasOne(m => m.Aluno)
-                .WithMany(a => a.Matriculas)
-                .HasForeignKey(m => m.AlunoId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //    // Aluno ---> Matricula
+            //    entity.HasOne(m => m.Aluno)
+            //    .WithMany(a => a.Matriculas)
+            //    .HasForeignKey(m => m.AlunoId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-                // Turma ---> Matricula 
-                entity.HasOne(m => m.Turma)
-                .WithMany(t => t.Matriculas)
-                .HasForeignKey(m => m.TurmaId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //    // Turma ---> Matricula 
+            //    entity.HasOne(m => m.Turma)
+            //    .WithMany(t => t.Matriculas)
+            //    .HasForeignKey(m => m.TurmaId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-                // Usuario (Criador) ---> Matricula 
-                entity.HasOne(m => m.UsuarioCriacao)
-                    .WithMany(u => u.MatriculasCriadas)
-                    .HasForeignKey(m => m.UsuarioCriacaoId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
+            //    // Usuario (Criador) ---> Matricula 
+            //    entity.HasOne(m => m.UsuarioCriacao)
+            //        .WithMany(u => u.MatriculasCriadas)
+            //        .HasForeignKey(m => m.UsuarioCriacaoId)
+            //        .IsRequired()
+            //        .OnDelete(DeleteBehavior.Restrict);
 
-                // Usuario (Mudou Situação) ---> Matricula
-                entity.HasOne(m => m.UsuarioSituacao)
-                    .WithMany(u => u.MatriculasComSituacaoAlterada)
-                    .HasForeignKey(m => m.UsuarioSituacaoId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Restrict);
+            //    // Usuario (Mudou Situação) ---> Matricula
+            //    entity.HasOne(m => m.UsuarioSituacao)
+            //        .WithMany(u => u.MatriculasComSituacaoAlterada)
+            //        .HasForeignKey(m => m.UsuarioSituacaoId)
+            //        .IsRequired()
+            //        .OnDelete(DeleteBehavior.Restrict);
 
-                // Usuario (Excluiu) ---> Matricula
-                entity.HasOne(m => m.UsuarioExclusao)
-                    .WithMany(u => u.MatriculasExcluidas)
-                    .HasForeignKey(m => m.UsuarioExclusaoId)
-                    .IsRequired(false)
-                    .OnDelete(DeleteBehavior.Restrict);
+            //    // Usuario (Excluiu) ---> Matricula
+            //    entity.HasOne(m => m.UsuarioExclusao)
+            //        .WithMany(u => u.MatriculasExcluidas)
+            //        .HasForeignKey(m => m.UsuarioExclusaoId)
+            //        .IsRequired(false)
+            //        .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(m => m.Situacao)
-                .HasConversion<string>()
-                .HasMaxLength(20);
-            });
+            //    entity.Property(m => m.Situacao)
+            //    .HasConversion<string>()
+            //    .HasMaxLength(20);
+            //});
 
             // 3. BatalhaParticipante
             modelBuilder.Entity<BatalhaParticipante>(entity =>
@@ -372,14 +372,14 @@ namespace EduQuest.Infrastructure.DataAccess
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // 17. Turma ---> PeriodoLetivo
-            modelBuilder.Entity<Turma>(entity =>
-            {
-                entity.HasOne(t => t.PeriodoLetivo)
-                .WithMany(p => p.Turmas)
-                .HasForeignKey(t => t.PeriodoLetivoId)
-                .OnDelete(DeleteBehavior.Restrict);
-            });
+            //// 17. Turma ---> PeriodoLetivo
+            //modelBuilder.Entity<Turma>(entity =>
+            //{
+            //    entity.HasOne(t => t.PeriodoLetivo)
+            //    .WithMany(p => p.Turmas)
+            //    .HasForeignKey(t => t.PeriodoLetivoId)
+            //    .OnDelete(DeleteBehavior.Restrict);
+            //});
         }
     }
 }
