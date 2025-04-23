@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -13,6 +14,7 @@ namespace EduQuest.Domain.Entities
         //                        ^
         //                        |
         //                    Disciplina
+        [JsonIgnore]
         public virtual ICollection<AlocacaoProfessor> AlocacaoProfessores { get; set; } = new HashSet<AlocacaoProfessor>();
     }
 }

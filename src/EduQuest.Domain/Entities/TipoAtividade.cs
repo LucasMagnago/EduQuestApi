@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -12,6 +13,7 @@ namespace EduQuest.Domain.Entities
         public int moedasRecompensa { get; set; }
 
         // 1. TipoAtividade -> Atividade
-        public ICollection<Atividade> Atividades { get; } = new HashSet<Atividade>();
+        [JsonIgnore]
+        public virtual ICollection<Atividade> Atividades { get; } = new HashSet<Atividade>();
     }
 }

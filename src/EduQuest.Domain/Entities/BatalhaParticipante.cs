@@ -1,6 +1,7 @@
 ﻿using EduQuest.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -26,6 +27,7 @@ namespace EduQuest.Domain.Entities
         public virtual Aluno Aluno { get; set; } = null!;
 
         // 2. BatalhaParticipante -> BatalhaRespostaParticipante <- Questao
+        [JsonIgnore]
         public virtual ICollection<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; } = new HashSet<BatalhaRespostaParticipante>();
 
 

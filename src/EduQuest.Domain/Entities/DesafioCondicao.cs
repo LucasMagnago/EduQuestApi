@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -22,6 +23,7 @@ namespace EduQuest.Domain.Entities
         public TipoCondicao TipoCondicaoNavigation { get; set; } = null!;
 
         // 3. Aluno ---> AlunoProgressoCondicao <--- DesafioCondicao
+        [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
     }
 }

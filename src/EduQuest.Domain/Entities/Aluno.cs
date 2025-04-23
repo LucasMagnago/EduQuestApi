@@ -1,4 +1,6 @@
-﻿namespace EduQuest.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace EduQuest.Domain.Entities
 {
     public class Aluno : Usuario
     {
@@ -19,21 +21,27 @@
 
 
         // 2. Aluno ---> AlunoRealizaAtividade <--- Atividade
+        [JsonIgnore]
         public virtual ICollection<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; } = new HashSet<AlunoRealizaAtividade>();
 
         // 3. Aluno ---> BatalhaParticipante <--- Batalha
+        [JsonIgnore]
         public virtual ICollection<BatalhaParticipante> BatalhaParticipantes { get; set; } = new HashSet<BatalhaParticipante>();
 
         // 4. Aluno ---> AlunoPossuiItem <--- Item
+        [JsonIgnore]
         public virtual ICollection<AlunoPossuiItem> AlunoPossuiItens { get; set; } = new HashSet<AlunoPossuiItem>();
 
         // 5. Aluno ---> AlunoConquista <--- Conquista
+        [JsonIgnore]
         public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
 
         // 6. Aluno ---> AlunoProgressoDesafio <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; } = new HashSet<AlunoProgressoDesafio>();
 
         // 7. Aluno ---> AlunoProgressoCondicao <--- Condicao
+        [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
     }
 }

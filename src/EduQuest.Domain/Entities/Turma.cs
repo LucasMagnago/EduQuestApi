@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -28,18 +29,22 @@ namespace EduQuest.Domain.Entities
         //public virtual ICollection<Matricula> Matriculas { get; set; } = new HashSet<Matricula>();
 
         //// 4. Turma ---> Aluno
+        [JsonIgnore]
         public virtual ICollection<Aluno> Alunos { get; set; } = new HashSet<Aluno>();
 
         // 5. Turma ---> AtividadeTurma <--- Atividade
+        [JsonIgnore]
         public virtual ICollection<AtividadeTurma> AtividadeTurmas { get; set; } = new HashSet<AtividadeTurma>();
 
         // 6. Usuario ---> AlocacaoProfessor <--- Turma
         //                        ^
         //                        |
         //                    Disciplina
+        [JsonIgnore]
         public virtual ICollection<AlocacaoProfessor> AlocacaoProfessores { get; set; } = new HashSet<AlocacaoProfessor>();
 
         // 7. Turma ---> DesafioTurma <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<DesafioTurma> DesafioTurmas { get; set; } = new HashSet<DesafioTurma>();
     }
 }

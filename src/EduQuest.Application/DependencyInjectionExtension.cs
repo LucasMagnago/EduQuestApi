@@ -1,5 +1,8 @@
 ﻿using EduQuest.Application.AutoMapper;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.AddProfessor;
+using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByProfessorId;
+using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByturmaId;
+using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByTurmaId;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.RemoveProfessor;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
@@ -78,6 +81,14 @@ namespace EduQuest.Application
 
             services.AddScoped<IAssingUserToSchoolWithRoleUseCase, AssignUserToSchoolWithRoleUseCase>();
             services.AddScoped<IUnassignUserToSchoolWithRoleUseCase, UnassignUserToSchoolWithRoleUseCase>();
+
+            services.AddScoped<IAddProfessorToTurmaUseCase, AddProfessorToTurmaUseCase>();
+            services.AddScoped<IRemoveProfessorFromTurmaUseCase, RemoveProfessorFromTurmaUseCase>();
+            services.AddScoped<IGetAllAlocacaoByProfessorId, GetAllAlocacaoByProfessorId>();
+            services.AddScoped<IGetAllAlocacaoByTurmaId, GetAllAlocacaoByTurmaId>();
+
+
+
         }
     }
 }

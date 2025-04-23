@@ -1,5 +1,6 @@
 ﻿using EduQuest.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -21,15 +22,19 @@ namespace EduQuest.Domain.Entities
         public Usuario UsuarioCriacao { get; set; } = null!;
 
         // 2. Turma ---> DesafioEscola <--- Escola
+        [JsonIgnore]
         public virtual ICollection<DesafioEscola> DesafioEscolas { get; set; } = new HashSet<DesafioEscola>();
 
         // 3. Turma ---> DesafioTurma <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<DesafioTurma> DesafioTurmas { get; set; } = new HashSet<DesafioTurma>();
 
         // 4. Aluno ---> AlunoProgressoCondicao <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<DesafioCondicao> DesafioCondicoes { get; set; } = new HashSet<DesafioCondicao>();
 
         // 5. Aluno ---> ProgressoDesafioAluno <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; } = new HashSet<AlunoProgressoDesafio>();
     }
 }

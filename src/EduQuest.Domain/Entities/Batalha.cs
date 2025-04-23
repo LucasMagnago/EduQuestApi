@@ -1,5 +1,6 @@
 ﻿using EduQuest.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -17,6 +18,7 @@ namespace EduQuest.Domain.Entities
         public int AtividadeId { get; set; }
 
         // 2. Batalha --> BatalhaParticipante <-- Aluno
+        [JsonIgnore]
         public virtual ICollection<BatalhaParticipante> BatalhaParticipantes { get; set; } = new HashSet<BatalhaParticipante>();
     }
 }

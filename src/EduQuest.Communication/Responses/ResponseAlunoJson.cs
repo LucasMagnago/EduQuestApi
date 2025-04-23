@@ -1,4 +1,6 @@
-﻿namespace EduQuest.Communication.Responses
+﻿using EduQuest.Domain.Entities;
+
+namespace EduQuest.Communication.Responses
 {
     public class ResponseAlunoJson
     {
@@ -16,7 +18,7 @@
         public DateTime DataUltimoAcessoStreak { get; set; }
         public int? TurmaId { get; set; }
 
-        // Está travando a aplicação
-        //public Turma? Turma { get; set; }
+        //Está travando a aplicação
+        public Turma? Turma { get; set; }
     }
 }

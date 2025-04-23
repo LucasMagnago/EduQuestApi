@@ -11,6 +11,7 @@ namespace EduQuest.Api.Controllers
     public class UsuarioEscolaPerfisController : ControllerBase
     {
         [HttpPost]
+        [Route("assign")]
         [ProducesResponseType(typeof(ResponseAssignedUsuarioJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AssignUserToSchoolWithRole(
@@ -22,7 +23,8 @@ namespace EduQuest.Api.Controllers
             return Created(string.Empty, response);
         }
 
-        [HttpPost("unassign")]
+        [HttpPost]
+        [Route("unassign")]
         [ProducesResponseType(typeof(ResponseUnassignedUsuarioJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UnassignUserToSchoolWithRole(

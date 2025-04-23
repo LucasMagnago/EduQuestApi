@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -17,12 +18,14 @@ namespace EduQuest.Domain.Entities
         public TipoUnidade TipoUnidade { get; set; } = default!;
 
         // 2. Escola ---> DesafioEscola <--- Desafio
+        [JsonIgnore]
         public virtual ICollection<DesafioEscola> DesafiosEscolas { get; set; } = new HashSet<DesafioEscola>();
 
         // 2. Usuario ---> UsuarioPerfilEscola <--- Escola
         //                        ^
         //                        |
         //                      Perfil
-        public ICollection<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; } = new List<UsuarioEscolaPerfil>();
+        [JsonIgnore]
+        public virtual ICollection<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; } = new List<UsuarioEscolaPerfil>();
     }
 }

@@ -49,6 +49,8 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<Escola, ResponseEscolaJson>();
 
             CreateMap<Turma, ResponseRegisteredTurmaJson>();
+
+            CreateMap<AlocacaoProfessor, ResponseProfessorDisciplinaJson>();
         }
     }
 }

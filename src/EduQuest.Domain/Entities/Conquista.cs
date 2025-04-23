@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -13,6 +14,7 @@ namespace EduQuest.Domain.Entities
         public string CriterioValor { get; set; } = string.Empty;
 
         // 1. Aluno ---> AlunoConquista <--- Conquista
+        [JsonIgnore]
         public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
     }
 }
