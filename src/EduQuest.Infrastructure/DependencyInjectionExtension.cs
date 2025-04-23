@@ -51,7 +51,7 @@ namespace EduQuest.Infrastructure
             services.AddScoped<IPerfilRepository, PerfilRepository>();
             //services.AddScoped<IPeriodoLetivoRepository, PeriodoLetivoRepository>();
             services.AddScoped<IQuestaoRepository, QuestaoRepository>();
-            services.AddScoped<ITipoAtividadeRepository, TipoAtividadeRepository>();
+            //services.AddScoped<ITipoAtividadeRepository, TipoAtividadeRepository>();
             services.AddScoped<ITipoUnidadeRepository, TipoUnidadeRepository>();
             services.AddScoped<ITurmaRepository, TurmaRepository>();
             services.AddScoped<IUsuarioEscolaPerfilRepository, UsuarioEscolaPerfilRepository>();

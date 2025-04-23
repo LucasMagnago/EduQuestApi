@@ -11,11 +11,13 @@ namespace EduQuest.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
         public int Valor { get; set; }
         public int TempoLimiteSegundos { get; set; }
+        public int XpRecompensa { get; set; } = 10;
+        public int MoedasRecompensa { get; set; } = 10;
         public DateTime DataCriacao { get; set; }
 
         // 1. Atividade ---> TipoAtividade
-        public int TipoAtividadeId { get; set; }
-        public TipoAtividade TipoAtividade { get; set; } = null!;
+        //public int TipoAtividadeId { get; set; }
+        //public TipoAtividade TipoAtividade { get; set; } = null!;
 
         // 2. Atividade ---> Usuário
         public int ProfessorId { get; set; }

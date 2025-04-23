@@ -35,7 +35,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<Perfil> Perfis { get; set; }
         //public DbSet<PeriodoLetivo> PeriodosLetivos { get; set; }
         public DbSet<Questao> Questoes { get; set; }
-        public DbSet<TipoAtividade> TiposAtividade { get; set; }
+        //public DbSet<TipoAtividade> TiposAtividade { get; set; }
         public DbSet<TipoCondicao> TiposCondicoes { get; set; }
         public DbSet<TipoUnidade> TiposUnidade { get; set; }
         public DbSet<Turma> Turmas { get; set; }
