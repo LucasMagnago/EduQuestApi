@@ -35,6 +35,10 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<RequestRemoveAlunoFromTurmaJson, Aluno>();
 
             CreateMap<RequestRegisterAtividadeJson, Atividade>();
+
+            CreateMap<RequestAssignAtividadeToTurmaJson, AtividadeTurma>();
+
+            CreateMap<RequestRegisterAlternativaJson, Alternativa>();
         }
 
         private void EntityToResponse()
@@ -55,6 +59,11 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<AlocacaoProfessor, ResponseProfessorDisciplinaJson>();
 
             CreateMap<Atividade, ResponseAtividadeJson>();
+
+            CreateMap<AtividadeTurma, ResponseAssignedAtividadeToTurmaJson>();
+            CreateMap<AtividadeTurma, ResponseUnassignedAtividadeFromTurmaJson>();
+
+            CreateMap<Alternativa, ResponseAlternativaJson>();
         }
     }
 }

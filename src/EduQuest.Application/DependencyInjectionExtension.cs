@@ -4,13 +4,21 @@ using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByPro
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByturmaId;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByTurmaId;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.RemoveProfessor;
+using EduQuest.Application.UseCases.Alternativas.Delete;
+using EduQuest.Application.UseCases.Alternativas.GetById;
+using EduQuest.Application.UseCases.Alternativas.Register;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
+using EduQuest.Application.UseCases.Atividades.GetAllAvailableAtividadeByTurmaIdUseCase.cs;
+using EduQuest.Application.UseCases.Atividades.GetAllAvailableByAlunoId;
+using EduQuest.Application.UseCases.Atividades.GetAllAvailableByProfessorId;
 using EduQuest.Application.UseCases.Atividades.GetAllByAlunoId;
 using EduQuest.Application.UseCases.Atividades.GetAllByProfessorId;
 using EduQuest.Application.UseCases.Atividades.GetAllByTurmaId;
 using EduQuest.Application.UseCases.Atividades.GetById;
 using EduQuest.Application.UseCases.Atividades.Register;
+using EduQuest.Application.UseCases.AtividadeTurmas.Assign;
+using EduQuest.Application.UseCases.AtividadeTurmas.Unassign;
 using EduQuest.Application.UseCases.Auth.Login;
 using EduQuest.Application.UseCases.Auth.Register;
 using EduQuest.Application.UseCases.Disciplinas.GetAll;
@@ -19,6 +27,7 @@ using EduQuest.Application.UseCases.Disciplinas.Register;
 using EduQuest.Application.UseCases.Escolas.GetAll;
 using EduQuest.Application.UseCases.Escolas.GetById;
 using EduQuest.Application.UseCases.Escolas.Register;
+using EduQuest.Application.UseCases.Questoes.Register;
 using EduQuest.Application.UseCases.Turmas.AddAluno;
 using EduQuest.Application.UseCases.Turmas.GetAll;
 using EduQuest.Application.UseCases.Turmas.GetById;
@@ -93,10 +102,22 @@ namespace EduQuest.Application
             services.AddScoped<IGetAllAlocacaoByTurmaId, GetAllAlocacaoByTurmaId>();
 
             services.AddScoped<IRegisterAtividadeUseCase, RegisterAtividadeUseCase>();
+            services.AddScoped<IGetAtividadeByIdUseCase, GetAtividadeByIdUseCase>();
             services.AddScoped<IGetAllAtividadeByAlunoIdUseCase, GetAllAtividadeByAlunoIdUseCase>();
             services.AddScoped<IGetAllAtividadeByProfessorIdUseCase, GetAllAtividadeByProfessorIdUseCase>();
             services.AddScoped<IGetAllAtividadeByTurmaIdUseCase, GetAllAtividadeByTurmaIdUseCase>();
-            services.AddScoped<IGetAtividadeByIdUseCase, GetAtividadeByIdUseCase>();
+            services.AddScoped<IGetAllAvailableAtividadeByAlunoIdUseCase, GetAllAvailableAtividadeByAlunoIdUseCase>();
+            services.AddScoped<IGetAllAvailableAtividadeByProfessorIdUseCase, GetAllAvailableAtividadeByProfessorIdUseCase>();
+            services.AddScoped<IGetAllAvailableAtividadeByTurmaIdUseCase, GetAllAvailableAtividadeByTurmaIdUseCase>();
+
+            services.AddScoped<IUnassignAtividadeFromTurmaUseCase, UnassignAtividadeFromTurmaUseCase>();
+            services.AddScoped<IAssignAtividadeToTurmaUseCase, AssignAtividadeToTurmaUseCase>();
+
+            services.AddScoped<IGetAlternativaByIdUseCase, GetAlternativaByIdUseCase>();
+            services.AddScoped<IRegisterAlternativaUseCase, RegisterAlternativaUseCase>();
+            services.AddScoped<IDeleteAlternativaUseCase, DeleteAlternativaUseCase>();
+
+            services.AddScoped<IRegisterQuestaoUseCase, RegisterQuestaoUseCase>();
         }
     }
 }
