@@ -4,6 +4,7 @@ using EduQuest.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EduQuest.Infrastructure.Migrations
 {
     [DbContext(typeof(EduQuestDbContext))]
-    partial class EduQuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424031900_AjusteEntidadeAtividadeMigration")]
+    partial class AjusteEntidadeAtividadeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
