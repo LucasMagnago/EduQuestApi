@@ -27,12 +27,16 @@ namespace EduQuest.Domain.Entities
         [JsonIgnore]
         public virtual ICollection<AtividadeQuestao> AtividadeQuestoes { get; set; } = new HashSet<AtividadeQuestao>();
 
-        // 4. Atividade ---> AlunoRealizaAtividade <--- Aluno
+        // 4. Atividade ---> AtividadeAlunos <--- Aluno
         [JsonIgnore]
-        public virtual ICollection<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; } = new HashSet<AlunoRealizaAtividade>();
+        public virtual ICollection<AtividadeAluno> AtividadeAlunos { get; set; } = new HashSet<AtividadeAluno>();
 
         // 5. Atividade ---> AtividadeTurma <--- Turma
         [JsonIgnore]
         public virtual ICollection<AtividadeTurma> AtividadeTurmas { get; set; } = new HashSet<AtividadeTurma>();
+
+        // 6. Atividade ---> AtividadeResposta
+        [JsonIgnore]
+        public ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
     }
 }

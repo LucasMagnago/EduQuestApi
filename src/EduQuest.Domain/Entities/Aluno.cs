@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -12,35 +13,44 @@ namespace EduQuest.Domain.Entities
         public int StreakDiasConsecutivos { get; set; }
         public DateTime DataUltimoAcessoStreak { get; set; }
 
-        // 1. Aluno ---> Matricula <--- Turma
-        //public virtual ICollection<Matricula> Matriculas { get; set; } = new HashSet<Matricula>();
-
-        // 1. Aluno ---> Turma
+        // Relacionamento com Turma
         public virtual int? TurmaId { get; set; }
         public virtual Turma? Turma { get; set; } = null!;
 
 
-        // 2. Aluno ---> AlunoRealizaAtividade <--- Atividade
+        // Relacionamento com AtividadeAluno (atividades atribuídas ao aluno)
         [JsonIgnore]
-        public virtual ICollection<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; } = new HashSet<AlunoRealizaAtividade>();
+        public virtual ICollection<AtividadeAluno> AtividadeAlunos { get; set; } = new HashSet<AtividadeAluno>();
 
-        // 3. Aluno ---> BatalhaParticipante <--- Batalha
+        // Relacionamento com Batalha (um aluno pode participar de várias batalhas)
+        // Coleção de batalhas onde este aluno foi o 'AlunoA'
+        [InverseProperty("AlunoA")] // Liga esta coleção à propriedade AlunoA na classe Batalha
         [JsonIgnore]
-        public virtual ICollection<BatalhaParticipante> BatalhaParticipantes { get; set; } = new HashSet<BatalhaParticipante>();
+        public virtual ICollection<Batalha> BatalhasAsAlunoA { get; set; } = new HashSet<Batalha>();
 
-        // 4. Aluno ---> AlunoPossuiItem <--- Item
+        // Relacionamento com Batalha (um aluno pode participar de várias batalhas)
+        [InverseProperty("AlunoB")] // Liga esta coleção à propriedade AlunoB na classe Batalha
+        [JsonIgnore]
+        public virtual ICollection<Batalha> BatalhasAsAlunoB { get; set; } = new HashSet<Batalha>();
+
+        // Todas as batalhas juntas 
+        [NotMapped]
+        [JsonIgnore]
+        public IEnumerable<Batalha> AllBatalhas => BatalhasAsAlunoA.Concat(BatalhasAsAlunoB);
+
+        // Relacionamento com AlunoPossuiItem (itens do aluno)
         [JsonIgnore]
         public virtual ICollection<AlunoPossuiItem> AlunoPossuiItens { get; set; } = new HashSet<AlunoPossuiItem>();
 
-        // 5. Aluno ---> AlunoConquista <--- Conquista
+        // Relacionamento com AlunoConquista (conquistas do aluno)
         [JsonIgnore]
         public virtual ICollection<AlunoConquista> AlunoConquistas { get; set; } = new HashSet<AlunoConquista>();
 
-        // 6. Aluno ---> AlunoProgressoDesafio <--- Desafio
+        // Relacionamento com AlunoProgressoDesafio (desafios que o aluno está progredindo)
         [JsonIgnore]
         public virtual ICollection<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; } = new HashSet<AlunoProgressoDesafio>();
 
-        // 7. Aluno ---> AlunoProgressoCondicao <--- Condicao
+        // Relacionamento com AlunoProgressoCondicao (condições do aluno em desafios)
         [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
     }

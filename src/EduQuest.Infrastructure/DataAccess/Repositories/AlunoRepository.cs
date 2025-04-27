@@ -13,19 +13,19 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         public async Task<Aluno?> GetByUsuarioGuid(Guid usuarioGuid)
         {
-            return await _context.Alunos
+            return await _entity
                 .Where(a => a.UsuarioIdentifier == usuarioGuid && a.Ativo)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<bool> ExistAlunoWithUsuarioGuid(Guid usuarioGuid)
         {
-            return await _context.Alunos.AnyAsync(a => a.UsuarioIdentifier == usuarioGuid);
+            return await _entity.AnyAsync(a => a.UsuarioIdentifier == usuarioGuid);
         }
 
         public async Task<Turma?> GetTurmaByAlunoId(int alunoId)
         {
-            return await _context.Alunos
+            return await _entity
                 .Where(a => a.Id == alunoId)
                 .Select(a => a.Turma)
                 .FirstOrDefaultAsync();

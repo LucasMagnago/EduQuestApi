@@ -13,28 +13,28 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         public async Task<List<AlocacaoProfessor>?> GetAllByProfessorId(int professorId)
         {
-            return await _context.AlocacaoProfessores
+            return await _entity
                 .Where(a => a.ProfessorId == professorId)
                 .ToListAsync();
         }
 
         public async Task<List<AlocacaoProfessor>?> GetAllByProfessorIdAndTurmaId(int professorId, int turmaId)
         {
-            return await _context.AlocacaoProfessores
+            return await _entity
                 .Where(a => a.ProfessorId == professorId && a.TurmaId == turmaId)
                 .ToListAsync();
         }
 
         public async Task<List<AlocacaoProfessor>?> GetAllByTurmaId(int turmaId)
         {
-            return await _context.AlocacaoProfessores
+            return await _entity
                 .Where(a => a.TurmaId == turmaId)
                 .ToListAsync();
         }
 
         public async Task<bool> DoesProfessorTeachDisciplinaInTurma(int professorId, int disciplinaId, int turmaId)
         {
-            return await _context.AlocacaoProfessores
+            return await _entity
                 .Where(a => a.ProfessorId == professorId &&
                     a.DisciplinaId == disciplinaId &&
                     a.TurmaId == turmaId)
@@ -43,7 +43,7 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         public async Task<AlocacaoProfessor?> GetByProfessorIdAndDisciplinaIdAndTurmaId(int professorId, int disciplinaId, int turmaId)
         {
-            return await _context.AlocacaoProfessores
+            return await _entity
                 .Where(a => a.ProfessorId == professorId &&
                     a.DisciplinaId == disciplinaId &&
                     a.TurmaId == turmaId)

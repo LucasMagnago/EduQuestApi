@@ -9,6 +9,10 @@ using EduQuest.Application.UseCases.Alternativas.GetById;
 using EduQuest.Application.UseCases.Alternativas.Register;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
+using EduQuest.Application.UseCases.AtividadeQuestoes.GetAllByAtividadeId;
+using EduQuest.Application.UseCases.AtividadeQuestoes.GetById;
+using EduQuest.Application.UseCases.AtividadeQuestoes.Register;
+using EduQuest.Application.UseCases.AtividadeQuestoes.Remove;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableAtividadeByTurmaIdUseCase.cs;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableByAlunoId;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableByProfessorId;
@@ -27,7 +31,13 @@ using EduQuest.Application.UseCases.Disciplinas.Register;
 using EduQuest.Application.UseCases.Escolas.GetAll;
 using EduQuest.Application.UseCases.Escolas.GetById;
 using EduQuest.Application.UseCases.Escolas.Register;
+using EduQuest.Application.UseCases.Questoes.Delete;
+using EduQuest.Application.UseCases.Questoes.GetAllByDisciplinaId;
+using EduQuest.Application.UseCases.Questoes.GetAllByDisciplinaIdAndNivel;
+using EduQuest.Application.UseCases.Questoes.GetAllByProfessorId;
+using EduQuest.Application.UseCases.Questoes.GetById;
 using EduQuest.Application.UseCases.Questoes.Register;
+using EduQuest.Application.UseCases.Questoes.SetCorrectAlternativa;
 using EduQuest.Application.UseCases.Turmas.AddAluno;
 using EduQuest.Application.UseCases.Turmas.GetAll;
 using EduQuest.Application.UseCases.Turmas.GetById;
@@ -118,6 +128,17 @@ namespace EduQuest.Application
             services.AddScoped<IDeleteAlternativaUseCase, DeleteAlternativaUseCase>();
 
             services.AddScoped<IRegisterQuestaoUseCase, RegisterQuestaoUseCase>();
+            services.AddScoped<IDeleteQuestaoUseCase, DeleteQuestaoUseCase>();
+            services.AddScoped<IGetAllQuestaoByDisciplinaIdUseCase, GetAllQuestaoByDisciplinaIdUseCase>();
+            services.AddScoped<IGetAllQuestaoByDisciplinaIdAndNivelUseCase, GetAllQuestaoByDisciplinaIdAndNivelUseCase>();
+            services.AddScoped<IGetAllQuestaoByProfessorIdUseCase, GetAllQuestaoByProfessorIdUseCase>();
+            services.AddScoped<IGetQuestaoByIdUseCase, GetQuestaoByIdUseCase>();
+            services.AddScoped<ISetQuestaoCorrectAlternativaUseCase, SetQuestaoCorrectAlternativaUseCase>();
+
+            services.AddScoped<IAddQuestaoToAtividadeUseCase, AddQuestaoToAtividadeUseCase>();
+            services.AddScoped<IRemoveQuestaoFromAtividadeUseCase, RemoveQuestaoFromAtividadeUseCase>();
+            services.AddScoped<IGetAllQuestaoByAtividadeIdUseCase, GetAllQuestaoByAtividadeIdUseCase>();
+            services.AddScoped<IGetAtividadeQuestaoByIdUseCase, GetAtividadeQuestaoByIdUseCase>();
         }
     }
 }

@@ -13,13 +13,13 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         public async Task<bool> ExistsWithNomeAsync(string nome)
         {
-            return await _context.Escolas
+            return await _entity
                 .AnyAsync(e => e.Nome.Equals(nome));
         }
 
         public async Task<bool> ExistsWithSiglaAsync(string sigla)
         {
-            return await _context.Escolas
+            return await _entity
                 .AnyAsync(e => e.Sigla.Equals(sigla));
         }
     }

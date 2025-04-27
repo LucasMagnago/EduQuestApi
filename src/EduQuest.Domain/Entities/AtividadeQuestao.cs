@@ -8,11 +8,10 @@ namespace EduQuest.Domain.Entities
         public int Id { get; set; }
         public int Ordem { get; set; }
 
-        // 1. Atividade -> AtividadeQuestao <- Questao
-        public Atividade Atividade { get; set; } = null!;
         public int AtividadeId { get; set; }
+        public virtual Atividade Atividade { get; set; } = null!;
 
-        public Questao Questao { get; set; } = null!;
         public int QuestaoId { get; set; }
+        public Questao Questao { get; set; } = null!;
     }
 }

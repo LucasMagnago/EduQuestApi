@@ -1,6 +1,4 @@
-﻿using EduQuest.Domain.Entities;
-
-namespace EduQuest.Communication.Responses
+﻿namespace EduQuest.Communication.Responses
 {
     public class ResponseAlternativaJson
     {
@@ -8,6 +6,5 @@ namespace EduQuest.Communication.Responses
         public string Texto { get; set; } = string.Empty;
         public int Ordem { get; set; }
         public int QuestaoId { get; set; }
-        public Questao? Questao { get; set; } = null!;
     }
 }

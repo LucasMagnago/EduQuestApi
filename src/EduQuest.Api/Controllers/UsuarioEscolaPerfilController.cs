@@ -8,7 +8,7 @@ namespace EduQuest.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioEscolaPerfisController : ControllerBase
+    public class UsuarioEscolaPerfilController : ControllerBase
     {
         [HttpPost]
         [Route("assign")]

@@ -20,7 +20,6 @@ namespace EduQuest.Application.UseCases.Turmas.GetAll
         public async Task<List<ResponseTurmaJson>> Execute()
         {
             var result = await _turmaRepository.GetAllAsync();
-
             if (result is null)
                 throw new NotFoundException("Turmas não encontradas");
 

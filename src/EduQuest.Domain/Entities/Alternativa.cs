@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -11,6 +12,7 @@ namespace EduQuest.Domain.Entities
 
         // Altenativa ---> Questao
         public int QuestaoId { get; set; }
+        [JsonIgnore]
         public Questao Questao { get; set; } = default!;
     }
 }

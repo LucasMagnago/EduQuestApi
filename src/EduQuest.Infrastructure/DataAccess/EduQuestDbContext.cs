@@ -14,13 +14,14 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<AlunoPossuiItem> AlunoPossuiItens { get; set; }
         public DbSet<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; }
         public DbSet<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; }
-        public DbSet<AlunoRealizaAtividade> AlunoRealizaAtividades { get; set; }
         public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<AtividadeAluno> AtividadeAlunos { get; set; }
         public DbSet<AtividadeQuestao> AtividadeQuestoes { get; set; }
-        public DbSet<AtividadeTurma> AtivideTurmas { get; set; }
+        public DbSet<AtividadeResposta> AtividadeRespostas { get; set; }
+        public DbSet<AtividadeTurma> AtividadeTurmas { get; set; }
         public DbSet<Batalha> Batalhas { get; set; }
-        public DbSet<BatalhaParticipante> BatalhaParticipantes { get; set; }
-        public DbSet<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; }
+        public DbSet<BatalhaQuestao> BatalhaQuestoes { get; set; }
+        public DbSet<BatalhaResposta> BatalhaRespostas { get; set; }
         public DbSet<Conquista> Conquistas { get; set; }
         //public DbSet<Curso> Cursos { get; set; }
         public DbSet<Desafio> Desafios { get; set; }
@@ -60,84 +61,48 @@ namespace EduQuest.Infrastructure.DataAccess
             // 2. Aluno
             modelBuilder.Entity<Aluno>().ToTable("Alunos");
 
-            // 3. Aluno ---> Matricula <--- Turma
-            //modelBuilder.Entity<Matricula>(entity =>
-            //{
-            //    // Configurar PK
-            //    //entity
-            //    //.HasKey(m => new { m.AlunoId, m.TurmaId });
-
-            //    // Aluno ---> Matricula
-            //    entity.HasOne(m => m.Aluno)
-            //    .WithMany(a => a.Matriculas)
-            //    .HasForeignKey(m => m.AlunoId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //    // Turma ---> Matricula 
-            //    entity.HasOne(m => m.Turma)
-            //    .WithMany(t => t.Matriculas)
-            //    .HasForeignKey(m => m.TurmaId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //    // Usuario (Criador) ---> Matricula 
-            //    entity.HasOne(m => m.UsuarioCriacao)
-            //        .WithMany(u => u.MatriculasCriadas)
-            //        .HasForeignKey(m => m.UsuarioCriacaoId)
-            //        .IsRequired()
-            //        .OnDelete(DeleteBehavior.Restrict);
-
-            //    // Usuario (Mudou Situação) ---> Matricula
-            //    entity.HasOne(m => m.UsuarioSituacao)
-            //        .WithMany(u => u.MatriculasComSituacaoAlterada)
-            //        .HasForeignKey(m => m.UsuarioSituacaoId)
-            //        .IsRequired()
-            //        .OnDelete(DeleteBehavior.Restrict);
-
-            //    // Usuario (Excluiu) ---> Matricula
-            //    entity.HasOne(m => m.UsuarioExclusao)
-            //        .WithMany(u => u.MatriculasExcluidas)
-            //        .HasForeignKey(m => m.UsuarioExclusaoId)
-            //        .IsRequired(false)
-            //        .OnDelete(DeleteBehavior.Restrict);
-
-            //    entity.Property(m => m.Situacao)
-            //    .HasConversion<string>()
-            //    .HasMaxLength(20);
-            //});
-
-            // 3. BatalhaParticipante
-            modelBuilder.Entity<BatalhaParticipante>(entity =>
+            // 3. Batalha
+            modelBuilder.Entity<Batalha>(entity =>
             {
-                // Aluno ---> BatalhaParticipante
-                entity.HasOne(bp => bp.Aluno)
-                .WithMany(a => a.BatalhaParticipantes)
-                .HasForeignKey(bp => bp.AlunoId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-                // Batalha ---> BatalhaParticipante
-                entity.HasOne(bp => bp.Batalha)
-                .WithMany(b => b.BatalhaParticipantes)
-                .HasForeignKey(bp => bp.BatalhaId)
+                entity.HasOne(b => b.AlunoA)
+                .WithMany(a => a.BatalhasAsAlunoA)
+                .HasForeignKey(b => b.AlunoAId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(bp => bp.Status)
-                .HasConversion<string>()
-                .HasMaxLength(20);
+                entity.HasOne(b => b.AlunoB)
+                .WithMany(a => a.BatalhasAsAlunoB)
+                .HasForeignKey(b => b.AlunoBId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // 4. BatalhaRespostaParticipante
-            modelBuilder.Entity<BatalhaRespostaParticipante>(entity =>
+            // 3. BatalhaQuestao
+            modelBuilder.Entity<BatalhaQuestao>(entity =>
             {
-                // BatalhaRespostaParticipante ---> BatalhaParticipante
-                entity.HasOne(brp => brp.BatalhaParticipante)
-                .WithMany(bp => bp.BatalhaRespostaParticipantes)
-                .HasForeignKey(brp => brp.BatalhaParticipanteId)
+                // Batalha ---> BatalhaQuestao
+                entity.HasOne(bq => bq.Batalha)
+                .WithMany(b => b.BatalhaQuestoes)
+                .HasForeignKey(bq => bq.BatalhaId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-                // BatalhaRespostaParticipante ---> Questao
-                entity.HasOne(brp => brp.Questao)
-                .WithMany(q => q.BatalhaRespostaParticipantes)
-                .HasForeignKey(brp => brp.QuestaoId)
+                // Questao ---> BatalhaQuestao
+                entity.HasOne(bq => bq.Questao)
+                .WithMany(b => b.BatalhaQuestoes)
+                .HasForeignKey(bq => bq.QuestaoId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 4. BatalhaResposta
+            modelBuilder.Entity<BatalhaResposta>(entity =>
+            {
+                // BatalhaResposta ---> Batalha
+                entity.HasOne(br => br.Batalha)
+                .WithMany(b => b.BatalhaRespostas)
+                .HasForeignKey(br => br.BatalhaId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(br => br.Questao)
+                .WithMany(q => q.BatalhaRespostas)
+                .HasForeignKey(br => br.QuestaoId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
@@ -171,28 +136,7 @@ namespace EduQuest.Infrastructure.DataAccess
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // 6. AlunoRealizaAtividade
-            modelBuilder.Entity<AlunoRealizaAtividade>(entity =>
-            {
-                //modelBuilder.Entity<AlunoRealizaAtividade>()
-                //.HasKey(a => new { a.AlunoId, a.AtividadeId });
-
-                // Aluno ---> AlunoRealizaAtividades
-                modelBuilder.Entity<AlunoRealizaAtividade>()
-                .HasOne(arv => arv.Aluno)
-                .WithMany(a => a.AlunoRealizaAtividades)
-                .HasForeignKey(arv => arv.AlunoId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-                // Atividade ---> AlunoRealizaAtividades
-                modelBuilder.Entity<AlunoRealizaAtividade>()
-                .HasOne(arv => arv.Atividade)
-                .WithMany(a => a.AlunoRealizaAtividades)
-                .HasForeignKey(arv => arv.AtividadeId)
-                .OnDelete(DeleteBehavior.Restrict);
-            });
-
-            // 7. AtividadeTurma
+            // 6. AtividadeTurma
             modelBuilder.Entity<AtividadeTurma>(entity =>
             {
                 // Atividade ---> AtividadeTurma
@@ -205,6 +149,46 @@ namespace EduQuest.Infrastructure.DataAccess
                 entity.HasOne(at => at.Turma)
                 .WithMany(t => t.AtividadeTurmas)
                 .HasForeignKey(at => at.TurmaId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 7. AtividadeAluno
+            modelBuilder.Entity<AtividadeAluno>(entity =>
+            {
+                //modelBuilder.Entity<AtividadeAluno>()
+                //.HasKey(a => new { a.AlunoId, a.AtividadeId });
+
+                // Aluno ---> AtividadeAluno
+                modelBuilder.Entity<AtividadeAluno>()
+                .HasOne(arv => arv.Aluno)
+                .WithMany(a => a.AtividadeAlunos)
+                .HasForeignKey(arv => arv.AlunoId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+                // Atividade ---> AtividadeAluno
+                modelBuilder.Entity<AtividadeAluno>()
+                .HasOne(arv => arv.Atividade)
+                .WithMany(a => a.AtividadeAlunos)
+                .HasForeignKey(arv => arv.AtividadeId)
+                .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // 7. AtividadeResposta
+            modelBuilder.Entity<AtividadeResposta>(entity =>
+            {
+                //modelBuilder.Entity<AtividadeAluno>()
+                //.HasKey(a => new { a.AlunoId, a.AtividadeId });
+
+                // Aluno ---> AtividadeResposta
+                entity.HasOne(ar => ar.AtividadeAluno)
+                .WithMany(aa => aa.AtividadeRespostas)
+                .HasForeignKey(ar => ar.AtividadeAlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                // Questao ---> AtividadeResposta
+                entity.HasOne(ar => ar.Questao)
+                .WithMany(q => q.AtividadeRespostas)
+                .HasForeignKey(br => br.QuestaoId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
 

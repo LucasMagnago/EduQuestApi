@@ -9,5 +9,7 @@
         public int DisciplinaId { get; set; }
         public int? AlternativaCorretaId { get; set; }
         public int UsuarioCriacaoId { get; set; }
+
+        public IEnumerable<ResponseAlternativaJson> Alternativas { get; set; } = new List<ResponseAlternativaJson>();
     }
 }

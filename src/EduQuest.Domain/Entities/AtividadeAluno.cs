@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EduQuest.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace EduQuest.Domain.Entities
 {
-    public class AlunoRealizaAtividade
+    public class AtividadeAluno
     {
         [Key]
         public int Id { get; set; }
@@ -12,11 +13,15 @@ namespace EduQuest.Domain.Entities
         public int XpGanho { get; set; }
         public int MoedasGanhas { get; set; }
         public string FeedbackProfessor { get; set; } = string.Empty;
+        public StatusAtividade Status { get; set; } = StatusAtividade.Pendente;
 
-        // 1. Aluno ---> AlunoRealizaAtividade <--- Atividade
+        // 1. Aluno ---> AtividadeAlunos <--- Atividade
         public int AlunoId { get; set; }
         public virtual Aluno Aluno { get; set; } = default!;
         public int AtividadeId { get; set; }
         public virtual Atividade Atividade { get; set; } = default!;
+
+        // 2. AtividadeAluno ---> RespostaAtividade
+        public virtual ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
     }
 }

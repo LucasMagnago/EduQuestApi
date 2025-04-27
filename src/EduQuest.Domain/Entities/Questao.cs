@@ -14,7 +14,7 @@ namespace EduQuest.Domain.Entities
 
         // 1. Questao ---> Disciplina
         public int DisciplinaId { get; set; }
-        public Disciplina Disciplina { get; set; } = null!;
+        public virtual Disciplina Disciplina { get; set; } = null!;
 
         //// 2. Questao ---> Curso
         //public int CursoId { get; set; }
@@ -23,22 +23,29 @@ namespace EduQuest.Domain.Entities
         // 3. Questao ---> Alternativa
         public int AlternativaCorretaId { get; set; }
         [ForeignKey("AlternativaCorretaId")]
-        public Alternativa AlternativaCorreta { get; set; } = null!;
+        public virtual Alternativa AlternativaCorreta { get; set; } = null!;
 
         // 4. Questao ---> Usuario
         public int UsuarioCriacaoId { get; set; }
-        public Usuario UsuarioCriacao { get; set; } = null!;
+        public virtual Usuario UsuarioCriacao { get; set; } = null!;
 
         // 5. Questao ---> Alternativas
-        [JsonIgnore]
         public virtual ICollection<Alternativa> Alternativas { get; set; } = new List<Alternativa>();
 
-        // 5. BatalhaParticipante ---> BatalhaRespostaParticipante <--- Questao
+        // 7. Questao ---> BatalhaQuestao <--- Batalha
         [JsonIgnore]
-        public virtual ICollection<BatalhaRespostaParticipante> BatalhaRespostaParticipantes { get; set; } = new HashSet<BatalhaRespostaParticipante>();
+        public virtual ICollection<BatalhaQuestao> BatalhaQuestoes { get; set; } = new HashSet<BatalhaQuestao>();
+
+        [JsonIgnore]
+        public virtual ICollection<BatalhaResposta> BatalhaRespostas { get; set; } = new HashSet<BatalhaResposta>();
 
         // 6. Questao ---> AtividadeQuestao <-- Atividade
         [JsonIgnore]
         public virtual ICollection<AtividadeQuestao> AtividadeQuestoes { get; set; } = new HashSet<AtividadeQuestao>();
+
+        [JsonIgnore]
+        public virtual ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
+
+
     }
 }

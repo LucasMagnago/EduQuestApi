@@ -39,6 +39,7 @@ namespace EduQuest.Infrastructure
             services.AddScoped<IAlocacaoProfessorRepository, AlocacaoProfessorRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
+            services.AddScoped<IAtividadeQuestaoRepository, AtividadeQuestaoRepository>();
             services.AddScoped<IAtividadeTurmaRepository, AtividadeTurmaRepository>();
             services.AddScoped<IBatalhaRepository, BatalhaRepository>();
             services.AddScoped<IConquistaRepository, ConquistaRepository>();

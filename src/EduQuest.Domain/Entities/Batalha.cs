@@ -13,12 +13,18 @@ namespace EduQuest.Domain.Entities
         public int TempoLimiteSegundos { get; set; }
         public StatusBatalha Status { get; set; }
 
-        // 1. Batalha --> Atividade
-        public Atividade Atividade { get; set; } = null!;
-        public int AtividadeId { get; set; }
+        // Relacionamento com Alunos (2 alunos por batalha)
+        public int AlunoAId { get; set; }
+        public virtual Aluno AlunoA { get; set; } = null!;
+        public int AlunoBId { get; set; }
+        public virtual Aluno AlunoB { get; set; } = null!;
 
-        // 2. Batalha --> BatalhaParticipante <-- Aluno
+        // Relacionamento com BatalhaQuestoes (questões respondidas na batalha)
         [JsonIgnore]
-        public virtual ICollection<BatalhaParticipante> BatalhaParticipantes { get; set; } = new HashSet<BatalhaParticipante>();
+        public virtual ICollection<BatalhaQuestao> BatalhaQuestoes { get; set; } = new HashSet<BatalhaQuestao>();
+
+        // Relacionamento com BatalhaRespostas (respostas fornecidas pelos alunos)
+        [JsonIgnore]
+        public virtual ICollection<BatalhaResposta> BatalhaRespostas { get; set; } = new HashSet<BatalhaResposta>();
     }
 }

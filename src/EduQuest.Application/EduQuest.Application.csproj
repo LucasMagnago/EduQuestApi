@@ -20,13 +20,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Matriculas\Remanejar\" />
-    <Folder Include="UseCases\Questoes\GetById\" />
-    <Folder Include="UseCases\Questoes\GetAllByDisciplinaId\" />
-    <Folder Include="UseCases\Questoes\GetAllByDisciplinaIdAndNivel\" />
-    <Folder Include="UseCases\Questoes\Delete\" />
-    <Folder Include="UseCases\Questoes\AddAlternativa\" />
-    <Folder Include="UseCases\Questoes\RemoveAlternativa\" />
-    <Folder Include="UseCases\Questoes\SetCorrectAlternativa\" />
+    <Folder Include="UseCases\AlunoRealizaAtividades\" />
   </ItemGroup>
 
 </Project>

@@ -174,48 +174,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("AlunoProgressoDesafios");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.AlunoRealizaAtividade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AtividadeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FeedbackProfessor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MoedasGanhas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PontuacaoObtida")
-                        .HasColumnType("int");
-
-                    b.Property<int>("XpGanho")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.HasIndex("AtividadeId");
-
-                    b.ToTable("AlunoRealizaAtividades");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Atividade", b =>
                 {
                     b.Property<int>("Id")
@@ -257,6 +215,51 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("Atividades");
                 });
 
+            modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeAluno", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AtividadeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FeedbackProfessor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MoedasGanhas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PontuacaoObtida")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("XpGanho")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
+
+                    b.HasIndex("AtividadeId");
+
+                    b.ToTable("AtividadeAlunos");
+                });
+
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeQuestao", b =>
                 {
                     b.Property<int>("Id")
@@ -281,6 +284,45 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("AtividadeQuestoes");
+                });
+
+            modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeResposta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Acertou")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("AlternativaEscolhaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AtividadeAlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AtividadeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataResposta")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("QuestaoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlternativaEscolhaId");
+
+                    b.HasIndex("AtividadeAlunoId");
+
+                    b.HasIndex("AtividadeId");
+
+                    b.HasIndex("QuestaoId");
+
+                    b.ToTable("AtividadeRespostas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeTurma", b =>
@@ -314,7 +356,7 @@ namespace EduQuest.Infrastructure.Migrations
 
                     b.HasIndex("TurmaId");
 
-                    b.ToTable("AtivideTurmas");
+                    b.ToTable("AtividadeTurmas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Batalha", b =>
@@ -325,7 +367,10 @@ namespace EduQuest.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AtividadeId")
+                    b.Property<int>("AlunoAId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AlunoBId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataFim")
@@ -342,12 +387,14 @@ namespace EduQuest.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AtividadeId");
+                    b.HasIndex("AlunoAId");
+
+                    b.HasIndex("AlunoBId");
 
                     b.ToTable("Batalhas");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaParticipante", b =>
+            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaQuestao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -355,45 +402,22 @@ namespace EduQuest.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("BatalhaId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MoedaRecebidas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Pontuacao")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("TempoTotalSegundos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("XpRecebido")
+                    b.Property<int>("QuestaoId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AlunoId");
-
                     b.HasIndex("BatalhaId");
 
-                    b.ToTable("BatalhaParticipantes");
+                    b.HasIndex("QuestaoId");
+
+                    b.ToTable("BatalhaQuestoes");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaRespostaParticipante", b =>
+            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaResposta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -404,7 +428,10 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<bool>("Acertou")
                         .HasColumnType("bit");
 
-                    b.Property<int>("BatalhaParticipanteId")
+                    b.Property<int>("AlternativaEscolhaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BatalhaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataResposta")
@@ -413,17 +440,15 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("QuestaoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("RespostaDada")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BatalhaParticipanteId");
+                    b.HasIndex("AlternativaEscolhaId");
+
+                    b.HasIndex("BatalhaId");
 
                     b.HasIndex("QuestaoId");
 
-                    b.ToTable("BatalhaRespostaParticipantes");
+                    b.ToTable("BatalhaRespostas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Conquista", b =>
@@ -1033,25 +1058,6 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Navigation("Desafio");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.AlunoRealizaAtividade", b =>
-                {
-                    b.HasOne("EduQuest.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("AlunoRealizaAtividades")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Atividade", "Atividade")
-                        .WithMany("AlunoRealizaAtividades")
-                        .HasForeignKey("AtividadeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Aluno");
-
-                    b.Navigation("Atividade");
-                });
-
             modelBuilder.Entity("EduQuest.Domain.Entities.Atividade", b =>
                 {
                     b.HasOne("EduQuest.Domain.Entities.Usuario", "Professor")
@@ -1061,6 +1067,25 @@ namespace EduQuest.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Professor");
+                });
+
+            modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeAluno", b =>
+                {
+                    b.HasOne("EduQuest.Domain.Entities.Aluno", "Aluno")
+                        .WithMany("AtividadeAlunos")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.Atividade", "Atividade")
+                        .WithMany("AtividadeAlunos")
+                        .HasForeignKey("AtividadeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Aluno");
+
+                    b.Navigation("Atividade");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeQuestao", b =>
@@ -1078,6 +1103,37 @@ namespace EduQuest.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Atividade");
+
+                    b.Navigation("Questao");
+                });
+
+            modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeResposta", b =>
+                {
+                    b.HasOne("EduQuest.Domain.Entities.Alternativa", "AlternativaEscolha")
+                        .WithMany()
+                        .HasForeignKey("AlternativaEscolhaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.AtividadeAluno", "AtividadeAluno")
+                        .WithMany("AtividadeRespostas")
+                        .HasForeignKey("AtividadeAlunoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.Atividade", null)
+                        .WithMany("AtividadeRespostas")
+                        .HasForeignKey("AtividadeId");
+
+                    b.HasOne("EduQuest.Domain.Entities.Questao", "Questao")
+                        .WithMany("AtividadeRespostas")
+                        .HasForeignKey("QuestaoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AlternativaEscolha");
+
+                    b.Navigation("AtividadeAluno");
 
                     b.Navigation("Questao");
                 });
@@ -1111,49 +1167,65 @@ namespace EduQuest.Infrastructure.Migrations
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Batalha", b =>
                 {
-                    b.HasOne("EduQuest.Domain.Entities.Atividade", "Atividade")
-                        .WithMany()
-                        .HasForeignKey("AtividadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Atividade");
-                });
-
-            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaParticipante", b =>
-                {
-                    b.HasOne("EduQuest.Domain.Entities.Aluno", "Aluno")
-                        .WithMany("BatalhaParticipantes")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EduQuest.Domain.Entities.Batalha", "Batalha")
-                        .WithMany("BatalhaParticipantes")
-                        .HasForeignKey("BatalhaId")
+                    b.HasOne("EduQuest.Domain.Entities.Aluno", "AlunoA")
+                        .WithMany("BatalhasAsAlunoA")
+                        .HasForeignKey("AlunoAId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Aluno");
+                    b.HasOne("EduQuest.Domain.Entities.Aluno", "AlunoB")
+                        .WithMany("BatalhasAsAlunoB")
+                        .HasForeignKey("AlunoBId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("Batalha");
+                    b.Navigation("AlunoA");
+
+                    b.Navigation("AlunoB");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaRespostaParticipante", b =>
+            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaQuestao", b =>
                 {
-                    b.HasOne("EduQuest.Domain.Entities.BatalhaParticipante", "BatalhaParticipante")
-                        .WithMany("BatalhaRespostaParticipantes")
-                        .HasForeignKey("BatalhaParticipanteId")
+                    b.HasOne("EduQuest.Domain.Entities.Batalha", "Batalha")
+                        .WithMany("BatalhaQuestoes")
+                        .HasForeignKey("BatalhaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EduQuest.Domain.Entities.Questao", "Questao")
-                        .WithMany("BatalhaRespostaParticipantes")
+                        .WithMany("BatalhaQuestoes")
                         .HasForeignKey("QuestaoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("BatalhaParticipante");
+                    b.Navigation("Batalha");
+
+                    b.Navigation("Questao");
+                });
+
+            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaResposta", b =>
+                {
+                    b.HasOne("EduQuest.Domain.Entities.Alternativa", "AlternativaEscolha")
+                        .WithMany()
+                        .HasForeignKey("AlternativaEscolhaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.Batalha", "Batalha")
+                        .WithMany("BatalhaRespostas")
+                        .HasForeignKey("BatalhaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EduQuest.Domain.Entities.Questao", "Questao")
+                        .WithMany("BatalhaRespostas")
+                        .HasForeignKey("QuestaoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AlternativaEscolha");
+
+                    b.Navigation("Batalha");
 
                     b.Navigation("Questao");
                 });
@@ -1338,21 +1410,25 @@ namespace EduQuest.Infrastructure.Migrations
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Atividade", b =>
                 {
-                    b.Navigation("AlunoRealizaAtividades");
+                    b.Navigation("AtividadeAlunos");
 
                     b.Navigation("AtividadeQuestoes");
+
+                    b.Navigation("AtividadeRespostas");
 
                     b.Navigation("AtividadeTurmas");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.Batalha", b =>
+            modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeAluno", b =>
                 {
-                    b.Navigation("BatalhaParticipantes");
+                    b.Navigation("AtividadeRespostas");
                 });
 
-            modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaParticipante", b =>
+            modelBuilder.Entity("EduQuest.Domain.Entities.Batalha", b =>
                 {
-                    b.Navigation("BatalhaRespostaParticipantes");
+                    b.Navigation("BatalhaQuestoes");
+
+                    b.Navigation("BatalhaRespostas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Conquista", b =>
@@ -1404,7 +1480,11 @@ namespace EduQuest.Infrastructure.Migrations
 
                     b.Navigation("AtividadeQuestoes");
 
-                    b.Navigation("BatalhaRespostaParticipantes");
+                    b.Navigation("AtividadeRespostas");
+
+                    b.Navigation("BatalhaQuestoes");
+
+                    b.Navigation("BatalhaRespostas");
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Turma", b =>
@@ -1439,9 +1519,11 @@ namespace EduQuest.Infrastructure.Migrations
 
                     b.Navigation("AlunoProgressoDesafios");
 
-                    b.Navigation("AlunoRealizaAtividades");
+                    b.Navigation("AtividadeAlunos");
 
-                    b.Navigation("BatalhaParticipantes");
+                    b.Navigation("BatalhasAsAlunoA");
+
+                    b.Navigation("BatalhasAsAlunoB");
                 });
 #pragma warning restore 612, 618
         }
