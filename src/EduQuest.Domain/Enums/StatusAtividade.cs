@@ -4,7 +4,6 @@
     {
         Pendente = 1,
         Iniciada = 2,
-        Enviada = 3,
-        Finalizada = 4
+        Enviada = 3
     }
 }

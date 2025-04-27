@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Matriculas\Remanejar\" />
-    <Folder Include="UseCases\AlunoRealizaAtividades\" />
   </ItemGroup>
 
 </Project>

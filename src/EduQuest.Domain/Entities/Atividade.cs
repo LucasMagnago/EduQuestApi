@@ -36,7 +36,7 @@ namespace EduQuest.Domain.Entities
         public virtual ICollection<AtividadeTurma> AtividadeTurmas { get; set; } = new HashSet<AtividadeTurma>();
 
         // 6. Atividade ---> AtividadeResposta
-        [JsonIgnore]
-        public ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
+        //[JsonIgnore]
+        //public ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EduQuest.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EduQuest.Domain.Entities
 {
@@ -17,8 +18,10 @@ namespace EduQuest.Domain.Entities
 
         // 1. Aluno ---> AtividadeAlunos <--- Atividade
         public int AlunoId { get; set; }
+        [JsonIgnore]
         public virtual Aluno Aluno { get; set; } = default!;
         public int AtividadeId { get; set; }
+        [JsonIgnore]
         public virtual Atividade Atividade { get; set; } = default!;
 
         // 2. AtividadeAluno ---> RespostaAtividade

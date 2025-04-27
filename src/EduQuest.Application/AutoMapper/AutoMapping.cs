@@ -41,6 +41,8 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<RequestRegisterAlternativaJson, Alternativa>();
 
             CreateMap<RequestSetQuestaoCorrectAlternativaJson, Questao>();
+
+            CreateMap<RequestAlunoAnswerQuestaoFromAtividadeJson, AtividadeResposta>();
         }
 
         private void EntityToResponse()
@@ -68,6 +70,8 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<Alternativa, ResponseAlternativaJson>();
 
             CreateMap<AtividadeQuestao, ResponseAtividadeQuestaoJson>();
+
+            CreateMap<AtividadeResposta, ResponseAtividadeRespostaJson>();
         }
     }
 }
