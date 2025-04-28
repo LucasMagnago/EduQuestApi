@@ -37,13 +37,25 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
             await Validate(request);
 
             var atividadeAluno = _atividadeAlunoRepository.GetByAlunoIdAndAtividadeId(request.AlunoId, request.AtividadeId);
-            var atividadeResposta = _mapper.Map<AtividadeResposta>(request);
 
+            var atividadeResposta = await _atividadeRespostaRepository.GetByAtividadeAlunoIdAndQuestaoId(atividadeAluno.Id, request.QuestaoId);
+
+            bool newResposta = atividadeResposta == null;
+
+            atividadeResposta = _mapper.Map<AtividadeResposta>(request);
             atividadeResposta.AtividadeAlunoId = atividadeAluno.Id;
             atividadeResposta.AlternativaEscolhaId = request.AlternativaEscolhaId;
             atividadeResposta.DataResposta = DateTime.Now;
 
-            await _atividadeRespostaRepository.SaveAsync(atividadeResposta);
+            if (newResposta)
+            {
+                await _atividadeRespostaRepository.SaveAsync(atividadeResposta);
+            }
+            else
+            {
+                await _atividadeRespostaRepository.UpdateAsync(atividadeResposta);
+            }
+
             await _unitOfWork.Commit();
 
             return _mapper.Map<ResponseAtividadeRespostaJson>(atividadeResposta);

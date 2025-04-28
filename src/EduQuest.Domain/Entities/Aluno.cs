@@ -53,5 +53,7 @@ namespace EduQuest.Domain.Entities
         // Relacionamento com AlunoProgressoCondicao (condições do aluno em desafios)
         [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
+
+
     }
 }

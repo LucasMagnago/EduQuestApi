@@ -40,6 +40,11 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
             atividadeAluno.Status = StatusAtividade.Enviada;
             atividadeAluno.DataFim = DateTime.Now;
 
+
+            aluno!.XpAtual += atividade.XpRecompensa;
+            aluno.SaldoMoedas += atividade.MoedasRecompensa;
+
+            await _alunoRepository.UpdateAsync(aluno);
             await _atividadeAlunoRepository.UpdateAsync(atividadeAluno);
             await _unitOfWork.Commit();
 
