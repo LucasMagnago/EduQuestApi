@@ -16,33 +16,24 @@ namespace EduQuest.Application.AutoMapper
         private void RequestToEntity()
         {
             CreateMap<RequestAddProfessorToTurmaJson, AlocacaoProfessor>();
-
             CreateMap<RequestRegisterDisciplinaJson, Disciplina>();
-
             CreateMap<RequestAddAlunoToTurmaJson, Aluno>();
-
             CreateMap<RequestRegisterUsuarioJson, Usuario>()
                 .ForMember(entity => entity.SenhaHash, config => config.Ignore());
-
             CreateMap<RequestRegisterUsuarioJson, Aluno>()
                 .ForMember(entity => entity.SenhaHash, config => config.Ignore());
-
             CreateMap<RequestRegisterEscolaJson, Escola>()
                 .ForMember(entity => entity.ativo, config => config.Ignore());
-
             CreateMap<RequestRegisterTurmaJson, Turma>();
-
             CreateMap<RequestRemoveAlunoFromTurmaJson, Aluno>();
-
             CreateMap<RequestRegisterAtividadeJson, Atividade>();
-
             CreateMap<RequestAssignAtividadeToTurmaJson, AtividadeTurma>();
-
             CreateMap<RequestRegisterAlternativaJson, Alternativa>();
-
             CreateMap<RequestSetQuestaoCorrectAlternativaJson, Questao>();
-
+            CreateMap<RequestAddQuestaoToAtividadeJson, AtividadeQuestao>();
+            CreateMap<RequestAlunoStartsAtividadeJson, AtividadeResposta>();
             CreateMap<RequestAlunoAnswerQuestaoFromAtividadeJson, AtividadeResposta>();
+            CreateMap<RequestRegisterBatalhaJson, Batalha>();
         }
 
         private void EntityToResponse()
@@ -51,27 +42,21 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<Aluno, ResponseAlunoJson>();
             CreateMap<Turma, ResponseTurmaJson>();
             CreateMap<Usuario, ResponseRegisteredUsuarioJson>();
-
             CreateMap<Disciplina, ResponseDisciplinaJson>();
             CreateMap<Disciplina, ResponseRegisteredDisciplinaJson>();
-
             CreateMap<Escola, ResponseRegisteredEscolaJson>();
             CreateMap<Escola, ResponseEscolaJson>();
-
             CreateMap<Turma, ResponseRegisteredTurmaJson>();
-
             CreateMap<AlocacaoProfessor, ResponseProfessorDisciplinaJson>();
-
             CreateMap<Atividade, ResponseAtividadeJson>();
-
             CreateMap<AtividadeTurma, ResponseAssignedAtividadeToTurmaJson>();
             CreateMap<AtividadeTurma, ResponseUnassignedAtividadeFromTurmaJson>();
-
             CreateMap<Alternativa, ResponseAlternativaJson>();
-
+            CreateMap<Questao, ResponseQuestaoJson>();
             CreateMap<AtividadeQuestao, ResponseAtividadeQuestaoJson>();
-
             CreateMap<AtividadeResposta, ResponseAtividadeRespostaJson>();
+            CreateMap<Batalha, ResponseBatalhaJson>();
+            CreateMap<BatalhaResposta, ResponseBatalhaRespostaJson>();
         }
     }
 }

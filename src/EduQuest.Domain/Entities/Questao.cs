@@ -14,6 +14,7 @@ namespace EduQuest.Domain.Entities
 
         // 1. Questao ---> Disciplina
         public int DisciplinaId { get; set; }
+        [JsonIgnore]
         public virtual Disciplina Disciplina { get; set; } = null!;
 
         //// 2. Questao ---> Curso
@@ -27,6 +28,7 @@ namespace EduQuest.Domain.Entities
 
         // 4. Questao ---> Usuario
         public int UsuarioCriacaoId { get; set; }
+        [JsonIgnore]
         public virtual Usuario UsuarioCriacao { get; set; } = null!;
 
         // 5. Questao ---> Alternativas
@@ -46,6 +48,9 @@ namespace EduQuest.Domain.Entities
         [JsonIgnore]
         public virtual ICollection<AtividadeResposta> AtividadeRespostas { get; set; } = new HashSet<AtividadeResposta>();
 
-
+        public bool IsCorrectAnswer(int alternativaId)
+        {
+            return this.AlternativaCorretaId == alternativaId;
+        }
     }
 }

@@ -28,5 +28,41 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                     ar.QuestaoId == QuestaoId)
                 .SingleOrDefaultAsync();
         }
+
+        public async Task<IEnumerable<AtividadeResposta>> GetAllByAlunoIdAndAtividadeId(int alunoId, int atividadeId)
+        {
+            return await _entity
+                .Include(ar => ar.AtividadeAluno)
+                .Include(ar => ar.AlternativaEscolha)
+                .Where(ar => ar.AtividadeAluno.AlunoId == alunoId &&
+                    ar.AtividadeAluno.AtividadeId == atividadeId)
+                .Select(ar => new AtividadeResposta
+                {
+                    Id = ar.Id,
+                    Acertou = ar.Acertou,
+                    DataResposta = ar.DataResposta,
+                    AtividadeAlunoId = ar.AtividadeAlunoId,
+                    QuestaoId = ar.QuestaoId,
+                    AlternativaEscolha = ar.AlternativaEscolha,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AtividadeResposta>> GetAllByAtividadeAlunoId(int atividadeAlunoId)
+        {
+            return await _entity
+                .Include(ar => ar.AlternativaEscolha)
+                .Where(ar => ar.AtividadeAlunoId == atividadeAlunoId)
+                .Select(ar => new AtividadeResposta
+                {
+                    Id = ar.Id,
+                    Acertou = ar.Acertou,
+                    DataResposta = ar.DataResposta,
+                    AtividadeAlunoId = ar.AtividadeAlunoId,
+                    QuestaoId = ar.QuestaoId,
+                    AlternativaEscolha = ar.AlternativaEscolha,
+                })
+                .ToListAsync();
+        }
     }
 }

@@ -33,10 +33,25 @@ namespace EduQuest.Domain.Entities
         [JsonIgnore]
         public virtual ICollection<Batalha> BatalhasAsAlunoB { get; set; } = new HashSet<Batalha>();
 
+        // Relacionamento com Batalha (um aluno pode vencer várias batalhas)
+        // Coleção de batalhas onde este aluno foi o 'AlunoA'
+        [InverseProperty("AlunoVencedor")] // Liga esta coleção à propriedade AlunoVencedor na classe Batalha
+        [JsonIgnore]
+        public virtual ICollection<Batalha> BatalhasWon { get; set; } = new HashSet<Batalha>();
+
+        // Relacionamento com Batalha (um aluno pode perder de várias batalhas)
+        [InverseProperty("AlunoPerdedor")] // Liga esta coleção à propriedade AlunoPerdedor na classe Batalha
+        [JsonIgnore]
+        public virtual ICollection<Batalha> BatalhasLost { get; set; } = new HashSet<Batalha>();
+
         // Todas as batalhas juntas 
         [NotMapped]
         [JsonIgnore]
         public IEnumerable<Batalha> AllBatalhas => BatalhasAsAlunoA.Concat(BatalhasAsAlunoB);
+
+        // Relacionamento com BatalhaResposta (um aluno pode responder várias questões em muitas batalhas)
+        [JsonIgnore] // Para evitar ciclos de serialização
+        public virtual ICollection<BatalhaResposta> RespostasInBatalhas { get; set; } = new HashSet<BatalhaResposta>();
 
         // Relacionamento com AlunoPossuiItem (itens do aluno)
         [JsonIgnore]
@@ -53,6 +68,8 @@ namespace EduQuest.Domain.Entities
         // Relacionamento com AlunoProgressoCondicao (condições do aluno em desafios)
         [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
+
+
 
 
     }

@@ -1,5 +1,5 @@
-﻿using EduQuest.Application.UseCases.AtividadeTurmas.Assign;
-using EduQuest.Application.UseCases.AtividadeTurmas.Unassign;
+﻿using EduQuest.Application.UseCases.AtividadeRespostas.Answer;
+using EduQuest.Application.UseCases.AtividadeRespostas.GetAllByAlunoIdAndAtividadeId;
 using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +11,12 @@ namespace EduQuest.Api.Controllers
     public class AtividadeRespostaController : ControllerBase
     {
         [HttpPost]
-        [Route("assign")]
-        [ProducesResponseType(typeof(ResponseAssignedAtividadeToTurmaJson), StatusCodes.Status201Created)]
+        [Route("answer")]
+        [ProducesResponseType(typeof(ResponseAtividadeRespostaJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Assign(
-            [FromServices] IAssignAtividadeToTurmaUseCase useCase,
-            [FromBody] RequestAssignAtividadeToTurmaJson request)
+        public async Task<IActionResult> Answer(
+            [FromServices] IAlunoAnswerQuestaoFromAtividadeUseCase useCase,
+            [FromBody] RequestAlunoAnswerQuestaoFromAtividadeJson request)
         {
             var response = await useCase.Execute(request);
 
@@ -24,14 +24,15 @@ namespace EduQuest.Api.Controllers
         }
 
         [HttpPost]
-        [Route("unassign")]
+        [Route("atividade/{atividadeId}/aluno/{alunoId}")]
         [ProducesResponseType(typeof(ResponseUnassignedAtividadeFromTurmaJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Unassign(
-            [FromServices] IUnassignAtividadeFromTurmaUseCase useCase,
-            [FromRoute] int id)
+        public async Task<IActionResult> GetAllByAlunoIdAndAtividadeId(
+            [FromServices] IGetAllAtividadeRespostaByAlunoIdAndAtividadeIdUseCase useCase,
+            [FromRoute] int atividadeId,
+            [FromRoute] int alunoId)
         {
-            await useCase.Execute(id);
+            await useCase.Execute(alunoId, atividadeId);
 
             return Ok();
         }

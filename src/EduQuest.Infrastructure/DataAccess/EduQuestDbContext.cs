@@ -104,6 +104,11 @@ namespace EduQuest.Infrastructure.DataAccess
                 .WithMany(q => q.BatalhaRespostas)
                 .HasForeignKey(br => br.QuestaoId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(br => br.Aluno)
+                .WithMany(a => a.RespostasInBatalhas)
+                .HasForeignKey(br => br.AlunoId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             // 5. AtividadeQuestao

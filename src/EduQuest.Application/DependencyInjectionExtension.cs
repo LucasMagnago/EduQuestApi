@@ -9,10 +9,14 @@ using EduQuest.Application.UseCases.Alternativas.GetById;
 using EduQuest.Application.UseCases.Alternativas.Register;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
+using EduQuest.Application.UseCases.AtividadeAlunos.End;
+using EduQuest.Application.UseCases.AtividadeAlunos.Start;
 using EduQuest.Application.UseCases.AtividadeQuestoes.GetAllByAtividadeId;
 using EduQuest.Application.UseCases.AtividadeQuestoes.GetById;
 using EduQuest.Application.UseCases.AtividadeQuestoes.Register;
 using EduQuest.Application.UseCases.AtividadeQuestoes.Remove;
+using EduQuest.Application.UseCases.AtividadeRespostas.Answer;
+using EduQuest.Application.UseCases.AtividadeRespostas.GetAllByAlunoIdAndAtividadeId;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableAtividadeByTurmaIdUseCase.cs;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableByAlunoId;
 using EduQuest.Application.UseCases.Atividades.GetAllAvailableByProfessorId;
@@ -25,6 +29,11 @@ using EduQuest.Application.UseCases.AtividadeTurmas.Assign;
 using EduQuest.Application.UseCases.AtividadeTurmas.Unassign;
 using EduQuest.Application.UseCases.Auth.Login;
 using EduQuest.Application.UseCases.Auth.Register;
+using EduQuest.Application.UseCases.Batalhas.AddAluno;
+using EduQuest.Application.UseCases.Batalhas.End;
+using EduQuest.Application.UseCases.Batalhas.GetById;
+using EduQuest.Application.UseCases.Batalhas.Register;
+using EduQuest.Application.UseCases.Batalhas.Start;
 using EduQuest.Application.UseCases.Disciplinas.GetAll;
 using EduQuest.Application.UseCases.Disciplinas.GetById;
 using EduQuest.Application.UseCases.Disciplinas.Register;
@@ -139,6 +148,21 @@ namespace EduQuest.Application
             services.AddScoped<IRemoveQuestaoFromAtividadeUseCase, RemoveQuestaoFromAtividadeUseCase>();
             services.AddScoped<IGetAllQuestaoByAtividadeIdUseCase, GetAllQuestaoByAtividadeIdUseCase>();
             services.AddScoped<IGetAtividadeQuestaoByIdUseCase, GetAtividadeQuestaoByIdUseCase>();
+
+            services.AddScoped<IAlunoStartsAtividadeUseCase, AlunoStartsAtividadeUseCase>();
+            services.AddScoped<IAlunoEndsAtividadeUseCase, AlunoEndsAtividadeUseCase>();
+
+            services.AddScoped<IAlunoAnswerQuestaoFromAtividadeUseCase, AlunoAnswerQuestaoFromAtividadeUseCase>();
+            services.AddScoped<IGetAllAtividadeRespostaByAlunoIdAndAtividadeIdUseCase, GetAllAtividadeRespostaByAlunoIdAndAtividadeIdUseCase>();
+
+            services.AddScoped<IRegisterBatalhaUseCase, RegisterBatalhaUseCase>();
+            services.AddScoped<IAddAlunoToBatalhaUseCase, AddAlunoToBatalhaUseCase>();
+            services.AddScoped<IStartBatalhaUseCase, StartBatalhaUseCase>();
+            services.AddScoped<IEndBatalhaUseCase, EndBatalhaUseCase>();
+            services.AddScoped<IGetBatalhaByIdUseCase, GetBatalhaByIdUseCase>();
+
+            services.AddScoped<IAlunoAnswerQuestaoFromAtividadeUseCase, AlunoAnswerQuestaoFromAtividadeUseCase>();
+
         }
     }
 }

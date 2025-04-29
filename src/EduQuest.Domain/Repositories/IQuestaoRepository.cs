@@ -7,5 +7,6 @@ namespace EduQuest.Domain.Repositories
         Task<List<Questao>> GetAllByDisciplinaId(int disciplinaId);
         Task<List<Questao>> GetAllByDisciplinaIdAndNivel(int disciplinaId, int nivel);
         Task<List<Questao>> GetAllByProfessorId(int professorId);
+        Task<List<Questao>> GetRandomQuestoesAsync(int count);
     }
 }

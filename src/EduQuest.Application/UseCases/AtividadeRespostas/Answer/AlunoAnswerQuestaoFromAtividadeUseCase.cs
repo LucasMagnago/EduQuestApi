@@ -15,6 +15,7 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
         private readonly IAtividadeRespostaRepository _atividadeRespostaRepository;
         private readonly IAtividadeRepository _atividadeRepository;
         private readonly IAlunoRepository _alunoRepository;
+        private readonly IQuestaoRepository _questaoRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public AlunoAnswerQuestaoFromAtividadeUseCase(IMapper mapper,
@@ -22,6 +23,7 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
             IAtividadeRepository atividadeRepository,
             IAtividadeRespostaRepository atividadeRespostaRepository,
             IAlunoRepository alunoRepository,
+            IQuestaoRepository questaoRepository,
             IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
@@ -29,6 +31,7 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
             _atividadeRespostaRepository = atividadeRespostaRepository;
             _atividadeRepository = atividadeRepository;
             _alunoRepository = alunoRepository;
+            _questaoRepository = questaoRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -36,23 +39,25 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
         {
             await Validate(request);
 
-            var atividadeAluno = _atividadeAlunoRepository.GetByAlunoIdAndAtividadeId(request.AlunoId, request.AtividadeId);
+            var atividadeAluno = await _atividadeAlunoRepository.GetByAlunoIdAndAtividadeId(request.AlunoId, request.AtividadeId);
 
-            var atividadeResposta = await _atividadeRespostaRepository.GetByAtividadeAlunoIdAndQuestaoId(atividadeAluno.Id, request.QuestaoId);
+            var atividadeResposta = await _atividadeRespostaRepository.GetByAtividadeAlunoIdAndQuestaoId(atividadeAluno!.Id, request.QuestaoId);
 
-            bool newResposta = atividadeResposta == null;
+            bool isNewResposta = atividadeResposta == null;
 
-            atividadeResposta = _mapper.Map<AtividadeResposta>(request);
-            atividadeResposta.AtividadeAlunoId = atividadeAluno.Id;
-            atividadeResposta.AlternativaEscolhaId = request.AlternativaEscolhaId;
-            atividadeResposta.DataResposta = DateTime.Now;
-
-            if (newResposta)
+            if (isNewResposta)
             {
+                atividadeResposta = _mapper.Map<AtividadeResposta>(request);
+                atividadeResposta.AtividadeAlunoId = atividadeAluno.Id;
+                atividadeResposta.DataResposta = DateTime.Now;
+
                 await _atividadeRespostaRepository.SaveAsync(atividadeResposta);
             }
             else
             {
+                atividadeResposta!.AlternativaEscolhaId = request.AlternativaEscolhaId;
+                atividadeResposta.DataResposta = DateTime.Now;
+
                 await _atividadeRespostaRepository.UpdateAsync(atividadeResposta);
             }
 
@@ -78,7 +83,7 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
                 result.Errors.Add(new ValidationFailure(string.Empty, "A atividade informada não existe"));
             }
 
-            bool existsQuestao = await _atividadeRepository.ExistsWithIdAsync(request.QuestaoId);
+            bool existsQuestao = await _questaoRepository.ExistsWithIdAsync(request.QuestaoId);
             if (!existsQuestao)
             {
                 result.Errors.Add(new ValidationFailure(string.Empty, "A questão informada não existe"));

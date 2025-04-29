@@ -37,5 +37,12 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                 .Where(q => q.UsuarioCriacaoId == professorId)
                 .ToListAsync();
         }
+
+        public async Task<List<Questao>> GetRandomQuestoesAsync(int count)
+        {
+            return await _context.Questoes
+                             .Take(count)
+                             .ToListAsync();
+        }
     }
 }

@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="UseCases\Batalhas\GetAllByAlunoId\" />
+    <Folder Include="UseCases\Batalhas\GetAllAvailable\" />
+    <Folder Include="UseCases\Batalhas\GetAllAvailableByNivel\" />
+    <Folder Include="UseCases\Batalhas\GetActiveBatalhaByAlunoId\" />
+    <Folder Include="UseCases\Batalhas\RemoveAluno\" />
     <Folder Include="UseCases\Matriculas\Remanejar\" />
   </ItemGroup>
 
