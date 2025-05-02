@@ -19,7 +19,7 @@ namespace EduQuest.Application.UseCases.Escolas.GetById
 
         public async Task<ResponseEscolaJson> Execute(int id)
         {
-            var result = await _escolaRepository.GetByIdAsync(id);
+            var result = await _escolaRepository.GetEscolaWithRelationsByIdAsync(id);
 
             if (result is null)
                 throw new NotFoundException("Escola não encontrada");

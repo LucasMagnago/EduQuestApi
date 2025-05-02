@@ -1,6 +1,4 @@
-﻿using EduQuest.Domain.Entities;
-
-namespace EduQuest.Communication.Responses
+﻿namespace EduQuest.Communication.Responses
 {
     public class ResponseBatalhaJson
     {
@@ -17,7 +15,7 @@ namespace EduQuest.Communication.Responses
         public DateTime DataFim { get; set; }
         public int AlunoAId { get; set; }
         public int AlunoBId { get; set; }
-        public ICollection<Questao> BatalhaQuestoes { get; set; } = new HashSet<Questao>();
-        public virtual ICollection<BatalhaResposta> BatalhaRespostas { get; set; } = new HashSet<BatalhaResposta>();
+        public ICollection<ResponseBatalhaQuestaoJson> BatalhaQuestoes { get; set; } = new HashSet<ResponseBatalhaQuestaoJson>();
+        public virtual ICollection<ResponseShortBatalhaRespostaJson> BatalhaRespostas { get; set; } = new HashSet<ResponseShortBatalhaRespostaJson>();
     }
 }

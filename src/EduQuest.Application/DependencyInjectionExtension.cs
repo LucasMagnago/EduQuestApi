@@ -53,6 +53,10 @@ using EduQuest.Application.UseCases.Turmas.GetById;
 using EduQuest.Application.UseCases.Turmas.Register;
 using EduQuest.Application.UseCases.Turmas.RemoveAluno;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.Assign;
+using EduQuest.Application.UseCases.UsuarioEscolaPerfis.GetAllByUsuarioId;
+using EduQuest.Application.UseCases.UsuarioEscolaPerfis.GetAtivoByUsuarioId;
+using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetAtivo;
+using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetInativo;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.Unassign;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -114,6 +118,11 @@ namespace EduQuest.Application
 
             services.AddScoped<IAssingUserToSchoolWithRoleUseCase, AssignUserToSchoolWithRoleUseCase>();
             services.AddScoped<IUnassignUserToSchoolWithRoleUseCase, UnassignUserToSchoolWithRoleUseCase>();
+            services.AddScoped<IGetUsuarioEscolaPerfilAtivoByUsuarioIdUseCase, GetUsuarioEscolaPerfilAtivoByUsuarioIdUseCase>();
+            services.AddScoped<IGetAllUsuarioEscolaPerfilByUsuarioIdUseCase, GetAllUsuarioEscolaPerfilByUsuarioIdUseCase>();
+            services.AddScoped<ISetUsuarioEscolaPerfilAtivoUseCase, SetUsuarioEscolaPerfilAtivoUseCase>();
+            services.AddScoped<ISetUsuarioEscolaPerfilInativoUseCase, SetUsuarioEscolaPerfilInativoUseCase>();
+
 
             services.AddScoped<IAddProfessorToTurmaUseCase, AddProfessorToTurmaUseCase>();
             services.AddScoped<IRemoveProfessorFromTurmaUseCase, RemoveProfessorFromTurmaUseCase>();

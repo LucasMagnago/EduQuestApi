@@ -18,7 +18,7 @@ namespace EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllB
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseProfessorDisciplinaJson>> Execute(int turmaId)
+        public async Task<List<ResponseProfessorDisciplinaTurmaJson>> Execute(int turmaId)
         {
             var alocacaoProfessores = await _alocacaoProfessorRepository.GetAllByTurmaId(turmaId);
 
@@ -27,7 +27,7 @@ namespace EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllB
                 throw new NotFoundException("Alocações não encontradas");
             }
 
-            return _mapper.Map<List<ResponseProfessorDisciplinaJson>>(alocacaoProfessores);
+            return _mapper.Map<List<ResponseProfessorDisciplinaTurmaJson>>(alocacaoProfessores);
         }
     }
 }

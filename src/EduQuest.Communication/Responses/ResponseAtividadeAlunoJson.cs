@@ -5,6 +5,8 @@ namespace EduQuest.Communication.Responses
     public class ResponseAtividadeAlunoJson
     {
         public int Id { get; set; }
+        public int AtividadeId { get; set; }
+        public int AlunoId { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
         public int? PontuacaoObtida { get; set; }
@@ -12,5 +14,7 @@ namespace EduQuest.Communication.Responses
         public int? MoedasGanhas { get; set; }
         public string FeedbackProfessor { get; set; } = string.Empty;
         public StatusAtividade Status { get; set; } = StatusAtividade.Pendente;
+        public ICollection<ResponseAtividadeQuestaoJson> AtividadeQuestoes { get; set; } = new HashSet<ResponseAtividadeQuestaoJson>();
+        public ICollection<ResponseShortAtividadeRespostaJson> AtividadeRespostas { get; set; } = new HashSet<ResponseShortAtividadeRespostaJson>();
     }
 }

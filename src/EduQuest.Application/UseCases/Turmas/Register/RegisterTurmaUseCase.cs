@@ -31,6 +31,7 @@ namespace EduQuest.Application.UseCases.Turmas.Register
             await Validate(request);
 
             var turma = _mapper.Map<Turma>(request);
+            turma.Ativo = true;
 
             await _turmaRepository.SaveAsync(turma);
             await _unitOfWork.Commit();

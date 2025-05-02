@@ -10,7 +10,7 @@ namespace EduQuest.Domain.Entities
         public int Id { get; set; }
         public string Enunciado { get; set; } = string.Empty;
         public string Resposta { get; set; } = string.Empty;
-        public int NivelEscola { get; set; }
+        public int NivelEscolar { get; set; }
 
         // 1. Questao ---> Disciplina
         public int DisciplinaId { get; set; }
@@ -22,9 +22,9 @@ namespace EduQuest.Domain.Entities
         //public Curso Curso { get; set; } = null!;
 
         // 3. Questao ---> Alternativa
-        public int AlternativaCorretaId { get; set; }
+        public int? AlternativaCorretaId { get; set; }
         [ForeignKey("AlternativaCorretaId")]
-        public virtual Alternativa AlternativaCorreta { get; set; } = null!;
+        public virtual Alternativa? AlternativaCorreta { get; set; } = null!;
 
         // 4. Questao ---> Usuario
         public int UsuarioCriacaoId { get; set; }

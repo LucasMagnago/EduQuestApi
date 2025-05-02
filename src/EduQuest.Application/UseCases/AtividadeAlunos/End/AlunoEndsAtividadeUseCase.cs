@@ -10,21 +10,26 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
 {
     internal class AlunoEndsAtividadeUseCase : IAlunoEndsAtividadeUseCase
     {
-        private readonly IMapper _mapper;
         private readonly IAtividadeAlunoRepository _atividadeAlunoRepository;
-        readonly IAtividadeRepository _atividadeRepository;
+        private readonly IAtividadeRepository _atividadeRepository;
         private readonly IAlunoRepository _alunoRepository;
-        private IAtividadeTurmaRepository _atividadeTurmaRepository;
+        private readonly IAtividadeTurmaRepository _atividadeTurmaRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public AlunoEndsAtividadeUseCase(IMapper mapper,
+        private readonly IMapper _mapper;
+
+        public AlunoEndsAtividadeUseCase(IAlunoRepository alunoRepository,
+            IAtividadeRepository atividadeRepository,
             IAtividadeAlunoRepository atividadeAlunoRepository,
-            IAlunoRepository alunoRepository,
-            IUnitOfWork unitOfWork)
+            IAtividadeTurmaRepository atividadeTurmaRepository,
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
-            _mapper = mapper;
             _atividadeAlunoRepository = atividadeAlunoRepository;
+            _atividadeRepository = atividadeRepository;
             _alunoRepository = alunoRepository;
+            _atividadeTurmaRepository = atividadeTurmaRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ResponseAtividadeAlunoJson> Execute(RequestAlunoEndsAtividadeJson request)
@@ -38,7 +43,7 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
             atividadeAluno!.XpGanho = atividade!.XpRecompensa;
             atividadeAluno.MoedasGanhas = atividade.MoedasRecompensa;
             atividadeAluno.PontuacaoObtida = 99; // Implementar
-            atividadeAluno.Status = StatusAtividade.Enviada;
+            atividadeAluno.Status = StatusAtividade.Concluida;
             atividadeAluno.DataFim = DateTime.Now;
 
 
@@ -75,7 +80,7 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
                 errors.Add("O aluno não está matriculado em nenhuma turma.");
             }
 
-            if (atividadeAluno.Status == StatusAtividade.Enviada)
+            if (atividadeAluno.Status == StatusAtividade.Concluida)
             {
                 errors.Add("A atividade já foi enviada anteriormente.");
             }

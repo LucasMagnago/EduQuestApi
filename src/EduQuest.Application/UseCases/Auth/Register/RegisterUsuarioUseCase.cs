@@ -49,7 +49,7 @@ namespace EduQuest.Application.UseCases.Auth.Register
 
             return new ResponseRegisteredUsuarioJson
             {
-                Nome = usuario.Nome,
+                Usuario = _mapper.Map<ResponseShortUsuarioJson>(usuario),
                 Token = _tokenGenerator.Generate(usuario, null, null)
             };
         }

@@ -1,10 +1,9 @@
-﻿using EduQuest.Domain.Entities;
-
-namespace EduQuest.Communication.Responses
+﻿namespace EduQuest.Communication.Responses
 {
     public class ResponseAlunoJson
     {
         public int Id { get; set; }
+        public Guid UsuarioIdentifier { get; set; }
         public string Nome { get; set; } = string.Empty;
         public DateOnly DataNascimento { get; set; }
         public string Email { get; set; } = string.Empty;
@@ -19,6 +18,6 @@ namespace EduQuest.Communication.Responses
         public int? TurmaId { get; set; }
 
         //Está travando a aplicação
-        public Turma? Turma { get; set; }
+        public ResponseTurmaJson? Turma { get; set; }
     }
 }

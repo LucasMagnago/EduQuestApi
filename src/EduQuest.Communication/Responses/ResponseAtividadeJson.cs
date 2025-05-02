@@ -10,6 +10,6 @@
         public int XpRecompensa { get; set; } = 10;
         public int MoedasRecompensa { get; set; } = 10;
         public DateTime DataCriacao { get; set; }
-        public int ProfessorId { get; set; }
+        public ResponseShortUsuarioJson Professor { get; set; } = null!;
     }
 }

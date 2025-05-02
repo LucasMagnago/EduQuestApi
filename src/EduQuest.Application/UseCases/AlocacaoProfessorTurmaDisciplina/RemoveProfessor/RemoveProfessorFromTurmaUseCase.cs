@@ -26,8 +26,8 @@ namespace EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.RemoveP
 
             var alocacaoProfessor = _mapper.Map<AlocacaoProfessor>(request);
 
-            var doesProfessorTeachDisciplinaInturma = await _alocacaoProfessorRepository.DoesProfessorTeachDisciplinaInTurma(request.ProfessorId, request.TurmaId, request.DisciplinaId);
-            if (doesProfessorTeachDisciplinaInturma)
+            var doesProfessorTeachDisciplinaInturma = await _alocacaoProfessorRepository.DoesProfessorTeachDisciplinaInTurma(request.ProfessorId, request.DisciplinaId, request.TurmaId);
+            if (!doesProfessorTeachDisciplinaInturma)
                 throw new NotFoundException("Professor não encontrado na turma informada");
 
             await _alocacaoProfessorRepository.DeleteAsync(alocacaoProfessor);

@@ -23,14 +23,6 @@ namespace EduQuest.Application.UseCases.Turmas.Register
                 .NotEmpty()
                 .WithMessage("Ano é obrigatório");
 
-            RuleFor(turma => turma.CursoId)
-                .NotEmpty()
-                .WithMessage("Curso é obrigatório");
-
-            RuleFor(turma => turma.PeriodoLetivoId)
-                .NotEmpty()
-                .WithMessage("Periodo letivo é obrigatório");
-
             RuleFor(turma => turma.EscolaId)
                 .NotEmpty()
                 .WithMessage("Escola é obrigatória");

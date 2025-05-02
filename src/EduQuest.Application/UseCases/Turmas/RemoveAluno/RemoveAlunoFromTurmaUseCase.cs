@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
-using EduQuest.Domain.Entities;
 using EduQuest.Domain.Repositories;
 using EduQuest.Exception.ExceptionsBase;
 using FluentValidation.Results;
@@ -30,8 +29,8 @@ namespace EduQuest.Application.UseCases.Turmas.RemoveAluno
         {
             await Validate(request);
 
-            var aluno = _mapper.Map<Aluno>(request);
-            aluno.TurmaId = null;
+            var aluno = await _alunoRepository.GetByIdAsync(request.AlunoId);
+            aluno!.TurmaId = null;
 
             await _alunoRepository.UpdateAsync(aluno);
             await _unitOfWork.Commit();

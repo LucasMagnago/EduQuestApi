@@ -39,10 +39,10 @@ namespace EduQuest.Api.Controllers
 
         [HttpGet]
         [Route("turma/{id}")]
-        [ProducesResponseType(typeof(List<ResponseProfessorDisciplinaJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponseProfessorDisciplinaTurmaJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllByTurmaId(
-        [FromServices] IGetAllAlocacaoByProfessorId useCase,
+        [FromServices] IGetAllAlocacaoByTurmaId useCase,
         [FromRoute] int id)
         {
             var response = await useCase.Execute(id);
@@ -52,10 +52,10 @@ namespace EduQuest.Api.Controllers
 
         [HttpGet]
         [Route("professor/{id}")]
-        [ProducesResponseType(typeof(List<ResponseProfessorDisciplinaJson>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ResponseProfessorDisciplinaTurmaJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllByProfessorId(
-        [FromServices] IGetAllAlocacaoByTurmaId useCase,
+        [FromServices] IGetAllAlocacaoByProfessorId useCase,
         [FromRoute] int id)
         {
             var response = await useCase.Execute(id);

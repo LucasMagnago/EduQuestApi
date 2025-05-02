@@ -17,37 +17,37 @@ namespace EduQuest.Application.UseCases.Usuarios
         {
             if (string.IsNullOrWhiteSpace(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
             if (password.Length < 8)
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
             if (!LowerCaseLetter().IsMatch(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
             if (!UpperCaseLetter().IsMatch(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
             if (!Numbers().IsMatch(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
             if (!SpecialSymbols().IsMatch(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, .).");
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, "Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (por exemplo, !, ?, *, ., @).");
                 return false;
             }
 
@@ -60,7 +60,7 @@ namespace EduQuest.Application.UseCases.Usuarios
         private static partial Regex UpperCaseLetter();
         [GeneratedRegex(@"[0-9]+")]
         private static partial Regex Numbers();
-        [GeneratedRegex(@"[\!\?\*\.]+")]
+        [GeneratedRegex(@"[\!\?\*\.\@]+")]
         private static partial Regex SpecialSymbols();
     }
 }

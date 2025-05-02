@@ -44,9 +44,9 @@ namespace EduQuest.Infrastructure.Security.Tokens
             {
                 claims.Add(new Claim("tipoUsuario", "servidor"));
 
-                var perfisValidos = perfis?.Where(p => p is not null) ?? Enumerable.Empty<UsuarioEscolaPerfil>();
-                claims.AddRange(perfisValidos.Select(p =>
-                    new Claim(ClaimTypes.Role, $"{p.EscolaId}:{p.PerfilId}")));
+                //var perfisValidos = perfis?.Where(p => p is not null) ?? Enumerable.Empty<UsuarioEscolaPerfil>();
+                //claims.AddRange(perfisValidos.Select(p =>
+                //    new Claim(ClaimTypes.Role, $"{p.EscolaId}:{p.PerfilId}")));
             }
 
             var tokenDescriptor = new SecurityTokenDescriptor

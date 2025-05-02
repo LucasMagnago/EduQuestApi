@@ -1,4 +1,3 @@
-using EduQuest.Api.Authorization;
 using EduQuest.Api.Filters;
 using EduQuest.Api.Token;
 using EduQuest.Application;
@@ -44,34 +43,41 @@ builder.Services.AddAuthentication(config =>
     };
 });
 
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("OnlyAdmin", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin" })));
+
+//    options.AddPolicy("OnlyAluno", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Aluno" })));
+
+//    options.AddPolicy("OnlyProfessor", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor" })));
+
+//    options.AddPolicy("OnlyGestor", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Gestor" })));
+
+//    options.AddPolicy("AdminOrGestor", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Gestor" })));
+
+//    options.AddPolicy("ProfessorOrGestor", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor", "Gestor" })));
+
+//    options.AddPolicy("AdminOrProfessorOrGestor", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Professor", "Gestor" })));
+
+//    options.AddPolicy("All", policy =>
+//        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Aluno", "Professor", "Gestor" })));
+//});
+
+//builder.Services.AddScoped<IAuthorizationHandler, PerfilHandler>();
+
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("OnlyAdmin", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin" })));
-
-    options.AddPolicy("OnlyAluno", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Aluno" })));
-
-    options.AddPolicy("OnlyProfessor", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor" })));
-
-    options.AddPolicy("OnlyGestor", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Gestor" })));
-
-    options.AddPolicy("AdminOrGestor", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Gestor" })));
-
-    options.AddPolicy("ProfessorOrGestor", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Professor", "Gestor" })));
-
-    options.AddPolicy("AdminOrProfessorOrGestor", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Professor", "Gestor" })));
-
-    options.AddPolicy("All", policy =>
-        policy.Requirements.Add(new PerfilRequirement(new[] { "Admin", "Aluno", "Professor", "Gestor" })));
+    options.FallbackPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
 });
-
-builder.Services.AddScoped<IAuthorizationHandler, PerfilHandler>();
 
 var app = builder.Build();
 

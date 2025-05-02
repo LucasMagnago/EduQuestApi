@@ -31,25 +31,26 @@ namespace EduQuest.Application.UseCases.UsuarioEscolaPerfis.Assign
         {
             bool existsUsuario = await _usuarioRepository.ExistsWithIdAsync(request.UsuarioId);
             if (!existsUsuario)
-                throw new InvalidLoginException(); // Alterar exception
+                throw new NotFoundException("O usuário não foi encontrado"); // Alterar exception
 
             bool existsEscola = await _escolaRepository.ExistsWithIdAsync(request.EscolaId);
             if (!existsEscola)
-                throw new InvalidLoginException(); // Alterar exception
+                throw new NotFoundException("A escola não foi encontrada"); // Alterar exception
 
             bool existPerfil = await _perfilRepository.ExistsWithIdAsync(request.PerfilId);
             if (!existPerfil)
-                throw new InvalidLoginException(); // Alterar exception
+                throw new NotFoundException("O perfil não foi encontrado"); // Alterar exception
 
             bool existVinculo = await _usuarioEscolaPerfilRepository.DoesUsuarioHavePerfilInEscolaAsync(request.UsuarioId, request.EscolaId, request.PerfilId);
             if (existVinculo)
-                throw new InvalidLoginException(); // Alterar exception
+                throw new ConflictException("O usuário já está vínculado a esta disciplina nesta turma"); // Alterar exception
 
             var usuarioEscolaPerfil = new UsuarioEscolaPerfil
             {
                 UsuarioId = request.UsuarioId,
                 EscolaId = request.EscolaId,
-                PerfilId = request.PerfilId
+                PerfilId = request.PerfilId,
+                Ativo = true
             };
 
             await _usuarioEscolaPerfilRepository.SaveAsync(usuarioEscolaPerfil);

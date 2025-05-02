@@ -11,8 +11,8 @@ namespace EduQuest.Domain.Entities
         public string Descricao { get; set; } = string.Empty;
         public int Valor { get; set; }
         public int TempoLimiteSegundos { get; set; }
-        public int XpRecompensa { get; set; } = 10;
-        public int MoedasRecompensa { get; set; } = 10;
+        public int XpRecompensa { get; set; } = 100;
+        public int MoedasRecompensa { get; set; } = 100;
         public DateTime DataCriacao { get; set; }
 
         // 1. Atividade ---> TipoAtividade

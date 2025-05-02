@@ -11,7 +11,7 @@ namespace EduQuest.Domain.Entities
         public string Sigla { get; set; } = string.Empty;
         public string Inep { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
-        public bool ativo { get; set; }
+        public bool Ativo { get; set; }
 
         // 1. Escola ---> TipoUnidade
         public int TipoUnidadeId { get; set; }

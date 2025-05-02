@@ -31,7 +31,7 @@ namespace EduQuest.Application.UseCases.Escolas.Register
             await Validate(request);
 
             var escola = _mapper.Map<Escola>(request);
-            escola.ativo = true;
+            escola.Ativo = true;
 
             await _escolaRepository.SaveAsync(escola);
             await _unitOfWork.Commit();

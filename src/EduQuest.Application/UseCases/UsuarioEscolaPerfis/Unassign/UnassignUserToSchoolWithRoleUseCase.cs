@@ -21,8 +21,8 @@ namespace EduQuest.Application.UseCases.UsuarioEscolaPerfis.Unassign
         public async Task<ResponseUnassignedUsuarioJson> Execute(RequestUnassignUsuarioJson request)
         {
             bool existVinculo = await _usuarioEscolaPerfilRepository.DoesUsuarioHavePerfilInEscolaAsync(request.UsuarioId, request.EscolaId, request.PerfilId);
-            if (existVinculo)
-                throw new InvalidLoginException(); // Alterar exception
+            if (!existVinculo)
+                throw new NotFoundException("Nenhum vínculo encontrado para este usuário nesta escola com este perfil"); // Alterar exception
 
             var usuarioEscolaPerfil = new UsuarioEscolaPerfil
             {

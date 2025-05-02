@@ -8,10 +8,11 @@ namespace EduQuest.Domain.Entities
     {
         [Key]
         public int Id { get; set; }
-        public DateTime DataCriacao { get; set; }
+        public DateTime DataCriacao { get; set; } = new DateTime(20);
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
         public int TempoLimiteSegundos { get; set; }
+
         public StatusBatalha Status { get; set; }
         public int XpConcedidoVencedor { get; set; } = 100;
         public int XpConcedidoPerdedor { get; set; } = 50;

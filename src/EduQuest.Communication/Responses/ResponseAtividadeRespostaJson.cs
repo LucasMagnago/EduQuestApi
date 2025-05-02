@@ -1,6 +1,4 @@
-﻿using EduQuest.Domain.Entities;
-
-namespace EduQuest.Communication.Responses
+﻿namespace EduQuest.Communication.Responses
 {
     public class ResponseAtividadeRespostaJson
     {
@@ -9,6 +7,6 @@ namespace EduQuest.Communication.Responses
         public DateTime DataResposta { get; set; }
         public int AtividadeAlunoId { get; set; }
         public int QuestaoId { get; set; }
-        public Alternativa AlternativaEscolha { get; set; } = null!;
+        public ResponseShortAlternativaJson AlternativaEscolha { get; set; } = null!;
     }
 }

@@ -2,7 +2,7 @@
 {
     public class ResponseRegisteredUsuarioJson
     {
-        public string Nome { get; set; } = string.Empty;
+        public ResponseShortUsuarioJson Usuario { get; set; } = null!;
         public string Token { get; set; } = string.Empty;
     }
 }

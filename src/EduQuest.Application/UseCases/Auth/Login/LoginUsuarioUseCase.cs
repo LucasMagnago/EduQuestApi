@@ -1,4 +1,5 @@
-﻿using EduQuest.Communication.Requests;
+﻿using AutoMapper;
+using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
 using EduQuest.Domain.Entities;
 using EduQuest.Domain.Repositories;
@@ -16,13 +17,15 @@ namespace EduQuest.Application.UseCases.Auth.Login
         private readonly IUsuarioEscolaPerfilRepository _usuarioEscolaPerfilRepository;
         private readonly IAccessTokenGenerator _tokenGenerator;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
         public LoginUsuarioUseCase(IPasswordEncripter passwordEncripter,
             IUsuarioRepository usuarioRepository,
             IAlunoRepository alunoRepository,
             IUsuarioEscolaPerfilRepository usuarioEscolaPerfilRepository,
             IAccessTokenGenerator tokenGenerator,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IMapper mapper)
         {
             _passwordEncripter = passwordEncripter;
             _usuarioRepository = usuarioRepository;
@@ -30,6 +33,7 @@ namespace EduQuest.Application.UseCases.Auth.Login
             _usuarioEscolaPerfilRepository = usuarioEscolaPerfilRepository;
             _tokenGenerator = tokenGenerator;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<ResponseLoggedUsuarioJson> Execute(RequestLoginUsuarioJson request)
@@ -48,7 +52,7 @@ namespace EduQuest.Application.UseCases.Auth.Login
 
             var response = new ResponseLoggedUsuarioJson
             {
-                Nome = string.Empty,
+                Usuario = new ResponseShortUsuarioJson(),
                 Token = string.Empty
             };
 
@@ -61,7 +65,7 @@ namespace EduQuest.Application.UseCases.Auth.Login
 
             return new ResponseLoggedUsuarioJson
             {
-                Nome = usuario.Nome,
+                Usuario = _mapper.Map<ResponseShortUsuarioJson>(usuario),
                 Token = _tokenGenerator.Generate(usuario, turma, perfis)
             };
         }

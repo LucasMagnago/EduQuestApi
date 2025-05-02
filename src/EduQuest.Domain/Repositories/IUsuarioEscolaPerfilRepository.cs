@@ -5,13 +5,23 @@ namespace EduQuest.Domain.Repositories
     public interface IUsuarioEscolaPerfilRepository
         : IGenericRepository<UsuarioEscolaPerfil>
     {
-        Task<List<UsuarioEscolaPerfil>> GetAllByUsuarioIdAsync(int userId);
-        Task<List<UsuarioEscolaPerfil>> GetAllByUsuarioGuidAsync(Guid userGuid);
+        Task<List<UsuarioEscolaPerfil>?> GetAllWithRelations();
 
-        Task<UsuarioEscolaPerfil> GetActiveByUsuarioIdAsync(int userId);
-        Task<UsuarioEscolaPerfil> GetActiveByUsuarioGuidAsync(Guid userGuid);
+        Task<UsuarioEscolaPerfil?> GetByUsuarioIdAndEscolaIdAndPerfilIdAsync(int usuarioId, int escolaId, int perfilId);
 
-        Task<bool> DoesUsuarioHavePerfilInEscolaAsync(int userId, int schoolId, int roleId);
-        Task<bool> DoesUsuarioHavePerfilInEscolaAsync(Guid userGuid, int schoolId, int roleId);
+        Task<List<UsuarioEscolaPerfil>?> GetAllByUsuarioIdAsync(int usuarioId);
+        Task<List<UsuarioEscolaPerfil>?> GetAllByUsuarioGuidAsync(Guid usuarioGuid);
+
+        Task<List<UsuarioEscolaPerfil>?> GetAllWithRelationsByUsuarioIdAsync(int usuarioId);
+        Task<List<UsuarioEscolaPerfil>?> GetAllWithRelationsByUsuarioGuidAsync(Guid usuarioGuid);
+
+        Task<UsuarioEscolaPerfil?> GetActiveByUsuarioIdAsync(int usuarioId);
+        Task<UsuarioEscolaPerfil?> GetActiveByUsuarioGuidAsync(Guid usuarioGuid);
+
+        Task<UsuarioEscolaPerfil?> GetActiveWithRelationsByUsuarioIdAsync(int usuarioId);
+        Task<UsuarioEscolaPerfil?> GetActiveWithRelationsByUsuarioGuidAsync(Guid usuarioGuid);
+
+        Task<bool> DoesUsuarioHavePerfilInEscolaAsync(int usuarioId, int escolaId, int perfilId);
+        Task<bool> DoesUsuarioHavePerfilInEscolaAsync(Guid usuarioGuid, int escolaId, int perfilId);
     }
 }

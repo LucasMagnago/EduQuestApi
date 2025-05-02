@@ -21,11 +21,11 @@ public class PerfilHandler : AuthorizationHandler<PerfilRequirement>
     protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PerfilRequirement requirement)
     {
         // 1. Pega o ID do usuário logado (vem do token JWT)
-        var usuarioIdClaim = context.User.FindFirst(ClaimTypes.Sid);
-        if (usuarioIdClaim == null)
+        var usuarioGuidClaim = context.User.FindFirst(ClaimTypes.Sid);
+        if (usuarioGuidClaim == null)
             return;
 
-        var userGuid = Guid.Parse(usuarioIdClaim.Value);
+        var userGuid = Guid.Parse(usuarioGuidClaim.Value);
 
         var routeData = _httpContextAccessor.HttpContext?.GetRouteData();
 

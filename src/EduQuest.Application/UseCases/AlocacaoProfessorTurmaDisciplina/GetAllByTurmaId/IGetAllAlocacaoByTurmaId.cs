@@ -4,7 +4,7 @@ namespace EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllB
 {
     public interface IGetAllAlocacaoByTurmaId
     {
-        Task<List<ResponseProfessorDisciplinaJson>> Execute(int turmaId);
+        Task<List<ResponseProfessorDisciplinaTurmaJson>> Execute(int turmaId);
     }
 }
 

@@ -40,6 +40,32 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("TurmaId");
 
                     b.ToTable("AlocacaoProfessores");
+
+                    b.HasData(
+                        new
+                        {
+                            ProfessorId = 3,
+                            TurmaId = 1,
+                            DisciplinaId = 2
+                        },
+                        new
+                        {
+                            ProfessorId = 3,
+                            TurmaId = 2,
+                            DisciplinaId = 2
+                        },
+                        new
+                        {
+                            ProfessorId = 4,
+                            TurmaId = 1,
+                            DisciplinaId = 1
+                        },
+                        new
+                        {
+                            ProfessorId = 4,
+                            TurmaId = 2,
+                            DisciplinaId = 1
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Alternativa", b =>
@@ -65,6 +91,288 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("Alternativas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            Descricao = "8",
+                            Ordem = 1,
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Descricao = "9",
+                            Ordem = 2,
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Descricao = "4",
+                            Ordem = 1,
+                            QuestaoId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Descricao = "5",
+                            Ordem = 2,
+                            QuestaoId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Descricao = "5",
+                            Ordem = 1,
+                            QuestaoId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Descricao = "6",
+                            Ordem = 2,
+                            QuestaoId = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Descricao = "14",
+                            Ordem = 1,
+                            QuestaoId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Descricao = "12",
+                            Ordem = 2,
+                            QuestaoId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Descricao = "4",
+                            Ordem = 1,
+                            QuestaoId = 6
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Descricao = "3",
+                            Ordem = 2,
+                            QuestaoId = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Descricao = "9",
+                            Ordem = 1,
+                            QuestaoId = 7
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Descricao = "6",
+                            Ordem = 2,
+                            QuestaoId = 7
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Descricao = "10",
+                            Ordem = 1,
+                            QuestaoId = 8
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Descricao = "20",
+                            Ordem = 2,
+                            QuestaoId = 8
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Descricao = "48",
+                            Ordem = 1,
+                            QuestaoId = 9
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Descricao = "56",
+                            Ordem = 2,
+                            QuestaoId = 9
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Descricao = "19",
+                            Ordem = 1,
+                            QuestaoId = 10
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Descricao = "20",
+                            Ordem = 2,
+                            QuestaoId = 10
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Descricao = "15",
+                            Ordem = 1,
+                            QuestaoId = 11
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Descricao = "12",
+                            Ordem = 2,
+                            QuestaoId = 11
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Descricao = "O menino",
+                            Ordem = 1,
+                            QuestaoId = 12
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Descricao = "Para casa",
+                            Ordem = 2,
+                            QuestaoId = 12
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Descricao = "Adjetivo",
+                            Ordem = 1,
+                            QuestaoId = 13
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Descricao = "Substantivo",
+                            Ordem = 2,
+                            QuestaoId = 13
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Descricao = "Metáfora",
+                            Ordem = 1,
+                            QuestaoId = 14
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Descricao = "Comparação",
+                            Ordem = 2,
+                            QuestaoId = 14
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Descricao = "Sujeito",
+                            Ordem = 2,
+                            QuestaoId = 15
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Descricao = "Pronome pessoal do caso reto",
+                            Ordem = 1,
+                            QuestaoId = 15
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Descricao = "Cidadãos",
+                            Ordem = 1,
+                            QuestaoId = 16
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Descricao = "Cidadães",
+                            Ordem = 2,
+                            QuestaoId = 16
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Descricao = "Amo",
+                            Ordem = 1,
+                            QuestaoId = 17
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Descricao = "Amarei",
+                            Ordem = 2,
+                            QuestaoId = 17
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Descricao = "'Houve problemas'",
+                            Ordem = 1,
+                            QuestaoId = 18
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Descricao = "'Houveram problemas'",
+                            Ordem = 2,
+                            QuestaoId = 18
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Descricao = "Triste",
+                            Ordem = 1,
+                            QuestaoId = 19
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Descricao = "Feliz",
+                            Ordem = 2,
+                            QuestaoId = 19
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Descricao = "Feliz",
+                            Ordem = 1,
+                            QuestaoId = 20
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Descricao = "Felicitar",
+                            Ordem = 2,
+                            QuestaoId = 20
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Descricao = "Vocativo",
+                            Ordem = 1,
+                            QuestaoId = 21
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Descricao = "Enumeração",
+                            Ordem = 2,
+                            QuestaoId = 21
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AlunoConquista", b =>
@@ -213,6 +521,32 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("ProfessorId");
 
                     b.ToTable("Atividades");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DataCriacao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Quiz de Frações",
+                            MoedasRecompensa = 100,
+                            ProfessorId = 4,
+                            TempoLimiteSegundos = 600,
+                            Titulo = "Quiz de Frações",
+                            Valor = 10,
+                            XpRecompensa = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DataCriacao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Descricao = "Atividade de Português",
+                            MoedasRecompensa = 100,
+                            ProfessorId = 3,
+                            TempoLimiteSegundos = 600,
+                            Titulo = "Atividade de Português",
+                            Valor = 10,
+                            XpRecompensa = 100
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeAluno", b =>
@@ -229,26 +563,26 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("AtividadeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataFim")
+                    b.Property<DateTime?>("DataFim")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataInicio")
+                    b.Property<DateTime?>("DataInicio")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FeedbackProfessor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MoedasGanhas")
+                    b.Property<int?>("MoedasGanhas")
                         .HasColumnType("int");
 
-                    b.Property<int>("PontuacaoObtida")
+                    b.Property<int?>("PontuacaoObtida")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("XpGanho")
+                    b.Property<int?>("XpGanho")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -258,6 +592,29 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("AtividadeId");
 
                     b.ToTable("AtividadeAlunos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlunoId = 5,
+                            AtividadeId = 1,
+                            DataFim = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataInicio = new DateTime(2025, 4, 12, 10, 19, 0, 0, DateTimeKind.Unspecified),
+                            FeedbackProfessor = "Bom",
+                            MoedasGanhas = 100,
+                            PontuacaoObtida = 10,
+                            Status = 3,
+                            XpGanho = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AlunoId = 5,
+                            AtividadeId = 2,
+                            FeedbackProfessor = "",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeQuestao", b =>
@@ -284,6 +641,148 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("AtividadeQuestoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AtividadeId = 1,
+                            Ordem = 1,
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AtividadeId = 1,
+                            Ordem = 2,
+                            QuestaoId = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AtividadeId = 1,
+                            Ordem = 3,
+                            QuestaoId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AtividadeId = 1,
+                            Ordem = 4,
+                            QuestaoId = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AtividadeId = 1,
+                            Ordem = 5,
+                            QuestaoId = 6
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AtividadeId = 1,
+                            Ordem = 6,
+                            QuestaoId = 7
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AtividadeId = 1,
+                            Ordem = 7,
+                            QuestaoId = 8
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AtividadeId = 1,
+                            Ordem = 8,
+                            QuestaoId = 9
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AtividadeId = 1,
+                            Ordem = 9,
+                            QuestaoId = 10
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AtividadeId = 1,
+                            Ordem = 10,
+                            QuestaoId = 11
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AtividadeId = 2,
+                            Ordem = 1,
+                            QuestaoId = 12
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AtividadeId = 2,
+                            Ordem = 2,
+                            QuestaoId = 13
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AtividadeId = 2,
+                            Ordem = 3,
+                            QuestaoId = 14
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AtividadeId = 2,
+                            Ordem = 4,
+                            QuestaoId = 15
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AtividadeId = 2,
+                            Ordem = 5,
+                            QuestaoId = 16
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AtividadeId = 2,
+                            Ordem = 6,
+                            QuestaoId = 17
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AtividadeId = 2,
+                            Ordem = 7,
+                            QuestaoId = 18
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AtividadeId = 2,
+                            Ordem = 8,
+                            QuestaoId = 19
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AtividadeId = 2,
+                            Ordem = 9,
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AtividadeId = 2,
+                            Ordem = 10,
+                            QuestaoId = 2
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeResposta", b =>
@@ -318,6 +817,98 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("AtividadeRespostas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Acertou = true,
+                            AlternativaEscolhaId = 3,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Acertou = true,
+                            AlternativaEscolhaId = 5,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Acertou = true,
+                            AlternativaEscolhaId = 7,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Acertou = true,
+                            AlternativaEscolhaId = 9,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 5
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Acertou = true,
+                            AlternativaEscolhaId = 11,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 6
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Acertou = true,
+                            AlternativaEscolhaId = 13,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 7
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Acertou = true,
+                            AlternativaEscolhaId = 15,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 8
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Acertou = true,
+                            AlternativaEscolhaId = 17,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 9
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Acertou = true,
+                            AlternativaEscolhaId = 19,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 10
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Acertou = true,
+                            AlternativaEscolhaId = 21,
+                            AtividadeAlunoId = 1,
+                            DataResposta = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            QuestaoId = 11
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AtividadeTurma", b =>
@@ -352,6 +943,44 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("TurmaId");
 
                     b.ToTable("AtividadeTurmas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AtividadeId = 1,
+                            DataAtribuicao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataEntrega = new DateTime(2025, 4, 18, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DisciplinaId = 1,
+                            TurmaId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AtividadeId = 1,
+                            DataAtribuicao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataEntrega = new DateTime(2025, 4, 17, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DisciplinaId = 1,
+                            TurmaId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AtividadeId = 2,
+                            DataAtribuicao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataEntrega = new DateTime(2025, 4, 18, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DisciplinaId = 2,
+                            TurmaId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AtividadeId = 2,
+                            DataAtribuicao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataEntrega = new DateTime(2025, 4, 17, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DisciplinaId = 2,
+                            TurmaId = 2
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Batalha", b =>
@@ -412,6 +1041,22 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("AlunoVencedorId");
 
                     b.ToTable("Batalhas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AlunoAId = 5,
+                            AlunoBId = 6,
+                            DataCriacao = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataInicio = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            MoedasConcedidasPerdedor = 50,
+                            MoedasConcedidasVencedor = 100,
+                            Status = 4,
+                            TempoLimiteSegundos = 6000000,
+                            XpConcedidoPerdedor = 50,
+                            XpConcedidoVencedor = 100
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaQuestao", b =>
@@ -438,6 +1083,43 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("QuestaoId");
 
                     b.ToTable("BatalhaQuestoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BatalhaId = 1,
+                            Ordem = 1,
+                            QuestaoId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BatalhaId = 1,
+                            Ordem = 2,
+                            QuestaoId = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BatalhaId = 1,
+                            Ordem = 3,
+                            QuestaoId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BatalhaId = 1,
+                            Ordem = 4,
+                            QuestaoId = 15
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BatalhaId = 1,
+                            Ordem = 5,
+                            QuestaoId = 16
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.BatalhaResposta", b =>
@@ -645,6 +1327,50 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Disciplinas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Matemática",
+                            Sigla = "MAT"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Descricao = "Português",
+                            Sigla = "PORT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Descricao = "História",
+                            Sigla = "HIST"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Descricao = "Geografia",
+                            Sigla = "GEO"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Descricao = "Ciências",
+                            Sigla = "CIEN"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Descricao = "Artes",
+                            Sigla = "ART"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Descricao = "Educação Física",
+                            Sigla = "EDF"
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Escola", b =>
@@ -654,6 +1380,9 @@ namespace EduQuest.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Inep")
                         .IsRequired()
@@ -674,14 +1403,23 @@ namespace EduQuest.Infrastructure.Migrations
                     b.Property<int>("TipoUnidadeId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ativo")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TipoUnidadeId");
 
                     b.ToTable("Escolas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = true,
+                            Inep = "12016365",
+                            Nome = "Escola Exemplo",
+                            Sigla = "EE",
+                            Telefone = "3251-2266",
+                            TipoUnidadeId = 1
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Item", b =>
@@ -760,6 +1498,26 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Perfis");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Responsável pela gestão geral da plataforma, com acesso total para configurar escolas, usuários e permissões.",
+                            Nome = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Descricao = "Supervisiona as atividades de uma escola específica, podendo gerenciar professores, alunos e turmas.",
+                            Nome = "Gestor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Descricao = "Responsável pelo acompanhamento pedagógico dos alunos, criação de atividades e lançamento de avaliações.",
+                            Nome = "Professor"
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Questao", b =>
@@ -770,7 +1528,7 @@ namespace EduQuest.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AlternativaCorretaId")
+                    b.Property<int?>("AlternativaCorretaId")
                         .HasColumnType("int");
 
                     b.Property<int>("DisciplinaId")
@@ -780,7 +1538,7 @@ namespace EduQuest.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NivelEscola")
+                    b.Property<int>("NivelEscolar")
                         .HasColumnType("int");
 
                     b.Property<string>("Resposta")
@@ -799,6 +1557,188 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("UsuarioCriacaoId");
 
                     b.ToTable("Questoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 5 + 3?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DisciplinaId = 1,
+                            Enunciado = "Qual é a raiz quadrada de 16?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 9 - 4?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DisciplinaId = 1,
+                            Enunciado = "Qual é o dobro de 7?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 12 ÷ 3?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 3²?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DisciplinaId = 1,
+                            Enunciado = "Qual é o valor de 10% de 100?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 8 × 6?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DisciplinaId = 1,
+                            Enunciado = "Quanto é 14 + 5?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DisciplinaId = 1,
+                            Enunciado = "Qual é a metade de 30?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual é o sujeito da frase: 'O menino correu para casa'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual a classe gramatical da palavra 'feliz'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DisciplinaId = 2,
+                            Enunciado = "Identifique a figura de linguagem: 'O tempo voa.'",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual a função do pronome na frase: 'Ela saiu cedo'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual é o plural de 'cidadão'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual a conjugação do verbo 'amar' na 1ª pessoa do singular no presente?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 18,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual é a forma correta: 'houveram problemas' ou 'houve problemas'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 19,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual o antônimo de 'alegre'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 20,
+                            DisciplinaId = 2,
+                            Enunciado = "A palavra 'felicidade' é derivada de que outra palavra?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        },
+                        new
+                        {
+                            Id = 21,
+                            DisciplinaId = 2,
+                            Enunciado = "Qual a função da vírgula em: 'Maria, vá já dormir.'?",
+                            NivelEscolar = 6,
+                            Resposta = "",
+                            UsuarioCriacaoId = 3
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.TipoCondicao", b =>
@@ -841,6 +1781,15 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TiposUnidade");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Descricao = "Escola pública, administrada pela prefeitura de um município, que oferece o ensino fundamental (anos iniciais e finais). ",
+                            Nome = "Escola Municipal de Ensino Fundamental",
+                            Sigla = "EMEF"
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Turma", b =>
@@ -875,6 +1824,28 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("EscolaId");
 
                     b.ToTable("Turmas");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ano = 2025,
+                            Ativo = true,
+                            Descricao = "6º Ano A",
+                            EscolaId = 1,
+                            NivelEscolar = 6,
+                            Turno = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ano = 2025,
+                            Ativo = true,
+                            Descricao = "6º Ano B",
+                            EscolaId = 1,
+                            NivelEscolar = 6,
+                            Turno = 1
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Usuario", b =>
@@ -920,6 +1891,56 @@ namespace EduQuest.Infrastructure.Migrations
                     b.ToTable("Usuarios", (string)null);
 
                     b.UseTptMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(1997, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "joao@eduquest.com",
+                            Nome = "João Admin",
+                            SenhaHash = "$2a$11$l.1.XtCPblw2zZZS.UIu2eEOZiaQoypQka7N4rHAq0Qs6l/0dyvga",
+                            UsuarioIdentifier = new Guid("3f3a2f14-56e1-4e1e-8d91-9f63d5f3d402")
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(1993, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "maria@eduquest.com",
+                            Nome = "Maria Gestora",
+                            SenhaHash = "$2a$11$/nTO8u7SXBROhis7RGn56OR0mWhxh7Tx.lf2P/F63R/TbHo/oWlZ.",
+                            UsuarioIdentifier = new Guid("09d8a9cc-c23d-4b1f-8e14-ff12fd17c248")
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(1999, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "alice@eduquest.com",
+                            Nome = "Alice Professora",
+                            SenhaHash = "$2a$11$mNIy4y97smFq6Vzjj0o6TOxkJ/472tnI4Qv8FQ/3smJjH/Rp4CEZS",
+                            UsuarioIdentifier = new Guid("f6f7b3b4-6e3e-4bc9-95f7-0d15f0e034c9")
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(2002, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "diego@eduquest.com",
+                            Nome = "Diego Professor",
+                            SenhaHash = "$2a$11$7aKDv6ML6d7whmHhJYUes.uBNAAcLM.dsIUOhCg1GxX5hXk/SCj62",
+                            UsuarioIdentifier = new Guid("61a3b16d-1208-4ce4-b3c6-ccbe0ab0acdf")
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.UsuarioEscolaPerfil", b =>
@@ -943,6 +1964,36 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("PerfilId");
 
                     b.ToTable("UsuarioEscolaPerfis");
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = 1,
+                            EscolaId = 1,
+                            PerfilId = 1,
+                            Ativo = true
+                        },
+                        new
+                        {
+                            UsuarioId = 2,
+                            EscolaId = 1,
+                            PerfilId = 2,
+                            Ativo = true
+                        },
+                        new
+                        {
+                            UsuarioId = 3,
+                            EscolaId = 1,
+                            PerfilId = 3,
+                            Ativo = true
+                        },
+                        new
+                        {
+                            UsuarioId = 4,
+                            EscolaId = 1,
+                            PerfilId = 3,
+                            Ativo = true
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.Aluno", b =>
@@ -970,6 +2021,62 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasIndex("TurmaId");
 
                     b.ToTable("Alunos", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 5,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(2015, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lucas@eduquest.com",
+                            Nome = "Lucas Aluno",
+                            SenhaHash = "$2a$11$zaRQt0VkVQkiPn/dMiKWuO6bpK/nAqyinCMuLk7tXSD3YPVbMAKtO",
+                            UsuarioIdentifier = new Guid("a8dd0cd3-e0a1-4a2c-a18d-ec7f69c82872"),
+                            DataUltimoAcessoStreak = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Nivel = 1,
+                            SaldoMoedas = 1000,
+                            StreakDiasConsecutivos = 6,
+                            TurmaId = 1,
+                            XpAtual = 1220
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(2014, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "israel@eduquest.com",
+                            Nome = "Israel Aluno",
+                            SenhaHash = "$2a$11$zaRQt0VkVQkiPn/dMiKWuO6bpK/nAqyinCMuLk7tXSD3YPVbMAKtO",
+                            UsuarioIdentifier = new Guid("772b5cbe-df26-4f16-90b5-4e0fd472e2c6"),
+                            DataUltimoAcessoStreak = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Nivel = 1,
+                            SaldoMoedas = 1000,
+                            StreakDiasConsecutivos = 4,
+                            TurmaId = 1,
+                            XpAtual = 1180
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Ativo = true,
+                            DataCadastro = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            DataNascimento = new DateOnly(2013, 4, 12),
+                            DataUltimoLogin = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Email = "anker@eduquest.com",
+                            Nome = "Anker Aluno",
+                            SenhaHash = "$2a$11$zaRQt0VkVQkiPn/dMiKWuO6bpK/nAqyinCMuLk7tXSD3YPVbMAKtO",
+                            UsuarioIdentifier = new Guid("2eaf4c9b-6bc9-4463-8cf4-27911b34939e"),
+                            DataUltimoAcessoStreak = new DateTime(2025, 4, 12, 10, 20, 0, 0, DateTimeKind.Unspecified),
+                            Nivel = 2,
+                            SaldoMoedas = 2000,
+                            StreakDiasConsecutivos = 7,
+                            TurmaId = 2,
+                            XpAtual = 2430
+                        });
                 });
 
             modelBuilder.Entity("EduQuest.Domain.Entities.AlocacaoProfessor", b =>
@@ -1375,8 +2482,7 @@ namespace EduQuest.Infrastructure.Migrations
                     b.HasOne("EduQuest.Domain.Entities.Alternativa", "AlternativaCorreta")
                         .WithMany()
                         .HasForeignKey("AlternativaCorretaId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EduQuest.Domain.Entities.Disciplina", "Disciplina")
                         .WithMany()

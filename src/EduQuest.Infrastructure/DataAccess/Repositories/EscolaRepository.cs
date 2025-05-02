@@ -11,6 +11,21 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         }
 
+        public async Task<Escola?> GetEscolaWithRelationsByIdAsync(int id)
+        {
+            return await _entity
+                .Include(e => e.TipoUnidade)
+                .Where(e => e.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Escola>?> GetAllEscolasWithRelationsByIdAsync()
+        {
+            return await _entity
+                .Include(e => e.TipoUnidade)
+                .ToListAsync();
+        }
+
         public async Task<bool> ExistsWithNomeAsync(string nome)
         {
             return await _entity

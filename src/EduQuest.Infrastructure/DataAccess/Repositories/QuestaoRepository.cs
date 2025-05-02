@@ -25,7 +25,7 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
             return await _entity
                 .Include(q => q.Alternativas)
                 .Include(q => q.AlternativaCorreta)
-                .Where(q => q.DisciplinaId == disciplinaId && q.NivelEscola == nivel)
+                .Where(q => q.DisciplinaId == disciplinaId && q.NivelEscolar == nivel)
                 .ToListAsync();
         }
 
