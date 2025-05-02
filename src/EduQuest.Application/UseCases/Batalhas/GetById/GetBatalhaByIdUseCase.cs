@@ -18,7 +18,7 @@ namespace EduQuest.Application.UseCases.Batalhas.GetById
 
         public async Task<ResponseBatalhaJson> Execute(int id)
         {
-            var batalha = await _batalhaRepository.GetByIdAsync(id);
+            var batalha = await _batalhaRepository.GetWithRelationsById(id);
             if (batalha == null)
             {
                 throw new NotFoundException("Batalha não encontrada");

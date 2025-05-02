@@ -70,9 +70,7 @@ namespace EduQuest.Application.AutoMapper
                 .ForMember(dest => dest.BatalhaQuestoes, opt => opt.MapFrom(src => src.BatalhaQuestoes))
                 .ForMember(dest => dest.BatalhaRespostas, opt => opt.MapFrom(src => src.BatalhaRespostas));
             CreateMap<BatalhaResposta, ResponseBatalhaRespostaJson>();
-
-
-
+            CreateMap<BatalhaQuestao, ResponseBatalhaQuestaoJson>();
 
             CreateMap<Alternativa, ResponseShortAlternativaJson>();
             CreateMap<Aluno, ResponseShortAlunoJson>();

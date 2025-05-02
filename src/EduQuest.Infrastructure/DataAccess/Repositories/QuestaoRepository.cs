@@ -41,6 +41,7 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         public async Task<List<Questao>> GetRandomQuestoesAsync(int count)
         {
             return await _context.Questoes
+                             .Include(q => q.Alternativas)
                              .Take(count)
                              .ToListAsync();
         }
