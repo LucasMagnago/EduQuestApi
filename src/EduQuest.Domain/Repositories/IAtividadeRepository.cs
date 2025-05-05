@@ -10,5 +10,6 @@ namespace EduQuest.Domain.Repositories
         Task<List<Atividade>> GetAllAvailableAtividadeByAlunoId(int alunoId);
         Task<List<Atividade>> GetAllAvailableAtividadeByProfessorId(int professorId);
         Task<List<Atividade>> GetAllAvailableAtividadeByTurmaId(int turmaId);
+        Task<int> CountQuestionsByAtividadeId(int atividadeId);
     }
 }

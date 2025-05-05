@@ -26,9 +26,22 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                 .FirstOrDefaultAsync();
         }
 
-        public Task<int> GetQuantidadeAcertos(int atividadeAlunoId)
+        public async Task<AtividadeAluno?> GetWithRelationsByAlunoIdAndAtividadeId(int alunoId, int atividadeId)
         {
-            throw new NotImplementedException();
+            return await _context.AtividadeAlunos
+                .Include(aa => aa.Atividade)
+                .Include(aa => aa.AtividadeRespostas)
+                .Where(aa => aa.AlunoId == alunoId && aa.AtividadeId == atividadeId)
+                .FirstOrDefaultAsync();
         }
+
+        public async Task<int> CountCorrectAnswers(int atividadeAlunoId)
+        {
+            return await _context.AtividadeRespostas
+            .Where(ar => ar.AtividadeAlunoId == atividadeAlunoId && ar.Acertou)
+            .CountAsync();
+        }
+
+
     }
 }

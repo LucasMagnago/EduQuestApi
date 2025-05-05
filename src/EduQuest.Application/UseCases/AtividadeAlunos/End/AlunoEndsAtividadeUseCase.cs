@@ -40,9 +40,14 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
 
             await Validate(aluno, atividade, atividadeAluno);
 
+            var valor = atividade!.Valor;
+            var qtdQuestoes = await _atividadeRepository.CountQuestionsByAtividadeId(request.AtividadeId);
+            var acertos = await _atividadeAlunoRepository.CountCorrectAnswers(atividadeAluno!.Id);
+
+            atividadeAluno.PontuacaoObtida = (valor * acertos) / qtdQuestoes;
+
             atividadeAluno!.XpGanho = atividade!.XpRecompensa;
             atividadeAluno.MoedasGanhas = atividade.MoedasRecompensa;
-            atividadeAluno.PontuacaoObtida = 99; // Implementar
             atividadeAluno.Status = StatusAtividade.Concluida;
             atividadeAluno.DataFim = DateTime.Now;
 

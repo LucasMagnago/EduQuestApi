@@ -8,7 +8,7 @@
         public int NivelEscola { get; set; }
         public int DisciplinaId { get; set; }
         public ResponseShortAlternativaJson? AlternativaCorreta { get; set; }
-        public ResponseShortUsuarioJson UsuarioCriacaoId { get; set; } = null!;
+        public ResponseShortUsuarioJson UsuarioCriacao { get; set; } = null!;
 
         public IEnumerable<ResponseShortAlternativaJson> Alternativas { get; set; } = new List<ResponseShortAlternativaJson>();
     }

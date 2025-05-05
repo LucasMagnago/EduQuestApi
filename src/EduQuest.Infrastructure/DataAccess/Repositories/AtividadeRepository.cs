@@ -11,6 +11,13 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         }
 
+        public async Task<int> CountQuestionsByAtividadeId(int atividadeId)
+        {
+            return await _context.AtividadeQuestoes
+                .Where(aq => aq.AtividadeId == atividadeId)
+                .CountAsync();
+        }
+
         public async Task<List<Atividade>> GetAllAtividadeByAlunoId(int alunoId)
         {
             return await _entity

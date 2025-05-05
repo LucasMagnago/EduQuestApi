@@ -40,7 +40,6 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
             await Validate(request);
 
             var atividadeAluno = await _atividadeAlunoRepository.GetByAlunoIdAndAtividadeId(request.AlunoId, request.AtividadeId);
-
             var atividadeResposta = await _atividadeRespostaRepository.GetByAtividadeAlunoIdAndQuestaoId(atividadeAluno!.Id, request.QuestaoId);
 
             bool isNewResposta = atividadeResposta == null;
@@ -60,6 +59,11 @@ namespace EduQuest.Application.UseCases.AtividadeRespostas.Answer
 
                 await _atividadeRespostaRepository.UpdateAsync(atividadeResposta);
             }
+
+            var questao = await _questaoRepository.GetByIdAsync(request.QuestaoId);
+            bool acertou = questao!.IsCorrectAnswer(request.AlternativaEscolhaId);
+
+            atividadeResposta.Acertou = acertou;
 
             await _unitOfWork.Commit();
 

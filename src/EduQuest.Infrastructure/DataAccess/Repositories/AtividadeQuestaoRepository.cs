@@ -21,7 +21,10 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         public async Task<List<Questao>> GetAllQuestaoByAtividadeId(int atividadeId)
         {
             return await _entity
+                .Include(aq => aq.Questao)
+                    .ThenInclude(q => q.Alternativas)
                 .Where(aq => aq.AtividadeId == atividadeId)
+                .OrderBy(aq => aq.Ordem)
                 .Select(aq => aq.Questao)
                 .ToListAsync();
         }
