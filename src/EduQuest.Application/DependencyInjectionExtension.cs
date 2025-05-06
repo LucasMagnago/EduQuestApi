@@ -1,4 +1,5 @@
 ﻿using EduQuest.Application.AutoMapper;
+using EduQuest.Application.Services.AssignRewards;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.AddProfessor;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByProfessorId;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByturmaId;
@@ -58,6 +59,8 @@ using EduQuest.Application.UseCases.UsuarioEscolaPerfis.GetAtivoByUsuarioId;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetAtivo;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetInativo;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.Unassign;
+using EduQuest.Domain.Services.AssignRewards;
+using EduQuest.Domain.Services.UpdateStatistics;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EduQuest.Application
@@ -66,6 +69,9 @@ namespace EduQuest.Application
     {
         public static void AddApplication(this IServiceCollection services)
         {
+            services.AddScoped<IAssignRewardsService, AssignRewardsService>();
+            services.AddScoped<IUpdateStatisticsService, IUpdateStatisticsService>();
+
             AddAutoMapper(services);
             AddUseCases(services);
         }

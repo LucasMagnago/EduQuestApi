@@ -69,8 +69,26 @@ namespace EduQuest.Domain.Entities
         [JsonIgnore]
         public virtual ICollection<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; } = new HashSet<AlunoProgressoCondicao>();
 
+        // Método para adicionar XP
+        public void AddXp(int xp)
+        {
+            if (xp < 0)
+            {
+                throw new ArgumentException("A quantidade de XP não pode ser negativa.");
+            }
 
+            this.XpAtual += xp;
+        }
 
+        // Método para adicionar Moedas
+        public void AddMoedas(int moedas)
+        {
+            if (SaldoMoedas - moedas < 0)
+            {
+                throw new ArgumentException("A quantidade de moedas é insuficiente.");
+            }
 
+            this.SaldoMoedas += moedas;
+        }
     }
 }

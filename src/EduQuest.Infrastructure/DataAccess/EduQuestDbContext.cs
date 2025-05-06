@@ -12,6 +12,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<AlunoConquista> AlunoConquistas { get; set; }
+        public DbSet<AlunoEstatistica> AlunosEstatisticas { get; set; }
         public DbSet<AlunoPossuiItem> AlunoPossuiItens { get; set; }
         public DbSet<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; }
         public DbSet<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; }
@@ -31,6 +32,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<DesafioTurma> DesafioTurmas { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<Escola> Escolas { get; set; }
+        public DbSet<EscolaEstatistica> EscolaEstatisticas { get; set; }
         public DbSet<Item> Itens { get; set; }
         //public DbSet<Matricula> Matriculas { get; set; }
         public DbSet<Mensagem> Mensagens { get; set; }
@@ -41,6 +43,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<TipoCondicao> TiposCondicoes { get; set; }
         public DbSet<TipoUnidade> TiposUnidade { get; set; }
         public DbSet<Turma> Turmas { get; set; }
+        public DbSet<TurmaEstatistica> TurmaEstatisticas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioEscolaPerfil> UsuarioEscolaPerfis { get; set; }
 
