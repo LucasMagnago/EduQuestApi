@@ -2,7 +2,7 @@
 {
     public interface IAssignRewardsService
     {
-        Task AssignByBatalha(int alunoId, int batalhaId, bool venceu);
-        Task AssignByAtividade(int alunoId, int atividadeId);
+        Task AssignByBatalha(int batalhaId);
+        Task AssignByAtividade(int atividadeAlunoId);
     }
 }

@@ -7,5 +7,6 @@ namespace EduQuest.Domain.Repositories
         Task<Aluno?> GetByUsuarioGuid(Guid usuarioGuid);
         Task<bool> ExistAlunoWithUsuarioGuid(Guid usuarioGuid);
         Task<Turma?> GetTurmaByAlunoId(int alunoId);
+        Task<Escola?> GetEscolaByAlunoId(int alunoId);
     }
 }

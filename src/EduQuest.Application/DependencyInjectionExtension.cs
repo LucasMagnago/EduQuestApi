@@ -1,5 +1,6 @@
 ﻿using EduQuest.Application.AutoMapper;
 using EduQuest.Application.Services.AssignRewards;
+using EduQuest.Application.Services.UpdateStatistics;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.AddProfessor;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByProfessorId;
 using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.GetAllByturmaId;
@@ -48,6 +49,22 @@ using EduQuest.Application.UseCases.Questoes.GetAllByProfessorId;
 using EduQuest.Application.UseCases.Questoes.GetById;
 using EduQuest.Application.UseCases.Questoes.Register;
 using EduQuest.Application.UseCases.Questoes.SetCorrectAlternativa;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByAtividadesConcluidasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByAtividadesConcluidasInTurma;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasParticipadasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasParticipadasInTurma;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasVencidasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasVencidasInTurma;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByMediaNotasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingAlunosByMediaNotasInTurma;
+using EduQuest.Application.UseCases.Rankings.GetRankingEscolasByAtividadesConcluidas;
+using EduQuest.Application.UseCases.Rankings.GetRankingEscolasByBatalhasParticipadas;
+using EduQuest.Application.UseCases.Rankings.GetRankingEscolasByBatalhasVencidas;
+using EduQuest.Application.UseCases.Rankings.GetRankingEscolasByMediaNotas;
+using EduQuest.Application.UseCases.Rankings.GetRankingTurmasByAtividadesConcluidasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingTurmasByBatalhasParticipadasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingTurmasByBatalhasVencidasInEscola;
+using EduQuest.Application.UseCases.Rankings.GetRankingTurmasByMediaNotasInEscola;
 using EduQuest.Application.UseCases.Turmas.AddAluno;
 using EduQuest.Application.UseCases.Turmas.GetAll;
 using EduQuest.Application.UseCases.Turmas.GetById;
@@ -70,7 +87,7 @@ namespace EduQuest.Application
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IAssignRewardsService, AssignRewardsService>();
-            services.AddScoped<IUpdateStatisticsService, IUpdateStatisticsService>();
+            services.AddScoped<IUpdateStatisticsService, UpdateStatisticsService>();
 
             AddAutoMapper(services);
             AddUseCases(services);
@@ -176,8 +193,22 @@ namespace EduQuest.Application
             services.AddScoped<IEndBatalhaUseCase, EndBatalhaUseCase>();
             services.AddScoped<IGetBatalhaByIdUseCase, GetBatalhaByIdUseCase>();
 
-            services.AddScoped<IAlunoAnswerQuestaoFromAtividadeUseCase, AlunoAnswerQuestaoFromAtividadeUseCase>();
-
+            services.AddScoped<IGetRankingAlunosByAtividadesConcluidasInEscolaUseCase, GetRankingAlunosByAtividadesConcluidasInEscolaUseCase>();
+            services.AddScoped<IGetRankingAlunosByAtividadesConcluidasInTurmaUseCase, GetRankingAlunosByAtividadesConcluidasInTurmaUseCase>();
+            services.AddScoped<IGetRankingAlunosByBatalhasParticipadasInEscolaUseCase, GetRankingAlunosByBatalhasParticipadasInEscolaUseCase>();
+            services.AddScoped<IGetRankingAlunosByBatalhasParticipadasInTurmaUseCase, GetRankingAlunosByBatalhasParticipadasInTurmaUseCase>();
+            services.AddScoped<IGetRankingAlunosByBatalhasVencidasInEscolaUseCase, GetRankingAlunosByBatalhasVencidasInEscolaUseCase>();
+            services.AddScoped<IGetRankingAlunosByBatalhasVencidasInTurmaUseCase, GetRankingAlunosByBatalhasVencidasInTurmaUseCase>();
+            services.AddScoped<IGetRankingAlunosByMediaNotasInEscolaUseCase, GetRankingAlunosByMediaNotasInEscolaUseCase>();
+            services.AddScoped<IGetRankingAlunosByMediaNotasInTurmaUseCase, GetRankingAlunosByMediaNotasInTurmaUseCase>();
+            services.AddScoped<IGetRankingEscolasByAtividadesConcluidasUseCase, GetRankingEscolasByAtividadesConcluidasUseCase>();
+            services.AddScoped<IGetRankingEscolasByBatalhasParticipadasUseCase, GetRankingEscolasByBatalhasParticipadasUseCase>();
+            services.AddScoped<IGetRankingEscolasByBatalhasVencidasUseCase, GetRankingEscolasByBatalhasVencidasUseCase>();
+            services.AddScoped<IGetRankingEscolasByMediaNotasUseCase, GetRankingEscolasByMediaNotasUseCase>();
+            services.AddScoped<IGetRankingTurmasByAtividadesConcluidasInEscolaUseCase, GetRankingTurmasByAtividadesConcluidasInEscolaUseCase>();
+            services.AddScoped<IGetRankingTurmasByBatalhasParticipadasInEscolaUseCase, GetRankingTurmasByBatalhasParticipadasInEscolaUseCase>();
+            services.AddScoped<IGetRankingTurmasByBatalhasVencidasInEscolaUseCase, GetRankingTurmasByBatalhasVencidasInEscolaUseCase>();
+            services.AddScoped<IGetRankingTurmasByMediaNotasInEscolaUseCase, GetRankingTurmasByMediaNotasInEscolaUseCase>();
         }
     }
 }

@@ -4,6 +4,8 @@ using EduQuest.Communication.Responses;
 using EduQuest.Domain.Entities;
 using EduQuest.Domain.Enums;
 using EduQuest.Domain.Repositories;
+using EduQuest.Domain.Services.AssignRewards;
+using EduQuest.Domain.Services.UpdateStatistics;
 using EduQuest.Exception.ExceptionsBase;
 
 namespace EduQuest.Application.UseCases.AtividadeAlunos.End
@@ -14,6 +16,8 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
         private readonly IAtividadeRepository _atividadeRepository;
         private readonly IAlunoRepository _alunoRepository;
         private readonly IAtividadeTurmaRepository _atividadeTurmaRepository;
+        private readonly IAssignRewardsService _assignRewardsService;
+        private readonly IUpdateStatisticsService _updateStatisticsService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
@@ -21,6 +25,8 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
             IAtividadeRepository atividadeRepository,
             IAtividadeAlunoRepository atividadeAlunoRepository,
             IAtividadeTurmaRepository atividadeTurmaRepository,
+            IAssignRewardsService assignRewardsService,
+            IUpdateStatisticsService updateStatisticsService,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
@@ -28,6 +34,8 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
             _atividadeRepository = atividadeRepository;
             _alunoRepository = alunoRepository;
             _atividadeTurmaRepository = atividadeTurmaRepository;
+            _assignRewardsService = assignRewardsService;
+            _updateStatisticsService = updateStatisticsService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -58,6 +66,11 @@ namespace EduQuest.Application.UseCases.AtividadeAlunos.End
             await _alunoRepository.UpdateAsync(aluno);
             await _atividadeAlunoRepository.UpdateAsync(atividadeAluno);
             await _unitOfWork.Commit();
+
+            await _assignRewardsService.AssignByAtividade(atividadeAluno.Id);
+            await _updateStatisticsService.UpdateAlunoStatisticsInAtividades(atividadeAluno.Id);
+            await _updateStatisticsService.UpdateTurmaStatisticsInAtividades(atividadeAluno.Id);
+            await _updateStatisticsService.UpdateEscolaStatisticsInAtividades(atividadeAluno.Id);
 
             return _mapper.Map<ResponseAtividadeAlunoJson>(atividadeAluno);
         }

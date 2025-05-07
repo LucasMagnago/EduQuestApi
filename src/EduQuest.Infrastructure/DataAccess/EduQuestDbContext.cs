@@ -12,7 +12,7 @@ namespace EduQuest.Infrastructure.DataAccess
         public DbSet<Alternativa> Alternativas { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<AlunoConquista> AlunoConquistas { get; set; }
-        public DbSet<AlunoEstatistica> AlunosEstatisticas { get; set; }
+        public DbSet<AlunoEstatistica> AlunoEstatisticas { get; set; }
         public DbSet<AlunoPossuiItem> AlunoPossuiItens { get; set; }
         public DbSet<AlunoProgressoCondicao> AlunoProgressoCondicoes { get; set; }
         public DbSet<AlunoProgressoDesafio> AlunoProgressoDesafios { get; set; }
@@ -373,6 +373,33 @@ namespace EduQuest.Infrastructure.DataAccess
             //    .HasForeignKey(t => t.PeriodoLetivoId)
             //    .OnDelete(DeleteBehavior.Restrict);
             //});
+
+            modelBuilder.Entity<AlunoEstatistica>()
+                .HasKey(ae => ae.AlunoId); // PK
+
+            modelBuilder.Entity<AlunoEstatistica>()
+                .HasOne(ae => ae.Aluno)
+                .WithOne() // ou .WithOne(a => a.AlunoEstatistica), se tiver navegação inversa
+                .HasForeignKey<AlunoEstatistica>(ae => ae.AlunoId) // FK
+                .OnDelete(DeleteBehavior.Cascade); // ou conforme necessário
+
+            modelBuilder.Entity<TurmaEstatistica>()
+                .HasKey(ae => ae.TurmaId); // PK
+
+            modelBuilder.Entity<TurmaEstatistica>()
+                .HasOne(ae => ae.Turma)
+                .WithOne() // ou .WithOne(a => a.AlunoEstatistica), se tiver navegação inversa
+                .HasForeignKey<TurmaEstatistica>(ae => ae.TurmaId) // FK
+                .OnDelete(DeleteBehavior.Cascade); // ou conforme necessário
+
+            modelBuilder.Entity<EscolaEstatistica>()
+                .HasKey(ae => ae.EscolaId); // PK
+
+            modelBuilder.Entity<EscolaEstatistica>()
+                .HasOne(ae => ae.Escola)
+                .WithOne() // ou .WithOne(a => a.AlunoEstatistica), se tiver navegação inversa
+                .HasForeignKey<EscolaEstatistica>(ae => ae.EscolaId) // FK
+                .OnDelete(DeleteBehavior.Cascade); // ou conforme necessário
 
             // SEED DATABASE
             modelBuilder.Entity<TipoUnidade>().HasData(

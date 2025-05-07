@@ -4,59 +4,91 @@ namespace EduQuest.Domain.Repositories
 {
     public interface IRankingRepository
     {
-        #region Ranking Atividades Concluídas
+        //-------------------------------------------------------------------------
+        // RANKING DE ALUNOS
+        //-------------------------------------------------------------------------
 
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorAtividadeConcluidaNaTurma(int turmaId);
+        #region Atividades Concluídas
 
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorAtividadeConcluidaNaEscola(int escolaId);
-
-        Task<List<TurmaRankingDTO>> GetRankingTurmasPorMediaAtividadesConcluidasNaEscola(int escolaId);
-        #endregion
-
-        #region Ranking Média Nota em Atividades
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorMediaNotaNaTurma(int turmaId);
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorMediaNotaNaEscola(int escolaId);
-
-        Task<List<TurmaRankingDTO>> GetRankingTurmasPorMediaGeralNotaNaEscola(int escolaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByAtividadesConcluidasInTurma(int turmaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByAtividadesConcluidasInEscola(int escolaId);
 
         #endregion
 
-        //---------------------------------------------------------------------
-        // Métricas de Batalhas e Questões (Alunos)
-        //---------------------------------------------------------------------
+        #region Média de Notas
 
-        #region Ranking Batalhas Participadas
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasParticipadasNaTurma(int turmaId);
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasParticipadasNaEscola(int escolaId);
-        #endregion
-
-        #region Ranking Batalhas Vencidas
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasVencidasNaTurma(int turmaId);
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasVencidasNaEscola(int escolaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByMediaNotasInTurma(int turmaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByMediaNotasInEscola(int escolaId);
 
         #endregion
 
-        #region Ranking Questões Respondidas (Total)
+        #region Batalhas Participadas
 
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesRespondidasNaTurma(int turmaId);
-
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesRespondidasNaEscola(int escolaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasParticipadasInTurma(int turmaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasParticipadasInEscola(int escolaId);
 
         #endregion
 
-        #region Ranking Questões Acertadas (Total)
+        #region Batalhas Vencidas
 
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesAcertadasNaTurma(int turmaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasVencidasInTurma(int turmaId);
+        Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasVencidasInEscola(int escolaId);
 
-        Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesAcertadasNaEscola(int escolaId);
+        #endregion
 
+        //-------------------------------------------------------------------------
+        // RANKING DE TURMAS
+        //-------------------------------------------------------------------------
+
+        #region Atividades Concluídas
+
+        Task<List<TurmaRankingDTO>> GetRankingTurmasByAtividadesConcluidasInEscola(int escolaId);
+
+        #endregion
+
+        #region Média de Notas
+
+        Task<List<TurmaRankingDTO>> GetRankingTurmasByMediaNotasInEscola(int escolaId);
+
+        #endregion
+
+        #region Batalhas Participadas
+
+        Task<List<TurmaRankingDTO>> GetRankingTurmasByBatalhasParticipadasInEscola(int escolaId);
+
+        #endregion
+
+        #region Batalhas Vencidas
+
+        Task<List<TurmaRankingDTO>> GetRankingTurmasByBatalhasVencidasInEscola(int escolaId);
+
+        #endregion
+
+        //-------------------------------------------------------------------------
+        // RANKING DE ESCOLAS
+        //-------------------------------------------------------------------------
+
+        #region Atividades Concluídas
+
+        Task<List<EscolaRankingDTO>> GetRankingEscolasByAtividadesConcluidas();
+
+        #endregion
+
+        #region Média de Notas
+
+        Task<List<EscolaRankingDTO>> GetRankingEscolasByMediaNotas();
+
+        #endregion
+
+        #region Batalhas Participadas
+
+        Task<List<EscolaRankingDTO>> GetRankingEscolasByBatalhasParticipadas();
+
+        #endregion
+
+        #region Batalhas Vencidas
+
+        Task<List<EscolaRankingDTO>> GetRankingEscolasByBatalhasVencidas();
 
         #endregion
     }

@@ -16,9 +16,9 @@ namespace EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasVenci
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseAlunoRankingJson>> Execute(int escolaId)
+        public async Task<List<ResponseAlunoRankingJson>> Execute(int turmaId)
         {
-            var ranking = await _rankingRepository.GetRankingAlunosPorBatalhasVencidasNaTurma(escolaId);
+            var ranking = await _rankingRepository.GetRankingAlunosByBatalhasVencidasInTurma(turmaId);
             if (ranking == null || ranking.Count == 0)
             {
                 return new List<ResponseAlunoRankingJson>();

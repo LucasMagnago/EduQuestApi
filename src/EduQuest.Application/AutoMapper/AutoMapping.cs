@@ -85,6 +85,7 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<Batalha, ResponseShortBatalhaRespostaJson>();
             CreateMap<AlunoRankingDTO, ResponseAlunoRankingJson>();
             CreateMap<TurmaRankingDTO, ResponseTurmaRankingJson>();
+            CreateMap<EscolaRankingDTO, ResponseEscolaRankingJson>();
 
             CreateMap<Usuario, ResponseShortUsuarioJson>();
             CreateMap<Escola, ResponseShortEscolaJson>();

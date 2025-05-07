@@ -38,6 +38,7 @@ namespace EduQuest.Infrastructure
             services.AddScoped<IAlternativaRepository, AlternativaRepository>();
             services.AddScoped<IAlocacaoProfessorRepository, AlocacaoProfessorRepository>();
             services.AddScoped<IAlunoRepository, AlunoRepository>();
+            services.AddScoped<IAlunoEstatisticaRepository, AlunoEstatisticaRepository>();
             services.AddScoped<IAtividadeRepository, AtividadeRepository>();
             services.AddScoped<IAtividadeAlunoRepository, AtividadeAlunoRepository>();
             services.AddScoped<IAtividadeQuestaoRepository, AtividadeQuestaoRepository>();
@@ -51,6 +52,7 @@ namespace EduQuest.Infrastructure
             services.AddScoped<IDesafioRepository, DesafioRepository>();
             services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
             services.AddScoped<IEscolaRepository, EscolaRepository>();
+            services.AddScoped<IEscolaEstatisticaRepository, EscolaEstatisticaRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             //services.AddScoped<IMatriculaRepository, MatriculaRepository>();
             services.AddScoped<IMensagemRepository, MensagemRepository>();
@@ -61,6 +63,7 @@ namespace EduQuest.Infrastructure
             services.AddScoped<IRankingRepository, RankingRepository>();
             services.AddScoped<ITipoUnidadeRepository, TipoUnidadeRepository>();
             services.AddScoped<ITurmaRepository, TurmaRepository>();
+            services.AddScoped<ITurmaEstatisticaRepository, TurmaEstatisticaRepository>();
             services.AddScoped<IUsuarioEscolaPerfilRepository, UsuarioEscolaPerfilRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }

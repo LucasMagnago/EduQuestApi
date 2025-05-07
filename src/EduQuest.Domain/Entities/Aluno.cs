@@ -78,6 +78,7 @@ namespace EduQuest.Domain.Entities
             }
 
             this.XpAtual += xp;
+            this.Nivel = (int)Math.Floor(XpAtual / 1000.0); // Exemplo: cada 1000 XP aumenta o nível
         }
 
         // Método para adicionar Moedas

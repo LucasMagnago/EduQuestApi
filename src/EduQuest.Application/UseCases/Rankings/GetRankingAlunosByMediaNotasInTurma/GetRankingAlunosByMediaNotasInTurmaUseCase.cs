@@ -2,23 +2,23 @@
 using EduQuest.Communication.Responses;
 using EduQuest.Domain.Repositories;
 
-namespace EduQuest.Application.UseCases.Rankings.GetRankingAlunosByBatalhasVencidasInEscola
+namespace EduQuest.Application.UseCases.Rankings.GetRankingAlunosByMediaNotasInTurma
 {
-    internal class GetRankingAlunosByBatalhasVencidasInEscolaUseCase : IGetRankingAlunosByBatalhasVencidasInEscolaUseCase
+    internal class GetRankingAlunosByMediaNotasInTurmaUseCase : IGetRankingAlunosByMediaNotasInTurmaUseCase
     {
         private readonly IRankingRepository _rankingRepository;
         private readonly IMapper _mapper;
 
-        public GetRankingAlunosByBatalhasVencidasInEscolaUseCase(IRankingRepository rankingRepository,
+        public GetRankingAlunosByMediaNotasInTurmaUseCase(IRankingRepository rankingRepository,
             IMapper mapper)
         {
             _rankingRepository = rankingRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<ResponseAlunoRankingJson>> Execute(int escolaId)
+        public async Task<List<ResponseAlunoRankingJson>> Execute(int turmaId)
         {
-            var ranking = await _rankingRepository.GetRankingAlunosByBatalhasVencidasInEscola(escolaId);
+            var ranking = await _rankingRepository.GetRankingAlunosByMediaNotasInTurma(turmaId);
             if (ranking == null || ranking.Count == 0)
             {
                 return new List<ResponseAlunoRankingJson>();

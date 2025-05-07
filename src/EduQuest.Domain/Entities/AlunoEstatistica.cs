@@ -7,12 +7,11 @@ namespace EduQuest.Domain.Entities
         [Key]
         public int AlunoId { get; set; }
         public Aluno Aluno { get; set; } = null!;
-        public int TotalParticipacoes { get; set; }
-        public int TotalVitorias { get; set; }
-        public int AtividadesConcluidas { get; set; }
-        public double MediaNotas { get; set; }
-        public int TotalNotas { get; set; } // Para cálculo incremental da média
-
+        public int TotalParticipacoesInBatalhas { get; set; } = 0;
+        public int TotalVitoriasInBatalhas { get; set; } = 0;
+        public int AtividadesConcluidas { get; set; } = 0;
+        public double MediaNotasNormalizadas { get; set; } = 0.0;
+        public int QuantidadeNotasValidas { get; set; } = 0; // Para cálculo incremental da média
         public DateTime UltimaAtualizacao { get; set; }
     }
 }

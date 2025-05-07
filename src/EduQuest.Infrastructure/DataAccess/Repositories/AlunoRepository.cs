@@ -26,8 +26,16 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
         public async Task<Turma?> GetTurmaByAlunoId(int alunoId)
         {
             return await _entity
-                .Where(a => a.Id == alunoId)
+                .Where(a => a.Id == alunoId && a.Turma != null)
                 .Select(a => a.Turma)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Escola?> GetEscolaByAlunoId(int alunoId)
+        {
+            return await _entity
+                .Where(a => a.Id == alunoId && a.Turma != null)
+                .Select(a => a.Turma!.Escola)
                 .FirstOrDefaultAsync();
         }
     }

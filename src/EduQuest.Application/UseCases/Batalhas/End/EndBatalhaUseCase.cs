@@ -3,6 +3,8 @@ using EduQuest.Communication.Requests;
 using EduQuest.Communication.Responses;
 using EduQuest.Domain.Enums;
 using EduQuest.Domain.Repositories;
+using EduQuest.Domain.Services.AssignRewards;
+using EduQuest.Domain.Services.UpdateStatistics;
 using EduQuest.Exception.ExceptionsBase;
 using FluentValidation.Results;
 
@@ -13,18 +15,24 @@ namespace EduQuest.Application.UseCases.Batalhas.End
         private readonly IBatalhaRepository _batalhaRepository;
         private readonly IBatalhaRespostaRepository _batalhaRespostaRepository;
         private readonly IAlunoRepository _alunoRepository;
+        private readonly IAssignRewardsService _assignRewardsService;
+        private readonly IUpdateStatisticsService _updateStatisticsService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
         public EndBatalhaUseCase(IBatalhaRepository batalhaRepository,
             IBatalhaRespostaRepository batalhaRespostaRepository,
             IAlunoRepository alunoRepository,
+            IAssignRewardsService assignRewardsService,
+            IUpdateStatisticsService updateStatisticsService,
             IUnitOfWork unitOfWork,
             IMapper mapper)
         {
             _batalhaRepository = batalhaRepository;
             _batalhaRespostaRepository = batalhaRespostaRepository;
             _alunoRepository = alunoRepository;
+            _assignRewardsService = assignRewardsService;
+            _updateStatisticsService = updateStatisticsService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -66,6 +74,11 @@ namespace EduQuest.Application.UseCases.Batalhas.End
             await _alunoRepository.UpdateAsync(alunoB);
             await _batalhaRepository.UpdateAsync(batalha);
             await _unitOfWork.Commit();
+
+            await _assignRewardsService.AssignByBatalha(batalha.Id);
+            await _updateStatisticsService.UpdateAlunoStatisticsInBatalhas(batalha.Id);
+            await _updateStatisticsService.UpdateTurmaStatisticsInBatalhas(batalha.Id);
+            await _updateStatisticsService.UpdateEscolaStatisticsInBatalhas(batalha.Id);
 
             return _mapper.Map<ResponseBatalhaJson>(batalha);
         }

@@ -1,5 +1,4 @@
 ﻿using EduQuest.Domain.DTOs;
-using EduQuest.Domain.Enums;
 using EduQuest.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,372 +13,269 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
             _context = context;
         }
 
-        #region Ranking Atividades Concluídas
+        //---------------------------------------------------------------------
+        // RANKING DE ALUNOS
+        //---------------------------------------------------------------------
 
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorAtividadeConcluidaNaTurma(int turmaId)
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByAtividadesConcluidasInTurma(int turmaId)
         {
-            var ranking = await _context.Alunos
-                .Where(a => a.TurmaId == turmaId)
-                .Select(a => new
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.TurmaId == turmaId)
+                .OrderByDescending(a => a.AtividadesConcluidas)
+                .Select((a, index) => new AlunoRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    Valor = (double)a.AtividadeAlunos.Count(aa => aa.Status == StatusAtividade.Concluida) // Cast para double
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na turma por atividades concluídas",
+                    Posicao = index + 1,
+                    Valor = a.AtividadesConcluidas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome) // Critério de desempate
-                .ToListAsync(); // Execute a query
-
-            // Adiciona a posição ao DTO
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
-        }
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorAtividadeConcluidaNaEscola(int escolaId)
-        {
-            var ranking = await _context.Alunos
-               .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId) // Garante que o aluno tem turma e é da escola
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   Valor = (double)a.AtividadeAlunos.Count(aa => aa.Status == StatusAtividade.Concluida)
-               })
-               .OrderByDescending(r => r.Valor)
-            .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
-        }
-
-        public async Task<List<TurmaRankingDTO>> GetRankingTurmasPorMediaAtividadesConcluidasNaEscola(int escolaId)
-        {
-            var ranking = await _context.Turmas
-                .Where(t => t.EscolaId == escolaId && t.Alunos.Any()) // Apenas turmas da escola com alunos
-                .Select(t => new
-                {
-                    t.Id,
-                    t.Descricao,
-                    // Média de atividades concluídas por aluno na turma
-                    Valor = t.Alunos.Average(a => (double?)a.AtividadeAlunos.Count(aa => aa.Status == StatusAtividade.Concluida)) ?? 0.0 // Trata turma sem atividades
-                })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Descricao)
                 .ToListAsync();
-
-            return ranking.Select((r, index) => new TurmaRankingDTO
-            {
-                TurmaId = r.Id,
-                TurmaDescricao = r.Descricao,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
         }
 
-        #endregion
-
-        #region Ranking Média Nota em Atividades
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorMediaNotaNaTurma(int turmaId)
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByAtividadesConcluidasInEscola(int escolaId)
         {
-            var ranking = await _context.Alunos
-                .Where(a => a.TurmaId == turmaId && a.AtividadeAlunos.Any(aa => aa.Status == StatusAtividade.Concluida)) // Apenas alunos da turma com atividades concluídas
-                .Select(a => new
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.Turma.EscolaId == escolaId)
+                .OrderByDescending(a => a.AtividadesConcluidas)
+                .Select((a, index) => new AlunoRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    Valor = a.AtividadeAlunos
-                             .Where(aa => aa.Status == StatusAtividade.Concluida)
-                             .Average(aa => (double?)aa.PontuacaoObtida) ?? 0.0 // Média, tratando null (caso não haja pontuação?)
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na escola por atividades concluídas",
+                    Posicao = index + 1,
+                    Valor = a.AtividadesConcluidas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+                .ToListAsync();
         }
 
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorMediaNotaNaEscola(int escolaId)
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByMediaNotasInTurma(int turmaId)
         {
-            var ranking = await _context.Alunos
-               .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId && a.AtividadeAlunos.Any(aa => aa.Status == StatusAtividade.Concluida))
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   Valor = a.AtividadeAlunos
-                            .Where(aa => aa.Status == StatusAtividade.Concluida)
-                            .Average(aa => (double?)aa.PontuacaoObtida) ?? 0.0
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.TurmaId == turmaId && a.QuantidadeNotasValidas > 0)
+                .OrderByDescending(a => a.MediaNotasNormalizadas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na turma por média nas atividades",
+                    Posicao = index + 1,
+                    Valor = a.MediaNotasNormalizadas
+                })
+                .ToListAsync();
         }
 
-        public async Task<List<TurmaRankingDTO>> GetRankingTurmasPorMediaGeralNotaNaEscola(int escolaId)
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByMediaNotasInEscola(int escolaId)
         {
-            var ranking = await _context.Turmas
-               .Where(t => t.EscolaId == escolaId && t.Alunos.Any(a => a.AtividadeAlunos.Any(aa => aa.Status == StatusAtividade.Concluida)))
-               .Select(t => new
-               {
-                   t.Id,
-                   t.Descricao,
-                   // Média das médias dos alunos da turma
-                   Valor = t.Alunos
-                            .Where(a => a.AtividadeAlunos.Any(aa => aa.Status == StatusAtividade.Concluida))
-                            .Average(a => a.AtividadeAlunos
-                                           .Where(aa => aa.Status == StatusAtividade.Concluida)
-                                           .Average(aa => (double?)aa.PontuacaoObtida) // Média do aluno
-                                     ) ?? 0.0 // Média da turma
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Descricao)
-               .ToListAsync();
-
-            return ranking.Select((r, index) => new TurmaRankingDTO
-            {
-                TurmaId = r.Id,
-                TurmaDescricao = r.Descricao,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.Turma.EscolaId == escolaId && a.QuantidadeNotasValidas > 0)
+                .OrderByDescending(a => a.MediaNotasNormalizadas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na escola por média nas atividades",
+                    Posicao = index + 1,
+                    Valor = a.MediaNotasNormalizadas
+                })
+                .ToListAsync();
         }
 
-        #endregion
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasParticipadasInTurma(int turmaId)
+        {
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.TurmaId == turmaId)
+                .OrderByDescending(a => a.TotalParticipacoesInBatalhas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na turma por participações em batalhas",
+                    Posicao = index + 1,
+                    Valor = a.TotalParticipacoesInBatalhas
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasParticipadasInEscola(int escolaId)
+        {
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.Turma.EscolaId == escolaId)
+                .OrderByDescending(a => a.TotalParticipacoesInBatalhas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na escola por participações em batalhas",
+                    Posicao = index + 1,
+                    Valor = a.TotalParticipacoesInBatalhas
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasVencidasInTurma(int turmaId)
+        {
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.TurmaId == turmaId)
+                .OrderByDescending(a => a.TotalVitoriasInBatalhas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na turma por vitórias em batalhas",
+                    Posicao = index + 1,
+                    Valor = a.TotalVitoriasInBatalhas
+                })
+                .ToListAsync();
+        }
+
+        public async Task<List<AlunoRankingDTO>> GetRankingAlunosByBatalhasVencidasInEscola(int escolaId)
+        {
+            return await _context.AlunoEstatisticas
+                .Where(a => a.Aluno.Turma != null && a.Aluno.Turma.EscolaId == escolaId)
+                .OrderByDescending(a => a.TotalVitoriasInBatalhas)
+                .Select((a, index) => new AlunoRankingDTO
+                {
+                    AlunoId = a.AlunoId,
+                    NomeAluno = a.Aluno.Nome,
+                    Descricao = "Ranking de alunos na escola por vitórias em batalhas",
+                    Posicao = index + 1,
+                    Valor = a.TotalVitoriasInBatalhas
+                })
+                .ToListAsync();
+        }
 
         //---------------------------------------------------------------------
-        // Métricas de Batalhas e Questões (Alunos)
+        // RANKING DE TURMAS
         //---------------------------------------------------------------------
 
-        #region Ranking Batalhas Participadas
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasParticipadasNaTurma(int turmaId)
+        public async Task<List<TurmaRankingDTO>> GetRankingTurmasByAtividadesConcluidasInEscola(int escolaId)
         {
-            var ranking = await _context.Alunos
-                .Where(a => a.TurmaId == turmaId)
-                .Select(a => new
+            return await _context.TurmaEstatisticas
+                .Where(t => t.Turma.EscolaId == escolaId)
+                .OrderByDescending(t => t.AtividadesConcluidas)
+                .Select((t, index) => new TurmaRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    // Conta batalhas como AlunoA ou AlunoB
-                    Valor = (double)(a.BatalhasAsAlunoA.Count + a.BatalhasAsAlunoB.Count) // Ou use a.AllBatalhas.Count() se configurado corretamente
+                    TurmaId = t.TurmaId,
+                    TurmaDescricao = t.Turma.Descricao,
+                    Descricao = "Ranking de turmas na escola por atividades concluídas",
+                    Posicao = index + 1,
+                    Valor = t.AtividadesConcluidas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+                .ToListAsync();
         }
 
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasParticipadasNaEscola(int escolaId)
+        public async Task<List<TurmaRankingDTO>> GetRankingTurmasByMediaNotasInEscola(int escolaId)
         {
-            var ranking = await _context.Alunos
-                .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId)
-                .Select(a => new
+            return await _context.TurmaEstatisticas
+                .Where(t => t.Turma.EscolaId == escolaId && t.QuantidadeNotasValidas > 0)
+                .OrderByDescending(t => t.MediaNotasNormalizadas)
+                .Select((t, index) => new TurmaRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    Valor = (double)(a.BatalhasAsAlunoA.Count + a.BatalhasAsAlunoB.Count)
+                    TurmaId = t.TurmaId,
+                    TurmaDescricao = t.Turma.Descricao,
+                    Descricao = "Ranking de turmas na escola por média nas atividades",
+                    Posicao = index + 1,
+                    Valor = t.MediaNotasNormalizadas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+                .ToListAsync();
         }
 
-        #endregion
-
-        #region Ranking Batalhas Vencidas
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasVencidasNaTurma(int turmaId)
+        public async Task<List<TurmaRankingDTO>> GetRankingTurmasByBatalhasParticipadasInEscola(int escolaId)
         {
-            var ranking = await _context.Alunos
-               .Where(a => a.TurmaId == turmaId)
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   Valor = (double)a.BatalhasWon.Count() // Usa a coleção BatalhasWon
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
-        }
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorBatalhasVencidasNaEscola(int escolaId)
-        {
-            var ranking = await _context.Alunos
-                .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId)
-                .Select(a => new
+            return await _context.TurmaEstatisticas
+                .Where(t => t.Turma.EscolaId == escolaId)
+                .OrderByDescending(t => t.TotalParticipacoesInBatalhas)
+                .Select((t, index) => new TurmaRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    Valor = (double)a.BatalhasWon.Count()
+                    TurmaId = t.TurmaId,
+                    TurmaDescricao = t.Turma.Descricao,
+                    Descricao = "Ranking de turmas na escola por participações em batalhas",
+                    Posicao = index + 1,
+                    Valor = t.TotalParticipacoesInBatalhas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+                .ToListAsync();
         }
 
-        #endregion
-
-        #region Ranking Questões Respondidas (Total)
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesRespondidasNaTurma(int turmaId)
+        public async Task<List<TurmaRankingDTO>> GetRankingTurmasByBatalhasVencidasInEscola(int escolaId)
         {
-            var ranking = await _context.Alunos
-                .Where(a => a.TurmaId == turmaId)
-                .Select(a => new
+            return await _context.TurmaEstatisticas
+                .Where(t => t.Turma.EscolaId == escolaId)
+                .OrderByDescending(t => t.TotalVitoriasInBatalhas)
+                .Select((t, index) => new TurmaRankingDTO
                 {
-                    a.Id,
-                    a.Nome,
-                    // Soma respostas em atividades E batalhas
-                    Valor = (double)(a.AtividadeAlunos.SelectMany(aa => aa.AtividadeRespostas).Count() +
-                                     a.RespostasInBatalhas.Count())
+                    TurmaId = t.TurmaId,
+                    TurmaDescricao = t.Turma.Descricao,
+                    Descricao = "Ranking de turmas na escola por vitórias em batalhas",
+                    Posicao = index + 1,
+                    Valor = t.TotalVitoriasInBatalhas
                 })
-                .OrderByDescending(r => r.Valor)
-                .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+                .ToListAsync();
         }
 
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesRespondidasNaEscola(int escolaId)
+        //---------------------------------------------------------------------
+        // RANKING DE ESCOLAS 
+        //---------------------------------------------------------------------
+
+        public async Task<List<EscolaRankingDTO>> GetRankingEscolasByAtividadesConcluidas()
         {
-            var ranking = await _context.Alunos
-               .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId)
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   Valor = (double)(a.AtividadeAlunos.SelectMany(aa => aa.AtividadeRespostas).Count() +
-                                    a.RespostasInBatalhas.Count())
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+            return await _context.EscolaEstatisticas
+                .OrderByDescending(e => e.AtividadesConcluidas)
+                .Select((e, index) => new EscolaRankingDTO
+                {
+                    EscolaId = e.EscolaId,
+                    EscolaNome = e.Escola.Nome,
+                    Descricao = "Ranking de escolas por atividades concluídas",
+                    Posicao = index + 1,
+                    Valor = e.AtividadesConcluidas
+                })
+                .ToListAsync();
         }
 
-        #endregion
-
-        #region Ranking Questões Acertadas (Total)
-
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesAcertadasNaTurma(int turmaId)
+        public async Task<List<EscolaRankingDTO>> GetRankingEscolasByMediaNotas()
         {
-            var ranking = await _context.Alunos
-               .Where(a => a.TurmaId == turmaId)
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   // Soma acertos em atividades E batalhas
-                   Valor = (double)(a.AtividadeAlunos.SelectMany(aa => aa.AtividadeRespostas).Count(ar => ar.Acertou) +
-                                    a.RespostasInBatalhas.Count(br => br.Acertou))
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+            return await _context.EscolaEstatisticas
+                .Where(e => e.QuantidadeNotasValidas > 0)
+                .OrderByDescending(e => e.MediaNotasNormalizadas)
+                .Select((e, index) => new EscolaRankingDTO
+                {
+                    EscolaId = e.EscolaId,
+                    EscolaNome = e.Escola.Nome,
+                    Descricao = "Ranking de escolas por média nas atividades",
+                    Posicao = index + 1,
+                    Valor = e.MediaNotasNormalizadas
+                })
+                .ToListAsync();
         }
 
-        public async Task<List<AlunoRankingDTO>> GetRankingAlunosPorQuestoesAcertadasNaEscola(int escolaId)
+        public async Task<List<EscolaRankingDTO>> GetRankingEscolasByBatalhasParticipadas()
         {
-            var ranking = await _context.Alunos
-               .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId)
-               .Select(a => new
-               {
-                   a.Id,
-                   a.Nome,
-                   Valor = (double)(a.AtividadeAlunos.SelectMany(aa => aa.AtividadeRespostas).Count(ar => ar.Acertou) +
-                                    a.RespostasInBatalhas.Count(br => br.Acertou))
-               })
-               .OrderByDescending(r => r.Valor)
-               .ThenBy(r => r.Nome)
-            .ToListAsync();
-
-            return ranking.Select((r, index) => new AlunoRankingDTO
-            {
-                AlunoId = r.Id,
-                NomeAluno = r.Nome,
-                Valor = r.Valor,
-                Posicao = index + 1
-            }).ToList();
+            return await _context.EscolaEstatisticas
+                .OrderByDescending(e => e.TotalParticipacoesInBatalhas)
+                .Select((e, index) => new EscolaRankingDTO
+                {
+                    EscolaId = e.EscolaId,
+                    EscolaNome = e.Escola.Nome,
+                    Descricao = "Ranking de escolas por participações em batalhas",
+                    Posicao = index + 1,
+                    Valor = e.TotalParticipacoesInBatalhas
+                })
+                .ToListAsync();
         }
-        #endregion
+
+        public async Task<List<EscolaRankingDTO>> GetRankingEscolasByBatalhasVencidas()
+        {
+            return await _context.EscolaEstatisticas
+                .OrderByDescending(e => e.TotalVitoriasInBatalhas)
+                .Select((e, index) => new EscolaRankingDTO
+                {
+                    EscolaId = e.EscolaId,
+                    EscolaNome = e.Escola.Nome,
+                    Descricao = "Ranking de escolas por vitórias em batalhas",
+                    Posicao = index + 1,
+                    Valor = e.TotalVitoriasInBatalhas
+                })
+                .ToListAsync();
+        }
     }
 }

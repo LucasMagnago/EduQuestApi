@@ -2,8 +2,11 @@
 {
     public interface IUpdateStatisticsService
     {
-        Task UpdateAlunoStatistics(int alunoId);
-        Task UpdateTurmaStatistics(int turmaId);
-        Task UpdateEscolaStatistics(int escolaId);
+        Task UpdateAlunoStatisticsInBatalhas(int batalhaId);
+        Task UpdateEscolaStatisticsInBatalhas(int batalhaId);
+        Task UpdateTurmaStatisticsInBatalhas(int batalhaId);
+        Task UpdateAlunoStatisticsInAtividades(int atividadeAlunoId);
+        Task UpdateEscolaStatisticsInAtividades(int atividadeAlunoId);
+        Task UpdateTurmaStatisticsInAtividades(int atividadeAlunoId);
     }
 }
