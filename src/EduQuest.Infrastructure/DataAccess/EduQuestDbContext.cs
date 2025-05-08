@@ -596,6 +596,97 @@ namespace EduQuest.Infrastructure.DataAccess
                 new BatalhaQuestao { Id = 4, BatalhaId = 1, QuestaoId = 15, Ordem = 4 },
                 new BatalhaQuestao { Id = 5, BatalhaId = 1, QuestaoId = 16, Ordem = 5 }
             );
+
+            modelBuilder.Entity<Item>().HasData(
+                new Item
+                {
+                    Id = 1,
+                    Nome = "Avatar Ninja Azul",
+                    Descricao = "Avatar estilizado com roupa ninja azul.",
+                    Tipo = TipoItem.Avatar,
+                    Custo = 300,
+                    XpDesbloqueio = 1000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 2,
+                    Nome = "Avatar Robô Futurista",
+                    Descricao = "Avatar com aparência metálica e olhos brilhantes.",
+                    Tipo = TipoItem.Avatar,
+                    Custo = 300,
+                    XpDesbloqueio = 1000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 3,
+                    Nome = "Borda Dourada para Perfil",
+                    Descricao = "Moldura elegante dourada ao redor da imagem de perfil.",
+                    Tipo = TipoItem.Moldura,
+                    Custo = 300,
+                    XpDesbloqueio = 1000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 4,
+                    Nome = "Borda de Cristal Azul",
+                    Descricao = "Moldura azulada com efeito de cristal.",
+                    Tipo = TipoItem.Moldura,
+                    Custo = 300,
+                    XpDesbloqueio = 1000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 5,
+                    Nome = "Tema Noturno",
+                    Descricao = "Altera a interface da plataforma para tons escuros.",
+                    Tipo = TipoItem.Tema,
+                    Custo = 300,
+                    XpDesbloqueio = 2000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 6,
+                    Nome = "Tema Floresta Encantada",
+                    Descricao = "Transforma o ambiente da plataforma em uma floresta mágica.",
+                    Tipo = TipoItem.Tema,
+                    Custo = 300,
+                    XpDesbloqueio = 3000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 7,
+                    Nome = "Tema Cibernético",
+                    Descricao = "Interface com neon e circuitos inspirada no futuro.",
+                    Tipo = TipoItem.Tema,
+                    Custo = 300,
+                    XpDesbloqueio = 4000,
+                    ImagemBase64 = string.Empty
+                },
+                new Item
+                {
+                    Id = 8,
+                    Nome = "Tema Oceano Profundo",
+                    Descricao = "Visual marinho com tons de azul e bolhas.",
+                    Tipo = TipoItem.Tema,
+                    Custo = 300,
+                    XpDesbloqueio = 5000,
+                    ImagemBase64 = string.Empty
+                }
+            );
+
+            modelBuilder.Entity<AlunoPossuiItem>().HasData(
+                new AlunoPossuiItem { Id = 1, AlunoId = 5, ItemId = 1, DataAquisicao = new DateTime(2025, 04, 12, 10, 20, 0) },
+                new AlunoPossuiItem { Id = 2, AlunoId = 5, ItemId = 2, DataAquisicao = new DateTime(2025, 04, 12, 10, 20, 0) },
+                new AlunoPossuiItem { Id = 3, AlunoId = 5, ItemId = 3, DataAquisicao = new DateTime(2025, 04, 12, 10, 20, 0) },
+                new AlunoPossuiItem { Id = 4, AlunoId = 5, ItemId = 4, DataAquisicao = new DateTime(2025, 04, 12, 10, 20, 0) },
+                new AlunoPossuiItem { Id = 5, AlunoId = 6, ItemId = 5, DataAquisicao = new DateTime(2025, 04, 12, 10, 20, 0) }
+            );
         }
     }
 }

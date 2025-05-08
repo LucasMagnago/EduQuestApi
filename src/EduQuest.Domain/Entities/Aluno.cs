@@ -91,5 +91,15 @@ namespace EduQuest.Domain.Entities
 
             this.SaldoMoedas += moedas;
         }
+
+        public void UpdateSaldoWithItemPurchase(int preco)
+        {
+            if (SaldoMoedas < preco)
+            {
+                throw new ArgumentException("A quantidade de moedas é insuficiente.");
+            }
+
+            this.SaldoMoedas -= preco;
+        }
     }
 }

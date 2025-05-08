@@ -9,6 +9,9 @@ using EduQuest.Application.UseCases.AlocacaoProfessorTurmaDisciplina.RemoveProfe
 using EduQuest.Application.UseCases.Alternativas.Delete;
 using EduQuest.Application.UseCases.Alternativas.GetById;
 using EduQuest.Application.UseCases.Alternativas.Register;
+using EduQuest.Application.UseCases.AlunoConquistas.GetAllByAlunoId;
+using EduQuest.Application.UseCases.AlunoPossuiItens.Acquire;
+using EduQuest.Application.UseCases.AlunoPossuiItens.GetAllByAlunoId;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
 using EduQuest.Application.UseCases.AtividadeAlunos.End;
@@ -36,12 +39,16 @@ using EduQuest.Application.UseCases.Batalhas.End;
 using EduQuest.Application.UseCases.Batalhas.GetById;
 using EduQuest.Application.UseCases.Batalhas.Register;
 using EduQuest.Application.UseCases.Batalhas.Start;
+using EduQuest.Application.UseCases.Conquistas.GetAll;
+using EduQuest.Application.UseCases.Conquistas.GetById;
 using EduQuest.Application.UseCases.Disciplinas.GetAll;
 using EduQuest.Application.UseCases.Disciplinas.GetById;
 using EduQuest.Application.UseCases.Disciplinas.Register;
 using EduQuest.Application.UseCases.Escolas.GetAll;
 using EduQuest.Application.UseCases.Escolas.GetById;
 using EduQuest.Application.UseCases.Escolas.Register;
+using EduQuest.Application.UseCases.Itens.GetAll;
+using EduQuest.Application.UseCases.Itens.GetById;
 using EduQuest.Application.UseCases.Questoes.Delete;
 using EduQuest.Application.UseCases.Questoes.GetAllByDisciplinaId;
 using EduQuest.Application.UseCases.Questoes.GetAllByDisciplinaIdAndNivel;
@@ -209,6 +216,15 @@ namespace EduQuest.Application
             services.AddScoped<IGetRankingTurmasByBatalhasParticipadasInEscolaUseCase, GetRankingTurmasByBatalhasParticipadasInEscolaUseCase>();
             services.AddScoped<IGetRankingTurmasByBatalhasVencidasInEscolaUseCase, GetRankingTurmasByBatalhasVencidasInEscolaUseCase>();
             services.AddScoped<IGetRankingTurmasByMediaNotasInEscolaUseCase, GetRankingTurmasByMediaNotasInEscolaUseCase>();
+
+            services.AddScoped<IGetAllItem, GetAllItem>();
+            services.AddScoped<IGetItemByIdUseCase, GetItemByIdUseCase>();
+            services.AddScoped<IAlunoAcquireItemUseCase, AlunoAcquireItemUseCase>();
+            services.AddScoped<IGetAllItemByAlunoIdUseCase, GetAllItemByAlunoIdUseCase>();
+
+            services.AddScoped<IGetAllConquistaByAlunoIdUseCase, GetAllConquistaByAlunoIdUseCase>();
+            services.AddScoped<IGetAllConquistaUseCase, GetAllConquistaUseCase>();
+            services.AddScoped<IGetConquistaByIdUseCase, GetConquistaByIdUseCase>();
         }
     }
 }

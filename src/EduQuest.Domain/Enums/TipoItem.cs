@@ -4,9 +4,11 @@
     {
         Avatar = 1,
         Moldura = 2,
-        Emblema = 3,
-        Efeito = 4,
-        Som = 5,
-        Musica = 6,
+        Tema = 3,
+        TemaPerfil = 4,
+        Emblema = 5,
+        Efeito = 6,
+        Som = 7,
+        Musica = 8,
     }
 }

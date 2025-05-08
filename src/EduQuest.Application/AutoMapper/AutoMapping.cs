@@ -36,6 +36,7 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<RequestAlunoStartsAtividadeJson, AtividadeResposta>();
             CreateMap<RequestAlunoAnswerQuestaoFromAtividadeJson, AtividadeResposta>();
             CreateMap<RequestRegisterBatalhaJson, Batalha>();
+            CreateMap<RequestAlunoAcquireItemJson, AlunoPossuiItem>();
         }
 
         private void EntityToResponse()
@@ -94,6 +95,15 @@ namespace EduQuest.Application.AutoMapper
                 .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src.Usuario))
                 .ForMember(dest => dest.Escola, opt => opt.MapFrom(src => src.Escola))
                 .ForMember(dest => dest.Perfil, opt => opt.MapFrom(src => src.Perfil));
+
+            CreateMap<Item, ResponseItemJson>();
+            CreateMap<Item, ResponseShortItemJson>();
+            CreateMap<AlunoPossuiItem, ResponseAlunoPossuiItemJson>();
+            CreateMap<AlunoPossuiItem, ResponseShortAlunoPossuiItemJson>();
+
+            CreateMap<Conquista, ResponseConquistaJson>();
+            CreateMap<Conquista, ResponseShortConquistaJson>();
+            CreateMap<AlunoConquista, ResponseAlunoConquistaJson>();
         }
     }
 }
