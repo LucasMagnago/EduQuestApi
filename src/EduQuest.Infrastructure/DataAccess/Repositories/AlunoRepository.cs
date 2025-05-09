@@ -11,10 +11,17 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
 
         }
 
+        public async Task<Aluno?> GetByAlunoId(int alunoId)
+        {
+            return await _entity
+                .Where(a => a.Id == alunoId)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<Aluno?> GetByUsuarioGuid(Guid usuarioGuid)
         {
             return await _entity
-                .Where(a => a.UsuarioIdentifier == usuarioGuid && a.Ativo)
+                .Where(a => a.UsuarioIdentifier == usuarioGuid)
                 .FirstOrDefaultAsync();
         }
 
@@ -37,6 +44,21 @@ namespace EduQuest.Infrastructure.DataAccess.Repositories
                 .Where(a => a.Id == alunoId && a.Turma != null)
                 .Select(a => a.Turma!.Escola)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Aluno>?> GetAllByTurmaId(int turmaId)
+        {
+            return await _entity
+                .Where(a => a.TurmaId == turmaId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Aluno>?> GetAllByEscolaId(int escolaId)
+        {
+            return await _entity
+                .Include(a => a.Turma)
+                .Where(a => a.Turma != null && a.Turma.EscolaId == escolaId)
+                .ToListAsync();
         }
     }
 }

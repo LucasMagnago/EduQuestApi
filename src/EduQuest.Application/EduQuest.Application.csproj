@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UseCases\Alunos - Cópia\**" />
+    <EmbeddedResource Remove="UseCases\Alunos - Cópia\**" />
+    <None Remove="UseCases\Alunos - Cópia\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.5.0" />
@@ -20,7 +26,6 @@
 
   <ItemGroup>
     <Folder Include="UseCases\AlunoConquistas\Grant %28Substituido por service%29\" />
-    <Folder Include="UseCases\Alunos\GetAllByTurmaId\" />
     <Folder Include="UseCases\Batalhas\GetAllByAlunoId\" />
     <Folder Include="UseCases\Batalhas\GetAllAvailable\" />
     <Folder Include="UseCases\Batalhas\GetAllAvailableByNivel\" />

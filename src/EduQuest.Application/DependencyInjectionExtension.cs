@@ -12,6 +12,8 @@ using EduQuest.Application.UseCases.Alternativas.Register;
 using EduQuest.Application.UseCases.AlunoConquistas.GetAllByAlunoId;
 using EduQuest.Application.UseCases.AlunoPossuiItens.Acquire;
 using EduQuest.Application.UseCases.AlunoPossuiItens.GetAllByAlunoId;
+using EduQuest.Application.UseCases.Alunos.GetAllByEscolaId;
+using EduQuest.Application.UseCases.Alunos.GetAllByTurmaId;
 using EduQuest.Application.UseCases.Alunos.GetById;
 using EduQuest.Application.UseCases.Alunos.GetTurmaByAlunoId;
 using EduQuest.Application.UseCases.AtividadeAlunos.End;
@@ -232,6 +234,9 @@ namespace EduQuest.Application
             services.AddScoped<IGetUsuarioByIdUseCase, GetUsuarioByIdUseCase>();
             services.AddScoped<IGetAllUsuarioByEscolaIdUseCase, GetAllUsuarioByEscolaIdUseCase>();
             services.AddScoped<IGetAllUsuarioByEscolaIdAndPerfilIdUseCase, GetAllUsuarioByEscolaIdAndPerfilIdUseCase>();
+
+            services.AddScoped<IGetAllAlunoByTurmaIdUseCase, GetAllAlunoByTurmaIdUseCase>();
+            services.AddScoped<IGetAllAlunoByEscolaIdUseCase, GetAllAlunoByEscolaIdUseCase>();
         }
     }
 }
