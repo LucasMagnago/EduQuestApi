@@ -83,6 +83,9 @@ using EduQuest.Application.UseCases.UsuarioEscolaPerfis.GetAtivoByUsuarioId;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetAtivo;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.SetInativo;
 using EduQuest.Application.UseCases.UsuarioEscolaPerfis.Unassign;
+using EduQuest.Application.UseCases.Usuarios.GetAllByEscolaAndPerfilId;
+using EduQuest.Application.UseCases.Usuarios.GetAllByEscolaId;
+using EduQuest.Application.UseCases.Usuarios.GetById;
 using EduQuest.Domain.Services.AssignRewards;
 using EduQuest.Domain.Services.UpdateStatistics;
 using Microsoft.Extensions.DependencyInjection;
@@ -225,6 +228,10 @@ namespace EduQuest.Application
             services.AddScoped<IGetAllConquistaByAlunoIdUseCase, GetAllConquistaByAlunoIdUseCase>();
             services.AddScoped<IGetAllConquistaUseCase, GetAllConquistaUseCase>();
             services.AddScoped<IGetConquistaByIdUseCase, GetConquistaByIdUseCase>();
+
+            services.AddScoped<IGetUsuarioByIdUseCase, GetUsuarioByIdUseCase>();
+            services.AddScoped<IGetAllUsuarioByEscolaIdUseCase, GetAllUsuarioByEscolaIdUseCase>();
+            services.AddScoped<IGetAllUsuarioByEscolaIdAndPerfilIdUseCase, GetAllUsuarioByEscolaIdAndPerfilIdUseCase>();
         }
     }
 }

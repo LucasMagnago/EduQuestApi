@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\AlunoConquistas\Grant %28Substituido por service%29\" />
+    <Folder Include="UseCases\Alunos\GetAllByTurmaId\" />
     <Folder Include="UseCases\Batalhas\GetAllByAlunoId\" />
     <Folder Include="UseCases\Batalhas\GetAllAvailable\" />
     <Folder Include="UseCases\Batalhas\GetAllAvailableByNivel\" />

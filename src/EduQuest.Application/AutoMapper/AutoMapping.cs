@@ -82,7 +82,7 @@ namespace EduQuest.Application.AutoMapper
             CreateMap<Escola, ResponseShortEscolaJson>();
             CreateMap<Questao, ResponseShortQuestaoJson>()
                 .ForMember(dest => dest.Alternativas, opt => opt.MapFrom(src => src.Alternativas));
-            CreateMap<Usuario, ResponseShortUsuarioJson>();
+            CreateMap<Usuario, ResponseUsuarioJson>();
             CreateMap<Batalha, ResponseShortBatalhaRespostaJson>();
             CreateMap<AlunoRankingDTO, ResponseAlunoRankingJson>();
             CreateMap<TurmaRankingDTO, ResponseTurmaRankingJson>();

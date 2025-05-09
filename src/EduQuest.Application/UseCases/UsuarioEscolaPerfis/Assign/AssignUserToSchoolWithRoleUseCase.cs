@@ -50,7 +50,7 @@ namespace EduQuest.Application.UseCases.UsuarioEscolaPerfis.Assign
                 UsuarioId = request.UsuarioId,
                 EscolaId = request.EscolaId,
                 PerfilId = request.PerfilId,
-                Ativo = true
+                Ativo = false
             };
 
             await _usuarioEscolaPerfilRepository.SaveAsync(usuarioEscolaPerfil);
@@ -58,9 +58,10 @@ namespace EduQuest.Application.UseCases.UsuarioEscolaPerfis.Assign
 
             return new ResponseAssignedUsuarioJson
             {
-                UsuarioId = request.UsuarioId,
-                EscolaId = request.EscolaId,
-                PerfilId = request.PerfilId,
+                UsuarioId = usuarioEscolaPerfil.UsuarioId,
+                EscolaId = usuarioEscolaPerfil.EscolaId,
+                PerfilId = usuarioEscolaPerfil.PerfilId,
+                Ativo = usuarioEscolaPerfil.Ativo,
                 CreatedAt = DateTime.Now
             };
         }

@@ -36,6 +36,8 @@ namespace EduQuest.Api.Controllers
             return Ok(response);
         }
 
+        // TO DO: GET ALL BY IDS (VERIFICAR)
+
         [HttpGet]
         [ProducesResponseType(typeof(List<ResponseEscolaJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]

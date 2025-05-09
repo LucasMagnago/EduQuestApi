@@ -76,6 +76,10 @@ namespace EduQuest.Api.Controllers
             return Ok(result);
         }
 
+        // TO DO: Get todos os usuários de uma escola
+
+        // TO DO: Get todos os usuários de um perfilId para uma escolaId
+
         [HttpGet]
         [Route("usuario/{usuarioId}/ativo")]
         [ProducesResponseType(typeof(ResponseShortUsuarioEscolaPerfilJson), StatusCodes.Status200OK)]

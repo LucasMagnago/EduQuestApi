@@ -38,6 +38,8 @@ namespace EduQuest.Api.Controllers
             return Ok(response);
         }
 
+        // TO DO: GET TURMAS POR ESCOLAID
+
         [HttpGet]
         [ProducesResponseType(typeof(List<ResponseTurmaJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
